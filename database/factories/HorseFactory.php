@@ -17,7 +17,8 @@ class HorseFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => fake()->name(),
+            'data' => fake()->text()
         ];
     }
 }

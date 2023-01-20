@@ -17,7 +17,9 @@ class OwnerFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => fake()->name(),
+            'phone' => fake()->phoneNumber(),
+           
         ];
     }
 }
