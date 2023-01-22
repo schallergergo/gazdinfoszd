@@ -12,4 +12,7 @@ class Horse extends Model
     public function owners (){
         return $this->belongsToMany(Owner::class);
     }
+    public function treatments (){
+        return $this->hasMany(Treatment::class);
+    }
 }

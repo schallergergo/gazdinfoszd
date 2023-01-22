@@ -13,15 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tasks', function (Blueprint $table) {
+        Schema::create('horse_task', function (Blueprint $table) {
             $table->id();
-            $table->string("task");
-            $table->datetime("when");
-            $table->integer("duration")->nullable();
-            $table->boolean("repeat")->default(0);
-            $table->date("repeat_until")->nullable();
-            $table->string("remarks")->nullable();
-            $table->timestamps();
+            $table->integer('owner_id')->unsigned();
+            $table->integer('horse_id')->unsigned();
         });
     }
 
@@ -32,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tasks');
+        Schema::dropIfExists('horse_task');
     }
 };

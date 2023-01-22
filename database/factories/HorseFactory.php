@@ -16,9 +16,15 @@ class HorseFactory extends Factory
      */
     public function definition()
     {
+
         return [
             'name' => fake()->name(),
-            'data' => fake()->text()
+            'birthdate'=> fake()->date(),
+            'gender'=> fake()->randomElement(['male', 'female']),
+            'passport_number'=> fake()->text(10),
+
+            'data' => fake()->text(),
+
         ];
     }
 }

@@ -16,6 +16,12 @@ return new class extends Migration
         Schema::create('horses', function (Blueprint $table) {
             $table->id();
             $table->string("name");
+            $table->date("birthdate")->nullable();
+            $table->string("gender")->nullable();
+            $table->string("passport_number")->nullable();
+            $table->string("FEI_number")->nullable();
+            $table->boolean("active")->default(1);
+            $table->string("color")->nullable();
             $table->string("data");
             $table->timestamps();
         });

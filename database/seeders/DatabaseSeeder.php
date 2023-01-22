@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory(10)->create();
         \App\Models\Owner::factory(10)->create();
          \App\Models\Horse::factory(10)->create();
-
+         \App\Models\Treatment::factory(10)->create();
 
          $horses = \App\Models\Horse::all();
 
