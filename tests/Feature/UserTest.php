@@ -16,10 +16,10 @@ class UserTest extends TestCase
     public function test_user_can_have_tasks_linked()
     {
         $user = \App\Models\User::find(1);
-        $task = \App\Models\Task::factory(2)->create();
+        $tasks = \App\Models\Task::factory(2)->create();
 
-        $user->tasks()->attach($task);
+        $user->tasks()->attach($tasks);
 
-        $this->assertEquals(2,$user->tasks);
+        $this->assertEquals(2,count($user->tasks));
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\HorseController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,3 +30,9 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::get('/horse/create',[HorseController::class,'create']);
+Route::post("/horse/store",[HorseController::class,'store']);
+Route::get("/horses/index",[HorseController::class,'index']);
+Route::get("/horse/edit/{horse}",[HorseController::class,'edit']);
+Route::patch("/horse/update/{horse}",[HorseController::class,'update']);

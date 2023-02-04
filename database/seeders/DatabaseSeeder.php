@@ -18,7 +18,9 @@ class DatabaseSeeder extends Seeder
         \App\Models\Owner::factory(10)->create();
          \App\Models\Horse::factory(10)->create();
          \App\Models\Treatment::factory(10)->create();
+         \App\Models\Task::factory(10)->create();
 
+         
          $horses = \App\Models\Horse::all();
 
         // Populate the pivot table

@@ -15,7 +15,7 @@ class HorseController extends Controller
      */
     public function index()
     {
-        //
+        return "blank";
     }
 
     /**
@@ -25,7 +25,7 @@ class HorseController extends Controller
      */
     public function create()
     {
-        //
+        return view("horse.create");
     }
 
     /**
@@ -36,7 +36,9 @@ class HorseController extends Controller
      */
     public function store(StoreHorseRequest $request)
     {
-        //
+        $data=$request->validated();
+        $newHorse=Horse::create($data);
+        return redirect("/horses/index");
     }
 
     /**
@@ -58,7 +60,7 @@ class HorseController extends Controller
      */
     public function edit(Horse $horse)
     {
-        //
+        return view("horse.edit",["horse"=>$horse]);
     }
 
     /**
@@ -70,7 +72,9 @@ class HorseController extends Controller
      */
     public function update(UpdateHorseRequest $request, Horse $horse)
     {
-        //
+        $data=$request->validated();
+        $horse->update($data);
+        return redirect("/horses/index");
     }
 
     /**

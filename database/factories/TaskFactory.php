@@ -17,7 +17,9 @@ class TaskFactory extends Factory
     public function definition()
     {
         return [
-            
+            "task" => fake()->text(20),
+            "when" => fake()->datetime()
         ];
     }
 }
+

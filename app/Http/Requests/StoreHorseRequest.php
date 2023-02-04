@@ -6,15 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StoreHorseRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return false;
-    }
+
 
     /**
      * Get the validation rules that apply to the request.
@@ -24,7 +16,13 @@ class StoreHorseRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            "name" => ['required',"string",'max:255'],
+            "birthdate" => ["date","nullable"],
+            "gender"=> ["string","nullable"],
+            "passport_number" => ["string",'max:255',"nullable"],
+            "FEI_number" => ["string",'max:255',"nullable"],
+            "color" => ["string",'max:255',"nullable"],
+            "data" => ["string",'max:255',"nullable"],
         ];
     }
 }

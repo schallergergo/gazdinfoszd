@@ -21,6 +21,7 @@ return new class extends Migration
             $table->boolean("repeat")->default(0);
             $table->date("repeat_until")->nullable();
             $table->string("remarks")->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

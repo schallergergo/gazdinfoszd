@@ -40,5 +40,75 @@ class HorseTest extends TestCase
         return $horse;
     }
 
+    public function test_horse_create_page_can_be_rendered()
+    {
+
+        $response = $this
+            ->get('/horse/create');
+
+        $response->assertSee("Rendered");
+    }
+
+    public function test_horse_can_be_stored_with_all_data()
+    {
+
+        $response = $this->post('/horse/store', [
+             "name" => "Lovacska",
+            "birthdate" => "2022-01-01",
+            "gender"=> "mare",
+            "passport_number" => "HU 135444 554",
+            "FEI_number" => "2525258",
+            "color" => "white",
+            "data" => "Hello. this is some data!"
+        ]);
+        $response->assertRedirect("horses/index");
+    }
+
+    public function test_horse_cannot_be_stored_without_a_name()
+    {
+
+        $response = $this->post('/horse/store', [
+            "birthdate" => "2022-01-01",
+            "gender"=> "mare",
+            "passport_number" => "HU 135444 554",
+            "FEI_number" => "2525258",
+            "color" => "white",
+            "data" => "Hello. this is some data!"
+        ]);
+        $response->assertInvalid("name");
+
+    }
+
+
+     public function test_horse_can_be_stored_with_a_name()
+    {
+
+        $response = $this->post('/horse/store', [
+            "name" => "Lovacska",
+        ]);
+        $response->assertValid("name");
+
+    }
+
+    public function test_horse_update_page_can_be_rendered()
+    {
+        $horse = Horse::factory()->create();
+        $response = $this
+            ->get('/horse/edit/'.$horse->id);
+
+        $response->assertSee($horse->name);
+    }
+
+    public function test_horse_can_be_updated()
+    {
+        $horse = Horse::factory()->create();
+
+        $response = $this->patch('/horse/update/'.$horse->id, [
+            "name" => "Lovacska",
+        ]);
+        $horse=Horse::find($horse->id);
+        $this->assertEquals($horse->name,"Lovacska");
+        $response->assertRedirect("horses/index");
+    }
 
 }
