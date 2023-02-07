@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string("name");
             $table->string("phone");
+            $table->unsignedBigInteger("tenant_id");
             $table->softDeletes();
             $table->timestamps();
         });

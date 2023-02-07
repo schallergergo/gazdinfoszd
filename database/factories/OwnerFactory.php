@@ -19,6 +19,7 @@ class OwnerFactory extends Factory
         return [
             'name' => fake()->name(),
             'phone' => fake()->phoneNumber(),
+            'tenant_id' => rand(1,3),
            
         ];
     }

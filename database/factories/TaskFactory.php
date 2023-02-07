@@ -18,7 +18,8 @@ class TaskFactory extends Factory
     {
         return [
             "task" => fake()->text(20),
-            "when" => fake()->datetime()
+            "when" => fake()->datetime(),
+            'tenant_id' => rand(1,3),
         ];
     }
 }

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer("cost");
             $table->date("date_of_notification");
             $table->foreignId("last_updated_by");
+            $table->unsignedBigInteger("tenant_id");
             $table->softDeletes();
             $table->timestamps();
         });

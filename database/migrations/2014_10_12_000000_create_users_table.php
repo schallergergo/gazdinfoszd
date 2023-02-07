@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->unsignedBigInteger("tenant_id")->nullable();
             $table->enum("role",["admin","owner","groom","rider"]);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

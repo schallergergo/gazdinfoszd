@@ -51,7 +51,7 @@ class HorseTest extends TestCase
 
     public function test_horse_can_be_stored_with_all_data()
     {
-
+        session()->put("tenant_id",1);
         $response = $this->post('/horse/store', [
              "name" => "Lovacska",
             "birthdate" => "2022-01-01",
@@ -61,6 +61,7 @@ class HorseTest extends TestCase
             "color" => "white",
             "data" => "Hello. this is some data!"
         ]);
+        $response->assertSessionHasNoErrors();
         $response->assertRedirect("horses/index");
     }
 
@@ -77,6 +78,7 @@ class HorseTest extends TestCase
         ]);
         $response->assertInvalid("name");
 
+
     }
 
 
@@ -86,6 +88,7 @@ class HorseTest extends TestCase
         $response = $this->post('/horse/store', [
             "name" => "Lovacska",
         ]);
+        $response->assertSessionHasNoErrors();
         $response->assertValid("name");
 
     }

@@ -15,10 +15,12 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         \App\Models\User::factory(10)->create();
+        \App\Models\User::factory()->create(["email"=>"seitec01@gmail.com"]);
         \App\Models\Owner::factory(10)->create();
          \App\Models\Horse::factory(10)->create();
          \App\Models\Treatment::factory(10)->create();
          \App\Models\Task::factory(10)->create();
+         \App\Models\Tenant::factory(3)->create();
 
          
          $horses = \App\Models\Horse::all();

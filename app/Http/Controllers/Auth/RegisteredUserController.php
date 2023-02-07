@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use App\Models\Tenant;
 
 class RegisteredUserController extends Controller
 {
@@ -34,13 +35,15 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'role' =>['required', 'string'],
+            'club' => ['required', 'string', 'max:255']
             ]);
+        $tenant_id = Tenant::create(["name"=>$request->club])->id;
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' => $request->role,
+            'role' => "admin",
+            'tenant_id' => $tenant_id,
         ]);
 
         event(new Registered($user));

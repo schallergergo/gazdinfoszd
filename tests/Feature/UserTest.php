@@ -22,4 +22,5 @@ class UserTest extends TestCase
 
         $this->assertEquals(2,count($user->tasks));
     }
+
 }
