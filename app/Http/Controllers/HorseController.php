@@ -40,7 +40,7 @@ class HorseController extends Controller
     {
         $data=$request->validated();
         $newHorse=Horse::create($data);
-        return redirect(route("horse.index"));
+        return redirect(route("horses.index"));
     }
 
     /**
