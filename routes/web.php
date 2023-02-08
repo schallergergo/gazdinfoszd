@@ -31,8 +31,13 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
+Route::get("/horses/index",[HorseController::class,'index'])->name('horses.index');
 Route::get('/horse/create',[HorseController::class,'create'])->name('horse.create');
 Route::post("/horse/store",[HorseController::class,'store'])->name('horse.store');
-Route::get("/horses/index",[HorseController::class,'index'])->name('horse.index');
-Route::get("/horse/edit/{horse}",[HorseController::class,'edit'])->name('horse.index');
+Route::get("/horse/edit/{horse}",[HorseController::class,'edit'])->name('horse.edit');
 Route::patch("/horse/update/{horse}",[HorseController::class,'update'])->name('horse.update');;
+
+
+Route::get('/test', function () {
+    return redirect()->back();
+})->name("test");

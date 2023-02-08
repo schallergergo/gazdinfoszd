@@ -14,8 +14,10 @@ class HorseController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return "blank";
+    {   
+        $horses = Horse::all();
+        return view("horse.index",["horses"=>$horses]);
+
     }
 
     /**
@@ -38,7 +40,7 @@ class HorseController extends Controller
     {
         $data=$request->validated();
         $newHorse=Horse::create($data);
-        return redirect("/horses/index");
+        return redirect(route("horse.index"));
     }
 
     /**

@@ -20,7 +20,7 @@ class UpdateHorseRequest extends FormRequest
             "passport_number" => ["string",'max:255',"nullable"],
             "FEI_number" => ["string",'max:255',"nullable"],
             "color" => ["string",'max:255',"nullable"],
-            "data" => ["string",'max:255',"nullable"],
+            "comments" => ["string",'max:255',"nullable"],
 
         ];
     }
