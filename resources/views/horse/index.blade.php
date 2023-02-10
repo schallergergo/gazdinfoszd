@@ -1,41 +1,31 @@
 
 
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Horses') }}
-        </h2>
-    </x-slot>
-
-    <div class="py-8">
-
-         <div class="pt-5">
-        <div class="max-w-10xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="p-4 sm:p-8 0 dark:bg-gray-800  sm:rounded-lg">
-
-      
-
-	           <div class="grid grid-cols-4 gap-3">
-	           		@foreach($horses as $horse)
-					<div class="flex">
-					  <div class="block p-6 rounded-lg shadow-lg bg-white max-w-sm">
-					    <h5 class="text-gray-900 text-xl leading-tight font-medium mb-2">{{$horse->name}}</h5>
-					    <p class="text-gray-700 text-base mb-4">
-					      Some quick example text to build on the card title and make up the bulk of the card's
-					      content.
-					    </p>
-					    <button type="button" class=" inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Button</button>
-					  </div>
-					</div>
-					@endforeach
-	             </div>
 
 
-                </div>
-            </div>
+    <div class="py-10">
+
+
+			<div id="accordion-collapse" data-accordion="collapse">
+				@foreach($horses as $horse)
+			  <h2 id="accordion-collapse-heading-{{$loop->index}}">
+			    <button type="button" class="flex items-center justify-between w-full p-5 font-medium text-left text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800" data-accordion-target="#accordion-collapse-body-{{$loop->index}}" aria-expanded="true" aria-controls="accordion-collapse-body-{{$loop->index}}">
+			      <span>{{$horse->name}}</span>
+			      <svg data-accordion-icon class="w-6 h-6 rotate-180 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+			    </button>
+			  </h2>
+			  <div id="accordion-collapse-body-{{$loop->index}}" class="hidden" aria-labelledby="accordion-collapse-heading-{{$loop->index}}">
+			    <div class="p-5 font-light border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
+			      <p class="mb-2 text-gray-500 dark:text-gray-400">{{$horse->comments}}</p>
+			      
+			    </div>
+			  </div>
+			  @endforeach
+
+			</div>
+
 
         
 
-        </div>
     </div>
 </x-app-layout>
