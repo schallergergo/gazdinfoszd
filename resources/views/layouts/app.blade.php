@@ -12,8 +12,8 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
         <!-- Scripts -->
         @if(App::environment('production'))
-        <link rel="stylesheet" href="/build/assets/app-6d975f68.css"/>
-        <script type="text/javascript" src="/build/assets/app-fe5e93e3.js">
+        <link rel="stylesheet" href="/build/assets/app-6d975f68.css">
+        <script type="text/javascript" src="/build/assets/app-fe5e93e3.js"></script>
         @else
          @vite(['resources/css/app.css', 'resources/js/app.js'])
          @endif

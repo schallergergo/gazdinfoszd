@@ -11,7 +11,12 @@
         <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
 
         <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @if(App::environment('production'))
+        <link rel="stylesheet" href="/build/assets/app-6d975f68.css">
+        <script type="text/javascript" src="/build/assets/app-fe5e93e3.js"></script>
+        @else
+         @vite(['resources/css/app.css', 'resources/js/app.js'])
+         @endif
     </head>
     <body class="font-sans text-gray-900 antialiased">
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
