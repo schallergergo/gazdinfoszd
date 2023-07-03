@@ -15,13 +15,14 @@ return new class extends Migration
     {
         Schema::create('treatments', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger("tenant_id");
             $table->foreignId("horse_id");
             $table->date("date_of_treatment");
             $table->enum("type_of_treatment",['farrier','vet','vaccination','deworming','breeding']);
-            $table->integer("cost");
+            $table->integer("cost_of_treatment");
             $table->date("date_of_notification");
             $table->foreignId("last_updated_by");
-            $table->unsignedBigInteger("tenant_id");
+            $table->string("comments")
             $table->softDeletes();
             $table->timestamps();
         });

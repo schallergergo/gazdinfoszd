@@ -5,8 +5,9 @@ namespace {{ namespace }};
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Traits\BelongsToTenant;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class {{ class }} extends Model
 {
-    use HasFactory, BelongsToTenant;;
+    use HasFactory, BelongsToTenant;
 }

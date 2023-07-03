@@ -17,10 +17,10 @@ return new class extends Migration
             $table->id();
             $table->string("task");
             $table->datetime("when");
-            $table->integer("duration")->nullable();
+            $table->integer("duration_mins")->nullable();
             $table->boolean("repeat")->default(0);
             $table->date("repeat_until")->nullable();
-            $table->string("remarks")->nullable();
+            $table->string("description")->nullable();
             $table->unsignedBigInteger("tenant_id");
             $table->softDeletes();
             $table->timestamps();

@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('owners', function (Blueprint $table) {
             $table->id();
             $table->string("name");
-            $table->string("phone");
+            $table->string("phone_no")->nullable();
+            $table->unsignedBigInteger("user_id")->nullable();
             $table->unsignedBigInteger("tenant_id");
             $table->softDeletes();
             $table->timestamps();
