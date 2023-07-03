@@ -22,7 +22,7 @@ return new class extends Migration
             $table->integer("cost_of_treatment");
             $table->date("date_of_notification");
             $table->foreignId("last_updated_by");
-            $table->string("comments")
+            $table->string("comments")->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

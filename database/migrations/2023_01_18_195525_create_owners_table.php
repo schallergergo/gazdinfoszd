@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string("name");
             $table->string("phone_no")->nullable();
             $table->unsignedBigInteger("user_id")->nullable();
+            $table->string("email");
             $table->unsignedBigInteger("tenant_id");
             $table->softDeletes();
             $table->timestamps();

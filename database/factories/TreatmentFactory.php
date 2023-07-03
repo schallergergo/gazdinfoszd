@@ -27,7 +27,7 @@ class TreatmentFactory extends Factory
             'horse_id'              => $horse->id,
             'date_of_treatment'     => fake()->date(),
             'type_of_treatment'     => fake()->randomElement(['farrier','vet','vaccination','deworming','breeding']),
-            'cost'                  => fake()->randomNumber(5, true),
+            'cost_of_treatment'                  => fake()->randomNumber(5, true),
             'date_of_notification'  => fake()->date(),
             'last_updated_by'              => User::factory()->create()->id,
             'tenant_id' => rand(1,3),

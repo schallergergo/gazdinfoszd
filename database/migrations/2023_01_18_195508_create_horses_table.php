@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string("FEI_number")->nullable();
             $table->boolean("active")->default(1);
             $table->string("color")->nullable();
-            $table->string("comments");
+            $table->string("comments")->nullable();
             $table->unsignedBigInteger("tenant_id");
             $table->softDeletes();
             $table->timestamps();

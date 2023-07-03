@@ -1,97 +1,53 @@
-<x-app-layout>
+
+@extends("layouts.app")
+@section("content")
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                    </div>
+                    <form method="POST" action="{{route('horse.store')}}">
+                    <!-- Content Row -->
+                    @csrf
+                    <div class="row">
+                       <hr />
 
 
-    <div class="py-8">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                <div class="max-w-xl">
+                          <x-input type="text" name="name" displayname="Name" isrequired="required" />
+                          <x-input type="date" name="birthdate" displayname="Date of birth" isrequired="required"/>
+                          <x-input type="text" name="gender" displayname="Gender" isrequired="required" />
 
-				 <section>
-				    <header>
-				        <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-				            {{ __('Profile Information') }}
-				        </h2>
-
-				        <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-				            {{ __("Update your account's profile information and email address.") }}
-				        </p>
-				    </header>
-
-				
-				    <form method="post" action="{{ route('horse.store') }}" class="mt-6 space-y-6">
-				        @csrf
-
-				        <!-- Horse name -->
-				        <div>
-				            <x-input-label for="name" :value="__('Name')" />
-				            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name')" required />
-				            <x-input-error class="mt-2" :messages="$errors->get('name')" />
-				        </div>
-
-				         <!-- Birth date -->
-				        <div>
-				            <x-input-label for="birthdate" :value="__('Birth date')" />
-				            <x-text-input id="birthdate" name="birthdate" type="date" class="mt-1 block w-full" :value="old('birthdate')" />
-				            <x-input-error class="mt-2" :messages="$errors->get('birthdate')" />
-				        </div>
-
-				         <!-- Gender-->
-				        <div>
-				            <x-input-label for="gender" :value="__('Gender')" />
-				            <x-select-input id="gender" name="gender" class="mt-1 block w-full rounded" />
-				            	<option>{{__("Select gender")}}</option>
-					            <option value="stallion">{{__("Stallion")}}</option>
-					            <option value="mare">{{__("Mare")}}</option>
-					            <option value="gelding">{{__("Gelding")}}</option>
-				        	</select>
-				            <x-input-error class="mt-2" :messages="$errors->get('gender')" />
-				        </div>
-
-
-				         <!-- Color -->
-				        <div>
-				            <x-input-label for="color" :value="__('Color')" />
-				            <x-text-input id="color" name="color" type="text" class="mt-1 block w-full" :value="old('color')" />
-				            <x-input-error class="mt-2" :messages="$errors->get('color')" />
-				        </div>
-
-
-				         <!-- Passport number -->
-				        <div>
-				            <x-input-label for="passport_number" :value="__('Passport number')" />
-				            <x-text-input id="passport_number" name="passport_number" type="text" class="mt-1 block w-full" :value="old('passport_number')" />
-				            <x-input-error class="mt-2" :messages="$errors->get('passport_number')" />
-				        </div>
-
-				         <!-- FEI /Licence number -->
-				        <div>
-				            <x-input-label for="FEI_number" :value="__('FEI/Licence number')" />
-				            <x-text-input id="FEI_number" name="FEI_number" type="text" class="mt-1 block w-full" :value="old('FEI_number')" />
-				            <x-input-error class="mt-2" :messages="$errors->get('FEI_number')" />
-				        </div>
-
-				        <!-- Textarea -->
-				        <div>
-				            <x-input-label for="comments" :value="__('Comments')" />
-				            <x-textarea-input id="comments" name="comments" type="text" class="mt-1 block w-full" :value="old('comments')" />
-				            <x-input-error class="mt-2" :messages="$errors->get('comments')" />
-				        </div>
+                   </div> <!-- end of the row-->
 
 
 
-				        <div class="flex items-center gap-4">
-				            <x-primary-button>{{ __('Save') }}</x-primary-button>
-				        </div>
-				    </form>
-				</section>
+                    <div class="row">
+                       <hr />
 
 
+                          <x-input type="text" name="passport_number" displayname="Passport number" isrequired="required"/>
+                          <x-input type="text" name="FEI_number" displayname="FEI number" isrequired="required"/>
+                          <x-input type="text" name="color" displayname="Color" isrequired=""/>
 
+                   </div> <!-- end of the row-->
+
+                    <div class="row">
+                         <hr />
+                      <x-textarea name="comments" displayname="Comments" isrequired=""/>
+
+                    </div>
+
+                    <div class="row">
+                          <div class= "col-md pt-2" >
+                            <button class="btn btn-secondary" type="submit">{{__("Submit")}}</button>
+                          </div>
+                      </div>
+                 </form>
                 </div>
-            </div>
 
-        
-
-        </div>
-    </div>
-</x-app-layout>
+@endsection
