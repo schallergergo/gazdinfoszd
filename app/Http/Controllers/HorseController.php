@@ -40,7 +40,7 @@ class HorseController extends Controller
     {
         $data=$request->validated();
         $newHorse=Horse::create($data);
-        return redirect(route("horses.index"));
+        return redirect(route("horse.show",$newHorse));
     }
 
     /**
@@ -51,7 +51,13 @@ class HorseController extends Controller
      */
     public function show(Horse $horse)
     {
-        //
+
+        $owners = $horse->owners;
+        return view("horse.show",[
+            "horse"=>$horse,
+            "owners"=>$owners
+
+        ]);
     }
 
     /**

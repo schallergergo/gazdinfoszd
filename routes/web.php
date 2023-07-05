@@ -16,7 +16,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+
+    return redirect("/login");
 });
 
 Route::get('/dashboard', function () {
@@ -24,21 +25,28 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::patch('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile/delete', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get("/horse/index",[HorseController::class,'index'])->name('horse.index');
+    Route::get('/horse/create',[HorseController::class,'create'])->name('horse.create');
+    Route::post("/horse/store",[HorseController::class,'store'])->name('horse.store');
+    Route::get("/horse/{horse}/show",[HorseController::class,'show'])->name('horse.show');
+    Route::get("/horse/{horse}/edit",[HorseController::class,'edit'])->name('horse.edit');
+    Route::patch("/horse/{horse}/update",[HorseController::class,'update'])->name('horse.update');;
+
+
 });
 
 require __DIR__.'/auth.php';
 
-Route::get("/horses/index",[HorseController::class,'index'])->name('horses.index');
-Route::get('/horse/create',[HorseController::class,'create'])->name('horse.create');
-Route::post("/horse/store",[HorseController::class,'store'])->name('horse.store');
-Route::get("/horse/edit/{horse}",[HorseController::class,'edit'])->name('horse.edit');
-Route::patch("/horse/update/{horse}",[HorseController::class,'update'])->name('horse.update');;
+
 
 
 
 Route::get('/test', function () {
     return redirect()->back();
 })->name("test");
+
+

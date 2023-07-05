@@ -21,7 +21,6 @@ return new class extends Migration
             $table->enum("type_of_treatment",['farrier','vet','vaccination','deworming','breeding']);
             $table->integer("cost_of_treatment");
             $table->date("date_of_notification");
-            $table->foreignId("last_updated_by");
             $table->string("comments")->nullable();
             $table->softDeletes();
             $table->timestamps();

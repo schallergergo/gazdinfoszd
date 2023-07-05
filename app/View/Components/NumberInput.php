@@ -4,25 +4,16 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class TextArea extends Component
+class NumberInput extends Component
 {
     /**
      * Create a new component instance.
      *
      * @return void
      */
-     public function __construct(
-    
-
-        public string $name,
-        public string $displayname,
-        public string $isrequired)
-
+    public function __construct()
     {
-
-        $this->displayname = $displayname;
-        $this->name = $name;
-        $this->isrequired =$isrequired;
+        //
     }
 
     /**
@@ -32,6 +23,6 @@ class TextArea extends Component
      */
     public function render()
     {
-        return view('components.text-area');
+        return view('components.number-input');
     }
 }

@@ -29,7 +29,6 @@ class TreatmentFactory extends Factory
             'type_of_treatment'     => fake()->randomElement(['farrier','vet','vaccination','deworming','breeding']),
             'cost_of_treatment'                  => fake()->randomNumber(5, true),
             'date_of_notification'  => fake()->date(),
-            'last_updated_by'              => User::factory()->create()->id,
             'tenant_id' => rand(1,3),
         ];
     }
