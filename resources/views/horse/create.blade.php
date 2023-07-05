@@ -38,7 +38,7 @@
 
                     <div class="row">
                          <hr />
-                      <x-textarea name="comments" displayname="Comments" isrequired=""/>
+                      <x-components.textarea name="comments" displayname="Comments" isrequired=""/>
 
                     </div>
 
