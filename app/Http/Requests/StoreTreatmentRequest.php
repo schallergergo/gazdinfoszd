@@ -6,15 +6,6 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StoreTreatmentRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return false;
-    }
 
     /**
      * Get the validation rules that apply to the request.
@@ -24,7 +15,13 @@ class StoreTreatmentRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+
+            "date_of_treatment" => ["date"],
+            "type_of_treatment"=> ["string"],
+            "cost_of_treatment" => ["integer",'max:100000000'],
+            "date_of_notification"=> ["date","nullable"],
+            "comments"=>["string", "nullable"],
+            "horses"=>[]
         ];
     }
 }

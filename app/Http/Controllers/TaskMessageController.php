@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\TaskMessage;
+use App\Models\Task;
 use App\Http\Requests\StoreTaskMessageRequest;
 use App\Http\Requests\UpdateTaskMessageRequest;
+use Illuminate\Support\Facades\Auth;
 
 class TaskMessageController extends Controller
 {
@@ -13,9 +15,10 @@ class TaskMessageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Task $task)
     {
-        //
+        $messages = $task->message->sortByDesc("created_at");
+        return view("taskmessage.index",["task"=>$task,"messages"=>$messages]);
     }
 
     /**
@@ -34,9 +37,14 @@ class TaskMessageController extends Controller
      * @param  \App\Http\Requests\StoreTaskMessageRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreTaskMessageRequest $request)
+    public function store(StoreTaskMessageRequest $request,Task $task)
     {
-        //
+        $data = $request->validated();
+        $data = array_merge($data,["user_id"=>Auth::user()->id,"task_id"=>$task->id]);
+
+        $newMessage = TaskMessage::create($data);
+        return redirect(route("taskmessage.index",$task));
+
     }
 
     /**

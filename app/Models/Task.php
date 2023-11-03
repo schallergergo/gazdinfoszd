@@ -9,17 +9,21 @@ use App\Models\Traits\BelongsToTenant;
 
 class Task extends Model
 {
-    use HasFactory, BelongsToTenant;
-    use SoftDeletes;
+    use HasFactory, BelongsToTenant,SoftDeletes;
     protected $guarded =[];
 
-    public function users(){
+    public function user(){
 
         return $this->belongsToMany(User::class);
     }
 
-    public function horses(){
+    public function horse(){
 
         return $this->belongsToMany(Horse::class);
+    }
+
+    public function message()
+    {
+        return $this->hasMany(TaskMessage::class);
     }
 }

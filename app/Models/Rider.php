@@ -9,5 +9,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Rider extends Model
 {
-    use HasFactory, BelongsToTenant;
+    use HasFactory, BelongsToTenant, SoftDeletes;
+    protected $guarded = [];
 }

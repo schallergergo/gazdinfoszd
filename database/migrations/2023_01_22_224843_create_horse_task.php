@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('horse_task', function (Blueprint $table) {
             $table->id();
-            $table->integer('owner_id')->unsigned();
+            $table->integer('task_id')->unsigned();
             $table->integer('horse_id')->unsigned();
         });
     }

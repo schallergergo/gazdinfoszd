@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Inventory;
 use App\Models\InventoryItem;
 use App\Http\Requests\StoreInventoryItemRequest;
 use App\Http\Requests\UpdateInventoryItemRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Lang;
 
 class InventoryItemController extends Controller
 {
@@ -23,9 +26,9 @@ class InventoryItemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Inventory $inventory)
     {
-        //
+        return view("inventoryitem.create",["inventory"=>$inventory]);
     }
 
     /**
@@ -34,9 +37,15 @@ class InventoryItemController extends Controller
      * @param  \App\Http\Requests\StoreInventoryItemRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreInventoryItemRequest $request)
+    public function store(StoreInventoryItemRequest $request,Inventory $inventory)
     {
-        //
+        $data = $request->validated();
+        $amount =  $data["amount"];
+        $user = Auth::user();
+        if ($inventory->amount < $amount) return back()->with("error",Lang::get("Invetory does not contain enough items!"));
+        $data = array_merge($data,["user_id"=>$user->id,"inventory_id"=>$inventory->id]);
+        InventoryItem::create($data);
+        return redirect(route("inventory.index"));
     }
 
     /**
@@ -81,6 +90,7 @@ class InventoryItemController extends Controller
      */
     public function destroy(InventoryItem $inventoryItem)
     {
-        //
+        $inventoryItem->delete();
+        return redirect(route("inventory.show",$inventoryItem->inventory));
     }
 }

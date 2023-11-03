@@ -16,10 +16,8 @@ return new class extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
             $table->string("task");
-            $table->datetime("when");
-            $table->integer("duration_mins")->nullable();
-            $table->boolean("repeat")->default(0);
-            $table->date("repeat_until")->nullable();
+            $table->datetime("task_start");
+            $table->datetime("task_end");
             $table->string("description")->nullable();
             $table->unsignedBigInteger("tenant_id");
             $table->softDeletes();

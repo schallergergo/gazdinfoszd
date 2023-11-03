@@ -20,7 +20,7 @@ return new class extends Migration
             $table->date("date_of_treatment");
             $table->enum("type_of_treatment",['farrier','vet','vaccination','deworming','breeding']);
             $table->integer("cost_of_treatment");
-            $table->date("date_of_notification");
+            $table->date("date_of_notification")->nullable();
             $table->string("comments")->nullable();
             $table->softDeletes();
             $table->timestamps();

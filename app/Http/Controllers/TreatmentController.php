@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Treatment;
+use App\Models\Horse;
 use App\Http\Requests\StoreTreatmentRequest;
 use App\Http\Requests\UpdateTreatmentRequest;
 
@@ -25,7 +26,9 @@ class TreatmentController extends Controller
      */
     public function create()
     {
-        //
+
+        $horses=Horse::where("active",1)->get();
+        return view("treatment.create",["horses"=>$horses]);
     }
 
     /**
@@ -36,7 +39,17 @@ class TreatmentController extends Controller
      */
     public function store(StoreTreatmentRequest $request)
     {
-        //
+        $data=$request->validated();
+        foreach ($data["horses"] as $horse_id){
+            Treatment::create([
+            "horse_id"=>$horse_id,     
+            "date_of_treatment" => $data["date_of_treatment"],
+            "type_of_treatment"=> $data["type_of_treatment"],
+            "cost_of_treatment" => $data["cost_of_treatment"],
+            "date_of_notification"=> $data["date_of_notification"],
+            "comments"=>$data["comments"]]);
+        }
+        return redirect(route("treatment.create")); 
     }
 
     /**
@@ -58,7 +71,8 @@ class TreatmentController extends Controller
      */
     public function edit(Treatment $treatment)
     {
-        //
+        //return $treatment->date_of_treatment;
+        return view("treatment.edit",["treatment"=> $treatment]);
     }
 
     /**
@@ -70,7 +84,9 @@ class TreatmentController extends Controller
      */
     public function update(UpdateTreatmentRequest $request, Treatment $treatment)
     {
-        //
+        $data=$request->validated();
+        $treatment->update($data);
+        return redirect()->back();
     }
 
     /**

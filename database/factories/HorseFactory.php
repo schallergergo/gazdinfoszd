@@ -22,7 +22,7 @@ class HorseFactory extends Factory
             'birthdate'=> fake()->date(),
             'gender'=> fake()->randomElement(['male', 'female']),
             'passport_number'=> fake()->text(10),
-            'tenant_id' => rand(1,3),
+            'tenant_id' => 1,
             'comments' => fake()->text(),
 
         ];

@@ -1,101 +1,76 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Profile') }}
-        </h2>
-    </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                <div class="max-w-xl">
+@extends("layouts.app")
+@section("content")
 
-				 <section>
-				    <header>
-				        <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-				            {{ __('Profile Information') }}
-				        </h2>
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
 
-				        <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-				            {{ __("Update your account's profile information and email address.") }}
-				        </p>
-				    </header>
-
-				
-				    <form method="post" action="{{ route('horse.update', ['horse'=>$horse->id]) }}" class="mt-6 space-y-6">
-				        @csrf
-				        @method('patch')
-				        <!-- Horse name -->
-				        <div>
-				            <x-input-label for="name" :value="__('Name')" />
-				            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $horse->name)" required />
-				            <x-input-error class="mt-2" :messages="$errors->get('name')" />
-				        </div>
-
-				         <!-- Birth date -->
-				        <div>
-				            <x-input-label for="birthdate" :value="__('Birth date')" />
-				            <x-text-input id="birthdate" name="birthdate" type="date" class="mt-1 block w-full" :value="old('birthdate',$horse->birthdate)" />
-				            <x-input-error class="mt-2" :messages="$errors->get('birthdate')" />
-				        </div>
-
-				         <!-- Gender-->
-				        <div>
-				            <x-input-label for="gender" :value="__('Gender')" />
-				            <x-select-input id="gender" name="gender" class="mt-1 block w-full rounded" />
-				            	<option>{{__("Select gender")}}</option>
-					            <option value="stallion" @if ($horse->gender="stallion") selected @endif>{{__("Stallion")}}</option>
-					            <option value="mare" @if ($horse->gender="mare") selected @endif>{{__("Mare")}}</option>
-					            <option value="gelding" @if ($horse->gender="gelding") selected @endif>{{__("Gelding")}}</option>
-				        	</select>
-				            <x-input-error class="mt-2" :messages="$errors->get('gender')" />
-				        </div>
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">{{__("Edit horse record")}}</h1>
+                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                    </div>
+                    <form method="POST" action="{{route('horse.store',$horse)}}">
+                    <!-- Content Row -->
+                    @csrf
+                    <div class="row">
+                       <hr />
 
 
-				         <!-- Color -->
-				        <div>
-				            <x-input-label for="color" :value="__('Color')" />
-				            <x-text-input id="color" name="color" type="text" class="mt-1 block w-full" :value="old('color', $horse->color)" />
-				            <x-input-error class="mt-2" :messages="$errors->get('color')" />
-				        </div>
+                          <x-input-edit type="text" name="name" displayname="Name" value="{{$horse->name}}" isrequired="" />
+                          <x-input-edit type="date" name="birthdate" displayname="Date of birth" value="{{$horse->birthdate}}"  isrequired="required"/>
+                          <x-input-edit type="text" name="gender" displayname="Gender" value="{{$horse->gender}}" isrequired="required" />
 
-
-				         <!-- Passport number -->
-				        <div>
-				            <x-input-label for="passport_number" :value="__('Passport number')" />
-				            <x-text-input id="passport_number" name="passport_number" type="text" class="mt-1 block w-full" :value="old('passport_number', $horse->passport_number)" />
-				            <x-input-error class="mt-2" :messages="$errors->get('passport_number')" />
-				        </div>
-
-				         <!-- FEI /Licence number -->
-				        <div>
-				            <x-input-label for="FEI_number" :value="__('FEI/Licence number')" />
-				            <x-text-input id="FEI_number" name="FEI_number" type="text" class="mt-1 block w-full" :value="old('FEI_number',$horse->FEI_number)" />
-				            <x-input-error class="mt-2" :messages="$errors->get('FEI_number')" />
-				        </div>
-
-				        <!-- Textarea -->
-				        <div>
-				            <x-input-label for="comments" :value="__('Comments')" />
-				            <x-textarea-input id="comments" name="comments" type="text" class="mt-1 block w-full" :content="$horse->comments" />
-				            <x-input-error class="mt-2" :messages="$errors->get('comments')" />
-				        </div>
+                   </div> <!-- end of the row-->
 
 
 
-				        <div class="flex items-center gap-4">
-				            <x-primary-button>{{ __('Save') }}</x-primary-button>
-				        </div>
-				    </form>
-				</section>
+                    <div class="row">
+                       <hr />
 
+
+                          <x-input-edit type="text" name="passport_number" displayname="Passport number" value="{{$horse->passport_number}}" isrequired="required"/>
+                          <x-input-edit type="text" name="FEI_number" displayname="FEI number" value="{{$horse->FEI_number}}" isrequired="required"/>
+                          <x-input-edit type="text" name="color" displayname="Color" value="{{$horse->color}}" isrequired=""/>
+
+                   </div> <!-- end of the row-->
+
+                    <div class="row">
+                         <hr />
+                      <x-text-area-edit name="comments" displayname="Comments" value="{{$horse->comments}}" isrequired=""/>
+
+                    </div>
+
+                    <div class="row">
+                          <div class= "col-md pt-2" >
+                            <button class="btn btn-secondary" type="submit">{{__("Submit")}}</button>
+                          </div>
+                      </div>
+                 </form>
+
+                   <!-- Page Heading2 -->
+                    <div class="d-sm-flex align-items-center justify-content-between mt-3 mb-3">
+                        <h1 class="h3 mb-0 text-gray-800">{{__("Attach owner")}}</h1>
+
+                    </div>
+                    @foreach($doesNotOwn as $owner)
+                    <a href="{{route('owner.attachHorse',[$owner,$horse,0])}}">{{$owner->name
+                    }} |</a>
+                    @endforeach
+
+
+                                 <!-- Page Heading2 -->
+                    <div class="d-sm-flex align-items-center justify-content-between mt-3 mb-3">
+                        <h1 class="h3 mb-0 text-gray-800">{{__("Detach owner")}}</h1>
+
+                    </div>
+                    @foreach($doesOwn as $owner)
+                    <a href="{{route('owner.detachHorse',[$owner,$horse,0])}}">{{$owner->name
+                    }} |</a>
+                    @endforeach
 
 
                 </div>
-            </div>
 
-        
-
-        </div>
-    </div>
-</x-app-layout>
+@endsection

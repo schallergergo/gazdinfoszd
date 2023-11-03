@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Horse;
+use App\Models\Owner;
 use App\Http\Requests\StoreHorseRequest;
 use App\Http\Requests\UpdateHorseRequest;
 
@@ -15,8 +16,19 @@ class HorseController extends Controller
      */
     public function index()
     {   
-        $horses = Horse::all();
-        return view("horse.index",["horses"=>$horses]);
+        $data = request()->validate([
+            "horse_name"=>["string","nullable"],
+            "gender"=>["string","nullable"]
+
+        ]);
+        $horse_name = isset($data["horse_name"]) ? $data["horse_name"] : "";
+        $gender =  isset($data["gender"]) ? $data["gender"] : "";
+        $horses = Horse::where("name","like","%".$horse_name."%")->where("gender","like","%".$gender."%")->paginate(10);
+
+         $genders = Horse::select("gender")->distinct("gender")->get();
+
+        
+        return view("horse.index",["horses"=>$horses,"genders"=>$genders,"horse_name"=>$horse_name,"genderSearch"=>$gender]);
 
     }
 
@@ -52,10 +64,22 @@ class HorseController extends Controller
     public function show(Horse $horse)
     {
 
-        $owners = $horse->owners;
+        $owners = $horse->owner;
+        $messages = $horse->message;
+        $treatments = $horse->treatment;
+        $tasks = $horse->task;
+        $currentTime = now();
+
+        $tasks = $tasks->where("task_start","<=",$currentTime)->where("task_end",">=",$currentTime);
+        $task = $tasks->first();
+
+
         return view("horse.show",[
             "horse"=>$horse,
-            "owners"=>$owners
+            "owners"=>$owners,
+            "messages"=>$messages,
+            "treatments"=>$treatments,
+            "tasks"=>$tasks,
 
         ]);
     }
@@ -68,7 +92,10 @@ class HorseController extends Controller
      */
     public function edit(Horse $horse)
     {
-        return view("horse.edit",["horse"=>$horse]);
+        $owners = Owner::all();
+        $doesOwn = $horse->owner;
+        $doesNotOwn = $owners->whereNotIn("id",$doesOwn->pluck("id"));
+        return view("horse.edit",["horse"=>$horse,"doesOwn"=>$doesOwn,"doesNotOwn"=>$doesNotOwn]);
     }
 
     /**

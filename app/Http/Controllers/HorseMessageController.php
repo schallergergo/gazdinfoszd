@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Horse;
 use App\Models\HorseMessage;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreHorseMessageRequest;
 use App\Http\Requests\UpdateHorseMessageRequest;
 
@@ -34,9 +36,14 @@ class HorseMessageController extends Controller
      * @param  \App\Http\Requests\StoreHorseMessageRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreHorseMessageRequest $request)
+    public function store(StoreHorseMessageRequest $request,Horse $horse)
     {
-        //
+        $data = $request->validated();
+        $data = array_merge($data,["user_id"=>Auth::user()->id,"horse_id"=>$horse->id]);
+        HorseMessage::create($data);
+        
+
+        return redirect(route("horse.show",$horse)."#messages");
     }
 
     /**

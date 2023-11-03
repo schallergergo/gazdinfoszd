@@ -6,15 +6,6 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateLessonRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return false;
-    }
 
     /**
      * Get the validation rules that apply to the request.
@@ -24,7 +15,11 @@ class UpdateLessonRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            "date_of_lesson" =>['required',"date_format:Y-m-d"],
+            "rider_id" =>['required', "integer","min:0"],
+            "horse_id" =>['required', "integer","min:0"],
+            "price_of_lesson" =>['required', "integer","min:0"],
+            "comments"=>['string',"max:256","nullable"],
         ];
     }
 }

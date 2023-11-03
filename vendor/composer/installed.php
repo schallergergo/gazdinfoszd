@@ -5,20 +5,11 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '7502856bbf58ec28bb720bec7eab00064e73e9b1',
+        'reference' => '3bdf46c2880ce4183483ea7414b23f002313fe1e',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
     'versions' => array(
-        'barryvdh/laravel-debugbar' => array(
-            'pretty_version' => 'v3.8.1',
-            'version' => '3.8.1.0',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../barryvdh/laravel-debugbar',
-            'aliases' => array(),
-            'reference' => 'aff3235fecb4104203b1e62c32239c56530eee32',
-            'dev_requirement' => true,
-        ),
         'brick/math' => array(
             'pretty_version' => '0.11.0',
             'version' => '0.11.0.0',
@@ -406,7 +397,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '7502856bbf58ec28bb720bec7eab00064e73e9b1',
+            'reference' => '3bdf46c2880ce4183483ea7414b23f002313fe1e',
             'dev_requirement' => false,
         ),
         'laravel/pint' => array(
@@ -444,6 +435,15 @@
             'aliases' => array(),
             'reference' => 'f23fe9d4e95255dacee1bf3525e0810d1a1b0f37',
             'dev_requirement' => false,
+        ),
+        'laravel/telescope' => array(
+            'pretty_version' => 'v4.16.4',
+            'version' => '4.16.4.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../laravel/telescope',
+            'aliases' => array(),
+            'reference' => '5cb73363ef6d57e4087ccc380964c5120d34ec3c',
+            'dev_requirement' => true,
         ),
         'laravel/tinker' => array(
             'pretty_version' => 'v2.8.1',
@@ -498,15 +498,6 @@
             'aliases' => array(),
             'reference' => 'ff6248ea87a9f116e78edd6002e39e5128a0d4dd',
             'dev_requirement' => false,
-        ),
-        'maximebf/debugbar' => array(
-            'pretty_version' => 'v1.18.2',
-            'version' => '1.18.2.0',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../maximebf/debugbar',
-            'aliases' => array(),
-            'reference' => '17dcf3f6ed112bb85a37cf13538fd8de49f5c274',
-            'dev_requirement' => true,
         ),
         'mockery/mockery' => array(
             'pretty_version' => '1.6.2',

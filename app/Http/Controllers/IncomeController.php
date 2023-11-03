@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Income;
+use App\Models\Horse;
+
 use App\Http\Requests\StoreIncomeRequest;
 use App\Http\Requests\UpdateIncomeRequest;
 
@@ -14,9 +16,42 @@ class IncomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
+    {   
+        $data = request()->validate(["search_term"=>["nullable","string","max:256"],]);
+        $search_term = $data["search_term"] ?? "";
+        $incomes =  Income::where("description","like","%".$search_term."%")
+        ->orWhere("date","like","%".$search_term."%")
+        ->orWhere("amount","like","%".$search_term."%")
+        ->orderByDesc("created_at")
+        ->paginate(10);
+        
+        return view("income.index",["incomes"=>$incomes,"search_term"=>$search_term]);
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexCategory($category)
+    {
+        $incomes =  Income::where("category",$category)->orderByDesc("created_at")->paginate(10);
+        $search_term = "";
+        return view("income.index",["incomes"=>$incomes,"search_term"=>$search_term]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexHorse(Horse $horse)
+    {
+        $incomes =  Income::where("horse_id",$horse->id)->orderByDesc("created_at")->paginate(10);
+        $search_term = "";
+        return view("income.index",["incomes"=>$incomes,"search_term"=>$search_term]);
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -25,7 +60,8 @@ class IncomeController extends Controller
      */
     public function create()
     {
-        //
+        $horses = Horse::all();
+        return view("income.create",["horses"=>$horses]);
     }
 
     /**
@@ -36,7 +72,9 @@ class IncomeController extends Controller
      */
     public function store(StoreIncomeRequest $request)
     {
-        //
+        $data = $request->validated();
+        Income::create($data);
+        return redirect(route("income.index"));
     }
 
     /**
@@ -81,6 +119,7 @@ class IncomeController extends Controller
      */
     public function destroy(Income $income)
     {
-        //
+        $income->delete();
+        return redirect(route("income.index"));
     }
 }

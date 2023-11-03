@@ -17,7 +17,10 @@ class RiderFactory extends Factory
     public function definition()
     {
         return [
-            //
+            "name"=>fake()->name(),
+            "normal_price"=>rand(10,20)*500,
+            "tenant_id"=>1
+
         ];
     }
 }

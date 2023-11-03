@@ -14,7 +14,7 @@ class UpdateHorseRequest extends FormRequest
     public function rules()
     {
         return [
-             "name" => ['required',"string",'max:255'],
+            "name" => ['required',"string",'max:255'],
             "birthdate" => ["date","nullable"],
             "gender"=> ["string","nullable"],
             "passport_number" => ["string",'max:255',"nullable"],

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\Venue;
 use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
 
@@ -15,7 +16,8 @@ class EventController extends Controller
      */
     public function index()
     {
-        //
+        $events = Event::all();
+        return $events;
     }
 
     /**
@@ -25,7 +27,9 @@ class EventController extends Controller
      */
     public function create()
     {
-        //
+        $venues = Venue::all();
+
+        return view("event.create",["venues"=>$venues]);
     }
 
     /**
@@ -36,7 +40,11 @@ class EventController extends Controller
      */
     public function store(StoreEventRequest $request)
     {
-        //
+        $data = $request->validated();
+
+        Event::create($data);
+
+        return redirect(route("event.index"));
     }
 
     /**
@@ -58,7 +66,13 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
-        //
+        $venues = Venue::all();
+
+        return view("event.edit",[
+
+                     "venues"=>$venues,
+                     "event"=>$event
+                 ]);
     }
 
     /**
@@ -70,7 +84,11 @@ class EventController extends Controller
      */
     public function update(UpdateEventRequest $request, Event $event)
     {
-        //
+         $data = $request->validated();
+
+        $event->update($data);
+
+        return redirect(route("event.index"));
     }
 
     /**
@@ -81,6 +99,7 @@ class EventController extends Controller
      */
     public function destroy(Event $event)
     {
-        //
+        $event->delete();
+        return redirect(route("event.index"));
     }
 }

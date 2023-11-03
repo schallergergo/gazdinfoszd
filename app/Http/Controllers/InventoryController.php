@@ -15,7 +15,7 @@ class InventoryController extends Controller
      */
     public function index()
     {
-        //
+        return Inventory::all();
     }
 
     /**
@@ -24,8 +24,8 @@ class InventoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //
+    {   
+        return view("inventory.create");
     }
 
     /**
@@ -36,7 +36,9 @@ class InventoryController extends Controller
      */
     public function store(StoreInventoryRequest $request)
     {
-        //
+        $data = $request->validated();
+        Inventory::create($data);
+        return redirect(route("inventory.index"));
     }
 
     /**
@@ -47,7 +49,8 @@ class InventoryController extends Controller
      */
     public function show(Inventory $inventory)
     {
-        //
+
+        return view("inventory.show",["inventory"=>$inventory]);
     }
 
     /**
@@ -58,7 +61,7 @@ class InventoryController extends Controller
      */
     public function edit(Inventory $inventory)
     {
-        //
+        return view("inventory.edit",["inventory"=>$inventory]);
     }
 
     /**
@@ -70,7 +73,9 @@ class InventoryController extends Controller
      */
     public function update(UpdateInventoryRequest $request, Inventory $inventory)
     {
-        //
+        $data = $request->validated();
+        $inventory->update($data);
+        return redirect(route("inventory.show",$inventory));
     }
 
     /**
@@ -81,6 +86,6 @@ class InventoryController extends Controller
      */
     public function destroy(Inventory $inventory)
     {
-        //
+        $inventory->delete();
     }
 }

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Owner;
+use App\Models\Horse;
+use App\Models\User;
 use App\Http\Requests\StoreOwnerRequest;
 use App\Http\Requests\UpdateOwnerRequest;
 
@@ -15,9 +17,16 @@ class OwnerController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $data = request()->validate([
+            "owner_name"=>["string","nullable"],
 
+        ]);
+        $owner_name = isset($data["owner_name"]) ? $data["owner_name"] : "";
+        $owners = Owner::where("name","like","%".$owner_name."%")->paginate(10);
+
+        return view("owner.index",["owners"=>$owners,"owner_name"=>$owner_name]);
+    
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -25,7 +34,9 @@ class OwnerController extends Controller
      */
     public function create()
     {
-        //
+
+        $users = User::where("role","owner")->get();
+        return view("owner.create",["users"=>$users]);
     }
 
     /**
@@ -36,7 +47,10 @@ class OwnerController extends Controller
      */
     public function store(StoreOwnerRequest $request)
     {
-        //
+        $data = $request->validated();
+        Owner::create($data);
+        return redirect(route("owner.index"));
+
     }
 
     /**
@@ -58,7 +72,11 @@ class OwnerController extends Controller
      */
     public function edit(Owner $owner)
     {
-        //
+        $users = User::where("role","owner")->get();
+        $horses = Horse::all();
+        $ownedHorses = $owner->horse;
+        $notOwnedHorses = $horses->whereNotIn("id",$ownedHorses->pluck("id"));
+        return view("owner.edit",["owner"=>$owner,"users"=>$users,"ownedHorses"=>$ownedHorses,"notOwnedHorses"=>$notOwnedHorses]);
     }
 
     /**
@@ -70,7 +88,9 @@ class OwnerController extends Controller
      */
     public function update(UpdateOwnerRequest $request, Owner $owner)
     {
-        //
+        $data = $request->validated();
+        $owner->update($data);
+        return redirect(route("owner.index"));
     }
 
     /**
@@ -81,6 +101,19 @@ class OwnerController extends Controller
      */
     public function destroy(Owner $owner)
     {
-        //
+
+        $owner->delete();
+        return redirect(route("owner.index")); 
+    }
+    public function attachHorse(Owner $owner, Horse $horse, $returnOwner){
+        $owner->horse()->attach($horse->id);
+        if(!$returnOwner) return redirect(route("horse.edit",$horse));
+        return redirect(route("owner.edit",$owner));
+    }
+     public function detachHorse(Owner $owner, Horse $horse, $returnOwner){
+
+        $owner->horse()->detach($horse->id);
+        if($returnOwner==0) return redirect(route("horse.edit",$horse));
+        return redirect(route("owner.edit",$owner));
     }
 }

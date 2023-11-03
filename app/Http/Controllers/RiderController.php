@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Rider;
+use App\Models\User;
 use App\Http\Requests\StoreRiderRequest;
 use App\Http\Requests\UpdateRiderRequest;
 
@@ -15,7 +16,15 @@ class RiderController extends Controller
      */
     public function index()
     {
-        //
+        $data = request()->validate([
+            "rider_name"=>["string","nullable"],
+        ]);
+        $rider_name = isset($data["rider_name"]) ? $data["rider_name"] : "";
+        $riders = Rider::where("name","like","%".$rider_name."%")->paginate(10);
+
+
+        
+        return view("rider.index",["riders"=>$riders,"rider_name"=>$rider_name]);
     }
 
     /**
@@ -25,7 +34,8 @@ class RiderController extends Controller
      */
     public function create()
     {
-        //
+        $users = User::where("role","rider")->get();
+        return view("rider.create",["users"=>$users]);
     }
 
     /**
@@ -36,7 +46,9 @@ class RiderController extends Controller
      */
     public function store(StoreRiderRequest $request)
     {
-        //
+        $data = $request->validated();
+        $rider = Rider::create($data);
+        return redirect(route("rider.index"));
     }
 
     /**
@@ -47,7 +59,12 @@ class RiderController extends Controller
      */
     public function show(Rider $rider)
     {
-        //
+        return $rider;
+    }
+
+     public function getPrice(Rider $rider)
+    {
+        return json_encode($rider->normal_price);
     }
 
     /**
@@ -58,7 +75,8 @@ class RiderController extends Controller
      */
     public function edit(Rider $rider)
     {
-        //
+        $users = User::where("role","rider")->get();
+        return view("rider.create",["rider"=>$rider,"users"=>$users]);
     }
 
     /**

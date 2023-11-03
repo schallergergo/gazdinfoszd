@@ -10,11 +10,11 @@ use App\Models\Traits\BelongsToTenant;
 
 class Owner extends Model
 {
-    use HasFactory, BelongsToTenant;
+    use HasFactory, BelongsToTenant, SoftDeletes;
     use SoftDeletes;
     protected $guarded =[];
 
-    public function horses(){
+    public function horse(){
 
         return $this->belongsToMany(Horse::class);
     }

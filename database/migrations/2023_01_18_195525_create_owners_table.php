@@ -20,6 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger("user_id")->nullable();
             $table->string("email");
             $table->unsignedBigInteger("tenant_id");
+            $table->string("comments")->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

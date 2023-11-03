@@ -53,7 +53,7 @@ class OwnerPolicy
      */
     public function update(User $user, Owner $owner)
     {
-        //
+        return true;
     }
 
     /**

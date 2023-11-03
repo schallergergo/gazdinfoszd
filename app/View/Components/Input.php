@@ -23,6 +23,7 @@ class Input extends Component
         $this->displayname = $displayname;
         $this->name = $name;
         $this->isrequired =$isrequired;
+
     }
 
     /**

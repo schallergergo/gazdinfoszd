@@ -6,15 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StoreOwnerRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return false;
-    }
+
 
     /**
      * Get the validation rules that apply to the request.
@@ -24,7 +16,11 @@ class StoreOwnerRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            "name" => ['required',"string",'max:255'],
+            "phone_no" => ['required',"string",'max:255'], 
+            "user_id"=> ["integer","nullable"],
+            "email" => ["string","email"],
+            "comments"=> ["string","nullable"],
         ];
     }
 }

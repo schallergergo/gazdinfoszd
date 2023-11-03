@@ -10,18 +10,25 @@ use App\Models\Traits\BelongsToTenant;
 class Horse extends Model
 {
 
-    use HasFactory, BelongsToTenant;
+    use HasFactory, BelongsToTenant, SoftDeletes;
     use SoftDeletes;
     protected $guarded =[];
 
-    public function owners (){
+    public function owner (){
         return $this->belongsToMany(Owner::class);
     }
-    public function treatments (){
+    public function treatment (){
         return $this->hasMany(Treatment::class);
     }
 
-    public function tasks (){
+    public function task (){
         return $this->belongsToMany(Task::class);
+    }
+
+    public function message (){
+        return $this->hasMany(HorseMessage::class);
+    }
+        public function income (){
+        return $this->hasMany(Income::class);
     }
 }

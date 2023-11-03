@@ -9,5 +9,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class HorseMessage extends Model
 {
-    use HasFactory, BelongsToTenant;
+    use HasFactory, BelongsToTenant, SoftDeletes;
+
+    protected $guarded = [];
+
+    public function horse(){
+        return $this->belongsTo(Horse::class);
+    }
+
+        public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

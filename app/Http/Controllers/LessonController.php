@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Lesson;
+use App\Models\Rider;
+use App\Models\Horse;
+
 use App\Http\Requests\StoreLessonRequest;
 use App\Http\Requests\UpdateLessonRequest;
 
@@ -15,7 +18,12 @@ class LessonController extends Controller
      */
     public function index()
     {
-        //
+
+        $lessons=Lesson::orderByDesc("created_at")->paginate(10);
+        $riders = Rider::orderBy("name")->get();
+        $horses = Horse::orderBy("name")->get();
+
+        return view("lesson.index",["lessons"=>$lessons,"riders"=>$riders,"horses"=>$horses,"rider_id"=>"","horse_is"=>""]);
     }
 
     /**
@@ -25,7 +33,10 @@ class LessonController extends Controller
      */
     public function create()
     {
-        //
+
+        $horses=Horse::all();
+        $riders=Rider::all();
+        return view("lesson.create",["horses"=>$horses,"riders"=>$riders]);
     }
 
     /**
@@ -36,7 +47,11 @@ class LessonController extends Controller
      */
     public function store(StoreLessonRequest $request)
     {
-        //
+        $data = $request->validated();
+        $newEntry = Lesson::create($data);
+
+        return redirect(route("lesson.index"));
+
     }
 
     /**
@@ -47,7 +62,39 @@ class LessonController extends Controller
      */
     public function show(Lesson $lesson)
     {
-        //
+        return view("lesson.show",["lesson"=>$lesson]);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Lesson  $lesson
+     * @return \Illuminate\Http\Response
+     */
+    public function riderIndex(Rider $rider)
+    {   
+        $riders = Rider::orderBy("name")->get();
+        $horses = Horse::orderBy("name")->get();
+        $lessons = Lesson::where("rider_id",$rider->id)->orderByDesc("created_at")->paginate(10);
+               return view("lesson.index",
+                    ["lessons"=>$lessons,
+                    "riders"=>$riders,
+                    "horses"=>$horses,
+                    "search_term"=>""
+                ]);
+        
+    }
+
+    public function horseIndex(Horse $horse)
+    {
+       $riders = Rider::orderBy("name")->get();
+        $horses = Horse::orderBy("name")->get();
+        $lessons = Lesson::where("horse_id",$horse->id)->orderByDesc("created_at")->paginate(10);
+        return view("lesson.index",
+                    ["lessons"=>$lessons,
+                    "riders"=>$riders,
+                    "horses"=>$horses,
+                ]);
     }
 
     /**
@@ -58,7 +105,13 @@ class LessonController extends Controller
      */
     public function edit(Lesson $lesson)
     {
-        //
+        $horses=Horse::where("active",1)->get();
+        $riders=Rider::all();
+        return view("lesson.edit",[
+            "lesson"=>$lesson,
+            "horses"=>$horses,
+            "riders"=>$riders,
+        ]);
     }
 
     /**
@@ -70,7 +123,10 @@ class LessonController extends Controller
      */
     public function update(UpdateLessonRequest $request, Lesson $lesson)
     {
-        //
+        $data = $request->validated();
+        $entry = $lesson->update($data);
+
+        return redirect(route("lesson.index.rider",$lesson->rider_id));
     }
 
     /**
@@ -81,6 +137,14 @@ class LessonController extends Controller
      */
     public function destroy(Lesson $lesson)
     {
-        //
+
+        $lesson->delete();
+
+        return redirect(route("lesson.index"));
+    }
+    private function getSearchTerm(){
+        $data = request()->validate(["search_term"=>["string","nullable"]]);
+        return $data["search_term"] ?? "";
+
     }
 }

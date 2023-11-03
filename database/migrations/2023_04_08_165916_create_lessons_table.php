@@ -15,10 +15,11 @@ return new class extends Migration
     {
         Schema::create('lessons', function (Blueprint $table) {
             $table->id();
+            $table->date("date_of_lesson");
             $table->unsignedBigInteger("rider_id");
             $table->unsignedBigInteger("horse_id");
             $table->unsignedBigInteger("tenant_id");
-            $table->integer("price")->default(0);
+            $table->integer("price_of_lesson")->default(0);
             $table->string("comments")->nullable();
             $table->softDeletes();
             $table->timestamps();
