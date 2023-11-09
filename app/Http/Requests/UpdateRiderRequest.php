@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use Illuminate\Contracts\Validation\Validator;
 class UpdateRiderRequest extends FormRequest
 {
 
@@ -19,7 +19,8 @@ class UpdateRiderRequest extends FormRequest
             "name"=>['required','string',"max:256","nullable"],
             "normal_price" =>['required',"integer","min:0"],
             "user_id" =>[ "integer","min:0","nullable"],
-            "email" =>['required', "email","unique:riders"],
+            "phone"=>["string","min:0","nullable"],
+            "email" =>['required', "email"],
 
         ];
     }

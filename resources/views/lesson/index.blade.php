@@ -30,15 +30,30 @@
                                         </h5>
                                         <p class="text-muted mb-2"><a href="{{route('lesson.index.horse',$lesson->horse)}}">{{$lesson->horse->name}}</a></p>
                                         <ul class="list-inline mb-0 text-muted">
-                                            <li class="list-inline-item"><i class="mdi mdi-map-marker"></i> {{$lesson->comments}}</li>
+                                             <li class="list-inline-item">
+                                                <i class="mdi mdi-calendar-blank"></i> 
+                                                <a href="{{route('lesson.index.date',$lesson->date_of_lesson)}}">{{$lesson->date_of_lesson}}</a>
+
+                                            </li>
+                                          
+                                             <li class="list-inline-item">
+
+                                                <i class="mdi mdi-cash"></i> {{$lesson->price_of_lesson}}
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <i class="mdi mdi-comment"></i> {{$lesson->comments}}
+
+                                            </li>
+   
    
                                         </ul>
+                                        
                                     </div>
                                 </div>
                              
                             </div>
                             <div class="favorite-icon">
-                                <a href="#"><i class="mdi mdi-heart fs-18"></i></a>
+                                <a href="#"><i class="mdi mdi mdi-trash-can-outline fs-18"></i></a>
                             </div>
                         </div>
                     </div>

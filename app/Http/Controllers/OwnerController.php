@@ -101,7 +101,7 @@ class OwnerController extends Controller
      */
     public function destroy(Owner $owner)
     {
-
+        $owner->horse()->detach();
         $owner->delete();
         return redirect(route("owner.index")); 
     }

@@ -17,6 +17,7 @@ class StoreInventoryItemRequest extends FormRequest
     {
         return [
             "amount"       => ['required', "integer","min:0"],
+            "comments"     => [ "string","min:0","nullable"],
         ];
     }
 }

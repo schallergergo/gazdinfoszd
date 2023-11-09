@@ -15,7 +15,7 @@
                         {{ session('error') }}
                     </div>
                     @endif
-                    <form method="POST" action="{{route('inventoryitem.store',$inventory)}}">
+                    <form method="POST" action="{{route('inventoryitem.store',[$inventory,$added])}}">
                     <!-- Content Row -->
                     @csrf
                     <div class="row">
@@ -24,6 +24,7 @@
 
                           
                           <x-input type="number" name="amount" displayname="Amount used" isrequired="required" />
+                          <x-input type="text" name="comments" displayname="Comments" isrequired="" />
 
                    </div> <!-- end of the row-->
 

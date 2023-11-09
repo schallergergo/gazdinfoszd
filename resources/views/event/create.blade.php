@@ -8,8 +8,7 @@
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">{{__("Create event")}}</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+
                     </div>
                     <form method="POST" action="{{route('event.store')}}">
                     <!-- Content Row -->
@@ -20,7 +19,7 @@
 
                           <x-input type="text" name="description" displayname="Description" isrequired="required" />
                            <div class="form-outline">
-                            <label class="form-label" for="description">Venue</label>
+                            <label class="form-label" for="description">{{__("Venue")}}</label>
                         <select class="form-select form-control form-select-sm" aria-label=".form-select-sm example" name="venue_id" required>
                             
                         <option value="">{{__("Select a venue")}}</option>

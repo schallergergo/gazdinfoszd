@@ -3,7 +3,7 @@
 
                          
                           <div class="form-outline">
-                            <label class="form-label" for="{{$name}}">{{__($displayname)}}</label>
+                            <label class="form-label" for="{{$name}}">{{__($displayname)}} @if ($isrequired!="") * @endif</label>
                             <input type="{{$type}}" name="{{$name}}" id="{{$name}}" class="form-control" value="{{ old(''.$name.'') }}" {{$isrequired}}/>
                             @error($name)
                                <div class="text-danger">{{ $message }}</div>

@@ -15,6 +15,7 @@ use App\Http\Controllers\LessonController;
 use App\Http\Controllers\RiderController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TaskMessageController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\HorseMessageController;
 use App\Http\Controllers\MonthlyFinanceController;
 use Illuminate\Support\Facades\Route;
@@ -42,13 +43,18 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile/delete', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+
     Route::get("/horse/index",[HorseController::class,'index'])->name('horse.index');
+    Route::get("/horse/index/owner/{owner}",[HorseController::class,'ownerIndex'])->name('horse.index.owner');
     Route::get('/horse/create',[HorseController::class,'create'])->name('horse.create');
     Route::post("/horse/store",[HorseController::class,'store'])->name('horse.store');
     Route::get("/horse/{horse}/show",[HorseController::class,'show'])->name('horse.show');
     Route::get("/horse/{horse}/edit",[HorseController::class,'edit'])->name('horse.edit');
-    Route::patch("/horse/{horse}/update",[HorseController::class,'update'])->name('horse.update');;
+    Route::post("/horse/{horse}/update",[HorseController::class,'update'])->name('horse.update');
+    Route::get("/horse/{horse}/delete",[HorseController::class,'destroy'])->name('horse.delete');
 
+    Route::get('/treatment/index',[TreatmentController::class,'index'])->name('treatment.index');
     Route::get('/treatment/create',[TreatmentController::class,'create'])->name('treatment.create');
     Route::post('/treatment/store',[TreatmentController::class,'store'])->name('treatment.store');
     Route::get('/treatment/{treatment}/edit',[TreatmentController::class,'edit'])->name('treatment.edit');
@@ -61,6 +67,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/owner/{owner}/update',[OwnerController::class,'update'])->name('owner.update');
     Route::get('/owner/{owner}/attachHorse/{horse}/{returnOwner}',[OwnerController::class,'attachHorse'])->name('owner.attachHorse');
     Route::get('/owner/{owner}/detachHorse/{horse}/{returnOwner}',[OwnerController::class,'detachHorse'])->name('owner.detachHorse');
+    Route::get('/owner/{owner}/delete',[OwnerController::class,'destroy'])->name('owner.delete');
 
 
     Route::get('/venue/index',[VenueController::class,'index'])->name('venue.index');
@@ -106,6 +113,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/lesson/index',[LessonController::class,'index'])->name('lesson.index');
     Route::get('/lesson/index/rider/{rider}',[LessonController::class,'riderIndex'])->name('lesson.index.rider');
     Route::get('/lesson/index/horse/{horse}',[LessonController::class,'horseIndex'])->name('lesson.index.horse');
+    Route::get('/lesson/index/date/{date}',[LessonController::class,'dateIndex'])->name('lesson.index.date');
     Route::get('/lesson/create',[LessonController::class,'create'])->name('lesson.create');
     Route::post('/lesson/store',[LessonController::class,'store'])->name('lesson.store');
     Route::get('/lesson/{lesson}/edit',[LessonController::class,'edit'])->name('lesson.edit');
@@ -113,8 +121,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/lesson/{lesson}/delete',[LessonController::class,'destroy'])->name('lesson.delete');
 
 
-    Route::get('/inventoryitem/create/inventory/{inventory}',[InventoryItemController::class,'create'])->name('inventory.create');
-    Route::post('/inventoryitem/store/inventory/{inventory}',[InventoryItemController::class,'store'])->name('inventoryitem.store');
+    Route::get('/inventoryitem/create/inventory/{inventory}/{added}',[InventoryItemController::class,'create'])->name('inventoryitem.create');
+    Route::post('/inventoryitem/store/inventory/{inventory}/{added}',[InventoryItemController::class,'store'])->name('inventoryitem.store');
     Route::get('/inventoryitem/{inventory_item}/delete',[InventoryItemController::class,'destroy'])->name('inventoryitem.delete');
 
     Route::get('/rider/index',[RiderController::class,'index'])->name('rider.index');
@@ -143,6 +151,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/task/{task}/delete',[TaskController::class,'destroy'])->name('task.delete');
 
 
+     Route::get('/message/show/{message}',[MessageController::class,'show'])->name('message.show');
 
     Route::get('/taskmessage/index/task/{task}',[TaskMessageController::class,'index'])->name('taskmessage.index');
     Route::post('/taskmessage/store/task/{task}',[TaskMessageController::class,'store'])->name('taskmessage.store');
@@ -153,16 +162,19 @@ Route::middleware('auth')->group(function () {
     Route::get('/monthlyfinance/income',[MonthlyFinanceController::class,'getIncomeJson'])->name('finance.income');
     Route::get('/monthlyfinance/expensepiechart',[MonthlyFinanceController::class,'getExpensePieChartJson'])->name('finance.pieExpense');
     Route::get('/monthlyfinance/incomepiechart',[MonthlyFinanceController::class,'getIncomePieChartJson'])->name('finance.pieIncome');
-});
 
+    });
 require __DIR__.'/auth.php';
 
 
 use Illuminate\Support\Facades\App;
 
-
+use App\Models\HorseMessage;
 Route::get('/test', function () {
-    dd(App::isLocale("en"));
+    $message = HorseMessage::find(1);
+    dd($message->toUser);
+    dd(request());
+    dd(App::isLocale("hu"));
 })->name("test");
 
 

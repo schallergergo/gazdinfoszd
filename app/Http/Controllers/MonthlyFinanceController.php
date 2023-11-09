@@ -24,7 +24,8 @@ class MonthlyFinanceController extends Controller
         $month = MonthlyFinance::where("year",$now->year)->where("month",$now->month)->first();
         $expenses = $month->expenses;
         $expenseAmount = $expenses->sum("amount");
-        $labels = ["treatment","feed","assets"];
+        $labels = getExpenseTypes();
+        $labelLenght = count($labels);
         $translatedLabels=[];
         $amounts = array();
         foreach ($labels as $label){
@@ -33,10 +34,10 @@ class MonthlyFinanceController extends Controller
             $expenseAmount-=$labelAmount;
              $translatedLabels[] = Lang::get($label);
         }
-        $translatedLabels[] = Lang::get("other");
+        $colors = array_slice(getChartColors()["color"],0,$labelLenght);
+        $hover = array_slice(getChartColors()["hover"],0,$labelLenght);
         
-        $amounts[]=$expenseAmount;
-        return json_encode(["labels"=>$translatedLabels,"amounts"=>$amounts]);
+        return json_encode(["labels"=>$translatedLabels,"amounts"=>$amounts,"color"=>$color,"hover"=>$hover]);
     }
 
     public function getIncomePieChartJson(){
@@ -45,7 +46,8 @@ class MonthlyFinanceController extends Controller
         $incomes = $month->incomes;
         $translatedLabels=[];
         $incomeAmount = $incomes->sum("amount");
-        $labels = ["lesson","boarding","breeding"];
+        $labels = getIncomeTypes();
+        $labelLenght = count($labels);
         $amounts = array();
         foreach ($labels as $label){
             $labelAmount = $incomes->where("category",$label)->sum("amount");
@@ -54,9 +56,10 @@ class MonthlyFinanceController extends Controller
             $translatedLabels[] = Lang::get($label);
 
         }
-        $translatedLabels[] = Lang::get("other");
-        $amounts[]=$incomeAmount;
-        return json_encode(["labels"=>$translatedLabels,"amounts"=>$amounts]);
+
+        $color = array_slice(getChartColors()["color"],0,$labelLenght);
+        $hover = array_slice(getChartColors()["hover"],0,$labelLenght);
+        return json_encode(["labels"=>$translatedLabels,"amounts"=>$amounts,"color"=>$color,"hover"=>$hover]);
     }
 
 

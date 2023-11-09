@@ -53,7 +53,7 @@ class RiderPolicy
      */
     public function update(User $user, Rider $rider)
     {
-        //
+        return true;
     }
 
     /**

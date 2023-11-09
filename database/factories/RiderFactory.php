@@ -19,6 +19,8 @@ class RiderFactory extends Factory
         return [
             "name"=>fake()->name(),
             "normal_price"=>rand(10,20)*500,
+            "phone"=>fake()->phoneNumber(),
+            "email"=>fake()->email(),
             "tenant_id"=>1
 
         ];

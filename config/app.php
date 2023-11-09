@@ -15,7 +15,22 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'StableMate'),
+
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Application Version
+    |--------------------------------------------------------------------------
+    |
+    | This value is the version of your application. 
+    |
+    */
+
+    'version' => env('APP_VERSION', 'Unknown'),
+
+
 
     /*
     |--------------------------------------------------------------------------
@@ -55,6 +70,7 @@ return [
     */
 
     'url' => env('APP_URL', 'http://localhost'),
+
 
     'asset_url' => env('ASSET_URL'),
 
@@ -108,7 +124,7 @@ return [
     |
     */
 
-    'faker_locale' => 'en_US',
+    'faker_locale' => 'hu_HU',
 
     /*
     |--------------------------------------------------------------------------

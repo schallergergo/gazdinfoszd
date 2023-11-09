@@ -20,8 +20,9 @@ class HorseFactory extends Factory
         return [
             'name' => fake()->name(),
             'birthdate'=> fake()->date(),
-            'gender'=> fake()->randomElement(['male', 'female']),
-            'passport_number'=> fake()->text(10),
+            'gender'=> fake()->randomElement(['mén', 'kanca',"herélt"]),
+            'box_in_stable'=>rand(1,3).". istálló ".rand(1,50).". boksz",
+            'passport_number'=> "HU ".rand(1000,10000)."-".rand(1000,10000)."-".rand(1000,10000),
             'tenant_id' => 1,
             'comments' => fake()->text(),
 

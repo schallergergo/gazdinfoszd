@@ -42,14 +42,14 @@ var token = $('meta[name="csrf-token"]').attr('content');
 
            });
            request.done(function(data){
-
+            res = JSON.parse(data);
 var ctx = document.getElementById("expenseAreaChart");
 var myLineChart = new Chart(ctx, {
   type: 'line',
   data: {
     labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
     datasets: [{
-      label: "Earnings",
+      label: "-",
       lineTension: 0.3,
       backgroundColor: "rgba(78, 115, 223, 0.05)",
       borderColor: "rgba(78, 115, 223, 1)",

@@ -8,6 +8,7 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\App;
 use App\Listeners\SetTenantIdInSession;
+use Illuminate\Support\Facades\Session;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -32,8 +33,12 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
         Event::listen(\Illuminate\Auth\Events\Login::class, function ($event) {
+            Session::put("locale",$event->user->locale);
             App::setLocale($event->user->locale);
+
+
     });
     }
 

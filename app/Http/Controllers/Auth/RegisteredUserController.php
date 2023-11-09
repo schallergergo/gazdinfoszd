@@ -30,12 +30,13 @@ class RegisteredUserController extends Controller
      * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request): RedirectResponse
-    {
+    {   
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'club' => ['required', 'string', 'max:255']
+            'club' => ['required', 'string', 'max:255'],
+            'locale'=>["required","string","in:en,hu"]
             ]);
         $tenant_id = Tenant::create(["name"=>$request->club])->id;
         $user = User::create([
@@ -44,6 +45,7 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
             'role' => "admin",
             'tenant_id' => $tenant_id,
+            'locale'=>$request->locale,
         ]);
 
         event(new Registered($user));

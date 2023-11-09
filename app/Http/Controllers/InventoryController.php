@@ -15,7 +15,12 @@ class InventoryController extends Controller
      */
     public function index()
     {
-        return Inventory::all();
+        
+        $data = request()->validate(["inventory_name"=>["string","min:0","nullable"]]);
+        $inventory_name = $data["inventory_name"] ?? "";
+        $inventories = Inventory::where("name_of_product","LIKE","%".$inventory_name."%")->paginate(20);
+
+        return view("inventory.index",["inventories"=>$inventories,"inventory_name"=>$inventory_name]);
     }
 
     /**
@@ -75,7 +80,7 @@ class InventoryController extends Controller
     {
         $data = $request->validated();
         $inventory->update($data);
-        return redirect(route("inventory.show",$inventory));
+        return redirect(route("inventory.index"));
     }
 
     /**

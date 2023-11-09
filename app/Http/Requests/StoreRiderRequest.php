@@ -18,7 +18,8 @@ class StoreRiderRequest extends FormRequest
             "name"=>['required','string',"max:256","nullable"],
             "normal_price" =>['required',"integer","min:0"],
             "user_id" =>[ "integer","min:0","nullable"],
-            "email" =>['required', "email","unique:riders"],
+            "email" =>['required', "email"],
+            "phone"=>["string","min:0","nullable"],
 
         ];
     }

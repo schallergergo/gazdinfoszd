@@ -9,7 +9,7 @@ use Carbon\Carbon;
 class HomeController extends Controller
 {
     public function dashboard(){
-
+        
         $now = Carbon::now();
         $currentMonth = MonthlyFinance::firstOrCreate(["year"=>$now->year,"month"=>$now->month]);
         $currentYear = MonthlyFinance::where("year",$now->year)->get();

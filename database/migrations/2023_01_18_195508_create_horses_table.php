@@ -19,6 +19,7 @@ return new class extends Migration
             $table->date("birthdate")->nullable();
             $table->string("gender")->nullable();
             $table->string("passport_number")->nullable();
+            $table->string("box_in_stable")->nullable();
             $table->string("FEI_number")->nullable();
             $table->boolean("active")->default(1);
             $table->string("color")->nullable();

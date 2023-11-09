@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Horse;
 use App\Models\Owner;
+use App\Models\Lesson;
+use App\Models\Treatment;
 use App\Http\Requests\StoreHorseRequest;
 use App\Http\Requests\UpdateHorseRequest;
 
@@ -29,7 +31,21 @@ class HorseController extends Controller
 
         
         return view("horse.index",["horses"=>$horses,"genders"=>$genders,"horse_name"=>$horse_name,"genderSearch"=>$gender]);
+        
+    }
 
+
+    public function ownerIndex(Owner $owner)
+    {   
+
+        $horses = $owner->horse()->paginate(10);
+
+
+        $genders = Horse::select("gender")->distinct("gender")->get();
+
+        
+        return view("horse.index",["horses"=>$horses,"genders"=>$genders,"horse_name"=>"","genderSearch"=>""]);
+        
     }
 
     /**
@@ -66,9 +82,10 @@ class HorseController extends Controller
 
         $owners = $horse->owner;
         $messages = $horse->message;
-        $treatments = $horse->treatment;
+        $treatments = Treatment::where("horse_id",$horse->id)->orderByDesc("date_of_treatment")->paginate(10);
         $tasks = $horse->task;
         $currentTime = now();
+        $lessons = Lesson::where("horse_id",$horse->id)->orderByDesc("date_of_lesson")->paginate(10);
 
         $tasks = $tasks->where("task_start","<=",$currentTime)->where("task_end",">=",$currentTime);
         $task = $tasks->first();
@@ -80,6 +97,7 @@ class HorseController extends Controller
             "messages"=>$messages,
             "treatments"=>$treatments,
             "tasks"=>$tasks,
+            "lessons"=>$lessons,
 
         ]);
     }
@@ -109,7 +127,7 @@ class HorseController extends Controller
     {
         $data=$request->validated();
         $horse->update($data);
-        return redirect("/horses/index");
+        return redirect(route("horse.show",$horse));
     }
 
     /**
@@ -120,6 +138,7 @@ class HorseController extends Controller
      */
     public function destroy(Horse $horse)
     {
-        //
+        $horse->delete();
+        return redirect(route('horse.index'));
     }
 }

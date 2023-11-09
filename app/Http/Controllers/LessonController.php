@@ -73,28 +73,31 @@ class LessonController extends Controller
      */
     public function riderIndex(Rider $rider)
     {   
-        $riders = Rider::orderBy("name")->get();
-        $horses = Horse::orderBy("name")->get();
+
         $lessons = Lesson::where("rider_id",$rider->id)->orderByDesc("created_at")->paginate(10);
                return view("lesson.index",
                     ["lessons"=>$lessons,
-                    "riders"=>$riders,
-                    "horses"=>$horses,
+
                     "search_term"=>""
+                ]);
+        
+    }
+    public function dateIndex($date)
+    {   
+
+        $lessons = Lesson::where("date_of_lesson",$date)->orderByDesc("created_at")->paginate(10);
+               return view("lesson.index",
+                    ["lessons"=>$lessons,
                 ]);
         
     }
 
     public function horseIndex(Horse $horse)
     {
-       $riders = Rider::orderBy("name")->get();
-        $horses = Horse::orderBy("name")->get();
+
         $lessons = Lesson::where("horse_id",$horse->id)->orderByDesc("created_at")->paginate(10);
         return view("lesson.index",
-                    ["lessons"=>$lessons,
-                    "riders"=>$riders,
-                    "horses"=>$horses,
-                ]);
+                    ["lessons"=>$lessons]);
     }
 
     /**

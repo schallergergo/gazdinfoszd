@@ -23,7 +23,7 @@
                            
                             <div class="col-lg-3">
                                 <div>
-                                    <input type="submit" name="submit" class="btn btn-success ms-2" value="Filter">
+                                    <input type="submit" name="submit" class="btn btn-success ms-2" value={{__("Filter")}}>
                                     <a href="{{route('income.create')}}" class="btn btn-success ms-2">{{__("Create new")}}</a>
                                 </div>
                             </div>
@@ -60,16 +60,17 @@
                                         </h5>
                                         <p class="text-muted mb-2">{{$income->amount}} ( {{$income->date}} )</p>
                                         <ul class="list-inline mb-0 text-muted">
-                                            <a href="{{route('income.index.category', $income->category)}}"><li class="list-inline-item"><i class="mdi mdi-map-marker"></i> {{$income->category}}</li></a>
-                                            <a href="{{route('income.index.horse', $income->horse)}}"><li class="list-inline-item"><i class="mdi mdi-map-marker"></i> {{$income->horse->name}}</li></a>
-   
-                                        </ul>
+                                            <a href="{{route('income.index.category', $income->category)}}"><li class="list-inline-item"><i class="mdi mdi-shape"></i> {{__($income->category)}}</li></a>
+                                            @if ($income->horse)
+                                            <a href="{{route('income.index.horse', $income->horse)}}"><li class="list-inline-item"><i class="mdi mdi-chess-knight"></i> {{$income->horse->name}}</li></a>
+                                            @endif
+                                            </ul>
                                     </div>
                                 </div>
 
                             </div>
                             <div class="favorite-icon">
-                                <a href="#"><i class="mdi mdi-heart fs-18"></i></a>
+                                <a href="#"><i class="mdi mdi mdi-trash-can-outline fs-18"></i></a>
                             </div>
                         </div>
                     </div>

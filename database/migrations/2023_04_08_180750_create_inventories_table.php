@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger("tenant_id");
             $table->string("name_of_product");
-            $table->integer("amount");
+            $table->integer("amount")->default(0);
             $table->string("description")->nullable();
             $table->softDeletes();
             $table->timestamps();

@@ -16,7 +16,6 @@ class UpdateInventoryRequest extends FormRequest
     {
         return [
             "name_of_product" => ['required','string',"max:256"],
-            "amount" =>['required', "integer","min:0"],
             "description"=>['required','string',"max:256","nullable"],
         ];
     }

@@ -21,7 +21,7 @@
                            
                             <div class="col-lg-3">
                                 <div>
-                                    <input type="submit" name="submit" class="btn btn-success ms-2" value="Filter">
+                                    <input type="submit" name="submit" class="btn btn-success ms-2" value={{__("Filter")}}>
 
                                 </div>
                             </div>
@@ -48,16 +48,14 @@
                                 <div class="col-lg-5">
                                     <div class="candidate-list-content mt-3 mt-lg-0">
                                         <h5 class="fs-19 mb-0">
-                                            @can("update",$rider)
-                                            <a class="primary-link" href="{{route('rider.edit',$rider)}}">{{$rider->name}}</a>
-                                            @else
-                                            {{$rider->name}}
-                                            @endcan
+                                            
+                                            <a class="primary-link" href="{{route('lesson.index.rider',$rider)}}">{{$rider->name}}</a>
+
 
                                         </h5>
                                         <p class="text-muted mb-2">{{$rider->phone}}</p>
                                         <ul class="list-inline mb-0 text-muted">
-                                            <li class="list-inline-item"><i class="mdi mdi-map-marker"></i> {{$rider->email}}</li>
+                                            <li class="list-inline-item"><i class="mdi mdi-email"></i> {{$rider->email}}</li>
    
                                         </ul>
                                     </div>
@@ -65,7 +63,9 @@
 
                             </div>
                             <div class="favorite-icon">
-                                <a href="#"><i class="mdi mdi-heart fs-18"></i></a>
+                                <a href="#"><i class="mdi mdi mdi-trash-can-outline fs-18"></i></a>
+                                <a href="{{route('rider.edit',$rider)}}" >
+                                    <i class="mdi mdi mdi-cog fs-18"></i></a>
                             </div>
                         </div>
                     </div>

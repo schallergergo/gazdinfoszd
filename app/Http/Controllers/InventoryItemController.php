@@ -26,9 +26,10 @@ class InventoryItemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Inventory $inventory)
+    public function create(Inventory $inventory,$added)
     {
-        return view("inventoryitem.create",["inventory"=>$inventory]);
+
+        return view("inventoryitem.create",["inventory"=>$inventory,"added"=>$added]);
     }
 
     /**
@@ -37,13 +38,16 @@ class InventoryItemController extends Controller
      * @param  \App\Http\Requests\StoreInventoryItemRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreInventoryItemRequest $request,Inventory $inventory)
+    public function store(StoreInventoryItemRequest $request,Inventory $inventory,$added)
     {
         $data = $request->validated();
         $amount =  $data["amount"];
         $user = Auth::user();
-        if ($inventory->amount < $amount) return back()->with("error",Lang::get("Invetory does not contain enough items!"));
-        $data = array_merge($data,["user_id"=>$user->id,"inventory_id"=>$inventory->id]);
+        $amount = $added=="minus" ? -$amount : $amount;
+
+        if ($added == "minus" && $inventory->amount < $amount) return back()->with("error",Lang::get("Invetory does not contain enough items!"));
+        $data = array("user_id"=>$user->id,"inventory_id"=>$inventory->id,"amount"=>$amount,"comments"=>$data["comments"]);
+
         InventoryItem::create($data);
         return redirect(route("inventory.index"));
     }

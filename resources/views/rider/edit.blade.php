@@ -7,10 +7,10 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">{{__("Create rider")}}</h1>
+                        <h1 class="h3 mb-0 text-gray-800">{{__("Edit rider")}}</h1>
 
                     </div>
-                    <form method="POST" action="{{route('rider.store')}}">
+                    <form method="POST" action="{{route('rider.update',$rider)}}">
                     <!-- Content Row -->
                     @csrf
 
@@ -31,9 +31,9 @@
                        <hr />
 
 
-                          <x-input-edit type="text" name="phone" displayname="Phone number" value="{{$rider->normal_price}}"  isrequired="required" />
+                          <x-input-edit type="text" name="phone" displayname="Phone number" value="{{$rider->phone}}"  isrequired="required" />
                           
-                          <x-input-edit type="email" name="email" displayname="Email" value="{{$rider->normal_price}}"  isrequired="required" />
+                          <x-input-edit type="email" name="email" displayname="Email" value="{{$rider->email}}"  isrequired="required" />
 
                    </div> <!-- end of the row-->
 

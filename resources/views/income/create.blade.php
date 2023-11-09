@@ -8,8 +8,7 @@
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">{{__("Create income")}}</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+
                     </div>
                     <form method="POST" action="{{route('income.store')}}">
                     <!-- Content Row -->
@@ -25,10 +24,37 @@
 
 
                             <x-input type="text" name="description" displayname="Description" isrequired="required" />
-                            <x-input type="text" name="category" displayname="Category" isrequired="required" />
 
+
+
+
+                          <div class="col-md">
+
+
+                         
+                          <div class="form-outline">
+                            <label class="form-label" for="category">{{__("Category")}}</label>
+                            <select class="form-select form-control form-select-sm" aria-label=".form-select-sm example" name="category">
+
+                                @foreach(getIncomeTypes() as $type)
+                            <option value="{{$type}}">{{__($type)}}</option>
+
+                                @endforeach
+
+                            </select>
+                            @error("category")
+                               <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                          </div>
+                        </div> <!-- end of the col-->
+
+
+
+
+                    </div> <!-- end of the row-->
+                    <div class="row">
                            <div class="form-outline">
-                            <label class="form-label" for="description">Horse</label>
+                            <label class="form-label" for="description">{{__("Horse")}}</label>
                         <select class="form-select form-control form-select-sm" aria-label=".form-select-sm example" name="horse_id">
                             
                         <option value="">{{__("Select a horse")}} {{__("Optional")}}</option>

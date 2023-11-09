@@ -24,6 +24,7 @@ class User extends Authenticatable
         'password',
         'role',
         "tenant_id",
+        "locale"
     ];
 
     /**

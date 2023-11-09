@@ -21,15 +21,20 @@
             <ul class="nav nav-pills navtab-bg">
                 <li class="nav-item">
                     <a href="#about-me" data-toggle="tab" aria-expanded="true" class="nav-link ml-0 active">
-                        <i class="mdi mdi-face-profile mr-1"></i>About
+                        <i class="mdi mdi-face-profile mr-1"></i>{{__("About")}}
+                    </a>
+                </li>
+
+                 <li class="nav-item">
+                    <a href="#lesson" data-toggle="tab" aria-expanded="false" class="nav-link">
+                        <i class="mdi mdi-settings-outline mr-1"></i>{{__("Lessons")}}
                     </a>
                 </li>
 
 
-
                   <li class="nav-item">
                     <a href="#messages" data-toggle="tab" aria-expanded="false" class="nav-link">
-                        <i class="mdi mdi-settings-outline mr-1"></i>Messages
+                        <i class="mdi mdi-settings-outline mr-1"></i>{{__("Messages")}}
                     </a>
                 </li>
 
@@ -38,9 +43,11 @@
             <div class="tab-content">
                 
                 @include("horse.show.about")
-
+                @include("horse.show.lesson")
             
                 @include("horse.show.messages")
+
+
 
 
             </div> <!-- end tab-content -->

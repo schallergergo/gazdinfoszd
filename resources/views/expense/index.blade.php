@@ -23,7 +23,7 @@
                            
                             <div class="col-lg-3">
                                 <div>
-                                    <input type="submit" name="submit" class="btn btn-success ms-2" value="Filter">
+                                    <input type="submit" name="submit" class="btn btn-success ms-2" value={{__("Filter")}}>
                                     <a href="{{route('expense.create')}}" class="btn btn-success ms-2">{{__("Create new")}}</a>
                                 </div>
                             </div>
@@ -60,7 +60,7 @@
                                         </h5>
                                         <p class="text-muted mb-2">{{$expense->amount}} ( {{$expense->date}} )</p>
                                         <ul class="list-inline mb-0 text-muted">
-                                            <a href="{{route('expense.index.category', $expense->category)}}"><li class="list-inline-item"><i class="mdi mdi-map-marker"></i> {{$expense->category}}</li></a>
+                                            <a href="{{route('expense.index.category', $expense->category)}}"><li class="list-inline-item"><i class="mdi mdi-map-marker"></i> {{__($expense->category)}}</li></a>
                                             <a href="{{route('expense.index.horse', $expense->horse)}}"><li class="list-inline-item"><i class="mdi mdi-map-marker"></i> {{$expense->horse->name}}</li></a>
    
                                         </ul>
@@ -69,7 +69,7 @@
 
                             </div>
                             <div class="favorite-icon">
-                                <a href="#"><i class="mdi mdi-heart fs-18"></i></a>
+                                <a href="#"><i class="mdi mdi mdi-trash-can-outline fs-18"></i></a>
                             </div>
                         </div>
                     </div>

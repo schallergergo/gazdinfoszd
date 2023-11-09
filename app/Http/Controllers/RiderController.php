@@ -76,7 +76,7 @@ class RiderController extends Controller
     public function edit(Rider $rider)
     {
         $users = User::where("role","rider")->get();
-        return view("rider.create",["rider"=>$rider,"users"=>$users]);
+        return view("rider.edit",["rider"=>$rider,"users"=>$users]);
     }
 
     /**
@@ -88,7 +88,10 @@ class RiderController extends Controller
      */
     public function update(UpdateRiderRequest $request, Rider $rider)
     {
-        //
+
+        $data = $request->validated();
+        $rider->update($data);
+        return redirect()->back();
     }
 
     /**

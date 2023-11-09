@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger("inventory_id");
             $table->unsignedBigInteger("user_id");
             $table->integer("amount");
+            $table->string("comments")->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

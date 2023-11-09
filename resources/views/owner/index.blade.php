@@ -21,7 +21,7 @@
                            
                             <div class="col-lg-3">
                                 <div>
-                                    <input type="submit" name="submit" class="btn btn-success ms-2" value="Filter">
+                                    <input type="submit" name="submit" class="btn btn-success ms-2" value={{__("Filter")}}>
 
                                 </div>
                             </div>
@@ -71,12 +71,15 @@
                                 </div>
                             </div>
                             <div class="favorite-icon">
-                                <a href="#"><i class="mdi mdi-heart fs-18"></i></a>
+                                <a href="#" data-toggle="modal" data-target="#deleteowner{{$owner->id}}Modal">
+                                    <i class="mdi mdi mdi-trash-can-outline fs-18"></i></a>
+                                <a href="{{route('owner.edit',$owner)}}" >
+                                    <i class="mdi mdi mdi-cog fs-18"></i></a>
                             </div>
                         </div>
                     </div>
 
-
+                    @include("owner.modal")
                     @endforeach
                    
                 </div>

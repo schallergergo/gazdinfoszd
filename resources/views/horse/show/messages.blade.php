@@ -19,7 +19,9 @@
                     <div class="row mt-2 ml-2 mr-2">
                     <div class="card ">
                           <div class="card-header">
-                           <span>{{$message->user->name}}</span> <span class="float-right">{{$message->created_at}}</span> 
+                           <span>{{$message->user->name}} @if($message->toUser) -> {{$message->toUser->name}}@endif
+                           </span> 
+                           <span class="float-right">{{$message->created_at}}</span> 
                           </div>
                           <div class="card-body">
 

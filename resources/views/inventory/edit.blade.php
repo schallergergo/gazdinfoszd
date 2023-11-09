@@ -7,7 +7,7 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">{{__("Create inventory")}}</h1>
+                        <h1 class="h3 mb-0 text-gray-800">{{__("Edit inventory")}}</h1>
                        
                     </div>
                     <form method="POST" action="{{route('inventory.update',$inventory)}}">
@@ -16,7 +16,7 @@
                     <div class="row">
                        <hr />
                           <x-input-edit type="text" name="name_of_product" displayname="Name of product" value="{{$inventory->name_of_product}}" isrequired="required"/>
-                          <x-input-edit type="number" name="amount" displayname="Amount" value="{{$inventory->amount}}" isrequired="required" />
+                          <x-input-edit type="number" name="amount" displayname="Amount" value="{{$inventory->amount}}" isrequired="disabled" />
 
                     </div> <!-- end of the row-->
                            <div class="row">

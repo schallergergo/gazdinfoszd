@@ -22,7 +22,7 @@ class InventoryItem extends Model
         static::created(function (InventoryItem $inventoryItem) {
 
             $inventory =  $inventoryItem->inventory;
-            $inventory->amount = $inventory->amount - $inventoryItem->amount;
+            $inventory->amount = $inventory->amount + $inventoryItem->amount;
             $inventory->save();
 
         });
@@ -30,7 +30,7 @@ class InventoryItem extends Model
         static::deleting(function (InventoryItem $inventoryItem) {
 
             $inventory =  $inventoryItem->inventory;
-            $inventory->amount = $inventory->amount + $inventoryItem->amount;
+            $inventory->amount = $inventory->amount - $inventoryItem->amount;
             $inventory->save();
 
         });

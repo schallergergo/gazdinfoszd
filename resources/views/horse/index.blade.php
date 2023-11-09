@@ -33,7 +33,7 @@
                            
                             <div class="col-lg-3">
                                 <div>
-                                    <input type="submit" name="submit" class="btn btn-success ms-2" value="Filter">
+                                    <input type="submit" name="submit" class="btn btn-success ms-2" value='{{__("Filter")}}'>
 
                                 </div>
                             </div>
@@ -64,7 +64,7 @@
                                         </h5>
                                         <p class="text-muted mb-2">{{$horse->gender}}</p>
                                         <ul class="list-inline mb-0 text-muted">
-                                            <li class="list-inline-item"><i class="mdi mdi-map-marker"></i> Első boksz balra</li>
+                                            <li class="list-inline-item"><i class="mdi mdi-map-marker"></i> {{$horse->box_in_stable}} </li>
    
                                         </ul>
                                     </div>
@@ -72,17 +72,20 @@
                                 <div class="col-lg-4">
                                     <div class="mt-2 mt-lg-0 d-flex flex-wrap align-items-start gap-1">
                                         @foreach($horse->owner as $owner)
-                                        <span class="badge bg-soft-secondary fs-14 mt-1"><a href="{{route('owner.edit',$owner)}}">{{$owner->name}}</a></span>
+                                        <span class="badge bg-soft-secondary fs-14 mt-1"><a href="{{route('horse.index.owner',$owner)}}">{{$owner->name}}</a></span>
                                         @endforeach
                                     </div>
                                 </div>
                             </div>
                             <div class="favorite-icon">
-                                <a href="#"><i class="mdi mdi-heart fs-18"></i></a>
+                                <a href="#" data-toggle="modal" data-target="#deleteHorse{{$horse->id}}Modal">
+                                    <i class="mdi mdi mdi-trash-can-outline fs-18"></i></a>
+                                    <a href="{{route('horse.edit',$horse)}}" >
+                                    <i class="mdi mdi mdi-cog fs-18"></i></a>
                             </div>
                         </div>
                     </div>
-
+                    @include("horse.modal")
 
                     @endforeach
                    
