@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string("email");
             $table->unsignedBigInteger("tenant_id");
             $table->string("comments")->nullable();
+            $table->boolean("active")->default(1);
             $table->softDeletes();
             $table->timestamps();
         });

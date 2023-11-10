@@ -59,7 +59,7 @@ class ExpenseController extends Controller
      */
     public function create()
     {
-        $horses = Horse::all();
+        $horses = Horse::where("active",1)->get();
         return view("expense.create",["horses"=>$horses]);
     }
 

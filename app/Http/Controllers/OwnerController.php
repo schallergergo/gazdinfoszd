@@ -22,7 +22,8 @@ class OwnerController extends Controller
 
         ]);
         $owner_name = isset($data["owner_name"]) ? $data["owner_name"] : "";
-        $owners = Owner::where("name","like","%".$owner_name."%")->paginate(10);
+        $owners = Owner::where("name","like","%".$owner_name."%")->
+            orderByDesc("active")->orderBy("name")->paginate(10);
 
         return view("owner.index",["owners"=>$owners,"owner_name"=>$owner_name]);
     
@@ -73,7 +74,7 @@ class OwnerController extends Controller
     public function edit(Owner $owner)
     {
         $users = User::where("role","owner")->get();
-        $horses = Horse::all();
+        $horses = Horse::where("active",1)->get();
         $ownedHorses = $owner->horse;
         $notOwnedHorses = $horses->whereNotIn("id",$ownedHorses->pluck("id"));
         return view("owner.edit",["owner"=>$owner,"users"=>$users,"ownedHorses"=>$ownedHorses,"notOwnedHorses"=>$notOwnedHorses]);
@@ -101,8 +102,8 @@ class OwnerController extends Controller
      */
     public function destroy(Owner $owner)
     {
-        $owner->horse()->detach();
-        $owner->delete();
+        $owner->active = !$owner->active;
+        $owner->save();
         return redirect(route("owner.index")); 
     }
     public function attachHorse(Owner $owner, Horse $horse, $returnOwner){

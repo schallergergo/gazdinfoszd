@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css" integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc=" crossorigin="anonymous" />
 <section class="section">
     <div class="container">
-        <form action="{{route('owner.index')}}" method="GET">
+        <form action="{{route('user.index')}}" method="GET">
         <div class="justify-content-center row">
             <div class="col-lg-12">
                 <div class="candidate-list-widgets mb-4">
@@ -15,7 +15,7 @@
                         <div class="g-2 row">
                             <div class="col-lg-3">
                                 <div class="filler-job-form">
-                                    <i class="uil uil-briefcase-alt"></i><input id="owner_name" name="owner_name" placeholder="{{__('Owner name')}}" type="search" class="form-control filler-job-input-box form-control"  value="{{$owner_name}}"/>
+                                    <i class="uil uil-briefcase-alt"></i><input id="user_name" name="user_name" placeholder="{{__('User name')}}" type="search" class="form-control filler-job-input-box form-control"  value="{{$user_name}}"/>
                                 </div>
                             </div>
                            
@@ -35,7 +35,7 @@
             <div class="col-lg-12">
 
 
-                @foreach ($owners as $owner)
+                @foreach ($users as $user)
                 <div class="candidate-list">
                     <div class="candidate-list-box card mt-4">
                         <div class="p-4 card-body">
@@ -49,41 +49,39 @@
                                     <div class="candidate-list-content mt-3 mt-lg-0">
                                         <h5 class="fs-19 mb-0">
 
-                                            {{$owner->name}}
-                                            @if(!$owner->active)
+                                            {{$user->name}} 
+                                            @if(!$user->active)
                                             <span class="text-danger">{{__("Inactive")}}</span>
                                             @endif
 
                                         </h5>
-                                        <p class="text-muted mb-2">{{$owner->phone_no}}</p>
+                                        <p class="text-muted mb-2">{{__($user->role)}}</p>
                                         <ul class="list-inline mb-0 text-muted">
-                                            <li class="list-inline-item"><i class="mdi mdi-map-marker"></i> {{$owner->email}}</li>
+                                            <li class="list-inline-item"><i class="mdi mdi-map-marker"></i> {{$user->email}}</li>
    
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="col-lg-4">
-                                    <div class="mt-2 mt-lg-0 d-flex flex-wrap align-items-start gap-1">
-                                        @foreach($owner->horse as $horse)
-                                        <span class="badge bg-soft-secondary fs-14 mt-1"><a href="{{route('horse.show',$horse)}}">{{$horse->name}}</a></span>
-                                        @endforeach
-                                    </div>
-                                </div>
+                                
                             </div>
                             <div class="favorite-icon">
-                                <a href="{{route('owner.delete',$owner)}}" >
-                                    @if ($owner->active)
+
+                                <a href="{{route('user.activate',$user)}}" >
+                                    @if ($user->active)
                                     <i class="mdi mdi mdi-trash-can-outline fs-18"></i>
                                     @else
                                     <i class="mdi mdi mdi-airplane-off fs-18"></i>
                                     @endif
-                                <a href="{{route('owner.edit',$owner)}}" >
+
+
+                                </a>
+                                <a href="{{route('user.edit',$user)}}" >
                                     <i class="mdi mdi mdi-cog fs-18"></i></a>
                             </div>
                         </div>
                     </div>
 
-
+                    
                     @endforeach
                    
                 </div>
@@ -93,7 +91,7 @@
             <div class="mt-4 pt-2 col-lg-12">
                 <nav aria-label="Page navigation example">
                     <div class="pagination job-pagination mb-0 justify-content-center">
-                        <div class="d-flex">{{$owners->links()}}</div>
+                        <div class="d-flex">{{$users->links()}}</div>
                     </div>
                 </nav>
             </div>

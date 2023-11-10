@@ -25,7 +25,15 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {   
+
         $request->authenticate();
+
+        if(!Auth::user()->active){
+            Auth::guard('web')->logout();
+
+            return redirect()->back()->with("status","Inactive user");
+
+        }
 
         $request->session()->regenerate();
         $request->session()->put("locale",Auth::user()->locale);

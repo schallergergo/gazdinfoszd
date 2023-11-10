@@ -16,6 +16,6 @@ class Owner extends Model
 
     public function horse(){
 
-        return $this->belongsToMany(Horse::class);
+        return $this->belongsToMany(Horse::class)->where("active",1);
     }
 }

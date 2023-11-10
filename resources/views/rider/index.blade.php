@@ -51,6 +51,10 @@
                                             
                                             <a class="primary-link" href="{{route('lesson.index.rider',$rider)}}">{{$rider->name}}</a>
 
+                                            @if(!$rider->active)
+                                            <span class="text-danger">{{__("Inactive")}}</span>
+                                            @endif
+
 
                                         </h5>
                                         <p class="text-muted mb-2">{{$rider->phone}}</p>
@@ -63,7 +67,15 @@
 
                             </div>
                             <div class="favorite-icon">
-                                <a href="#"><i class="mdi mdi mdi-trash-can-outline fs-18"></i></a>
+                                <a href="{{route('rider.delete',$rider)}}">
+
+                                    @if ($rider->active)
+                                    <i class="mdi mdi mdi-trash-can-outline fs-18"></i>
+                                    @else
+                                    <i class="mdi mdi mdi-airplane-off fs-18"></i>
+                                    @endif
+
+
                                 <a href="{{route('rider.edit',$rider)}}" >
                                     <i class="mdi mdi mdi-cog fs-18"></i></a>
                             </div>

@@ -16,9 +16,10 @@ class InventoryItemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Inventory $inventory)
     {
-        //
+        $inventoryitems = InventoryItem::where("inventory_id",$inventory->id)->orderByDesc("created_at")->paginate(10);
+        return view("inventoryitem.index",["inventory"=>$inventory,"inventoryitems"=>$inventoryitems]);
     }
 
     /**
@@ -49,7 +50,7 @@ class InventoryItemController extends Controller
         $data = array("user_id"=>$user->id,"inventory_id"=>$inventory->id,"amount"=>$amount,"comments"=>$data["comments"]);
 
         InventoryItem::create($data);
-        return redirect(route("inventory.index"));
+        return redirect(route("inventoryitem.index",$inventory));
     }
 
     /**
@@ -95,6 +96,6 @@ class InventoryItemController extends Controller
     public function destroy(InventoryItem $inventoryItem)
     {
         $inventoryItem->delete();
-        return redirect(route("inventory.show",$inventoryItem->inventory));
+        return redirect(route("inventoryitem.show",$inventoryItem->inventory));
     }
 }

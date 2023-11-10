@@ -60,7 +60,7 @@ class IncomeController extends Controller
      */
     public function create()
     {
-        $horses = Horse::all();
+        $horses = Horse::where("active",1)->get();
         return view("income.create",["horses"=>$horses]);
     }
 

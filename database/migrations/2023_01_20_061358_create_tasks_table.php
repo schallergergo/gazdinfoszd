@@ -19,6 +19,7 @@ return new class extends Migration
             $table->datetime("task_start");
             $table->datetime("task_end");
             $table->string("description")->nullable();
+            $table->boolean("done")->default(0);
             $table->unsignedBigInteger("tenant_id");
             $table->softDeletes();
             $table->timestamps();

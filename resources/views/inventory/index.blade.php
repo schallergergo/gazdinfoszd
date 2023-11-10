@@ -34,9 +34,9 @@
         <div class="row">
             <div class="col-lg-12">
 
-
-                @foreach ($inventories as $inventory)
                 <div class="candidate-list">
+                @foreach ($inventories as $inventory)
+                
                     <div class="candidate-list-box card mt-4">
                         <div class="p-4 card-body">
                             <div class="align-items-center row">
@@ -49,11 +49,12 @@
                                     <div class="candidate-list-content mt-3 mt-lg-0">
                                         <h5 class="fs-19 mb-0">
                                             
-                                            {{$inventory->name_of_product}}</a>
+                                            
+                                            <a href="{{route('inventoryitem.index',$inventory)}}">{{$inventory->name_of_product}}</a>
 
 
                                         </h5>
-                                        <p class="text-muted mb-2">{{$inventory->phone_no}}</p>
+                                        
                                         <ul class="list-inline mb-0 text-muted">
                                             <li class="list-inline-item"><i class="mdi mdi-warehouse"></i> {{$inventory->amount}}</li>
                                             <li class="list-inline-item"><i class="mdi mdi-comment"></i> {{$inventory->description}}</li>

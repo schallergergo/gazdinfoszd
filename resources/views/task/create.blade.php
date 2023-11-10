@@ -7,7 +7,7 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">{{__("Create event")}}</h1>
+                        <h1 class="h3 mb-0 text-gray-800">{{__("Create task")}}</h1>
 
                     </div>
                     <form method="POST" action="{{route('task.store')}}">
@@ -34,21 +34,13 @@
                    </div> <!-- end of the row-->
                    <label class="form-label pt-2" for="horses" >{{__("Horses")}}</label><br>
 @foreach($horses as $horse)
-                   <div class="col-md">
-
-
-                         
-                          <div class="form-outline">
-
+                   <div class="form-check form-check-inline">
                               
-                               
-                               <input type="checkbox" id= "horse_{{$horse->id}}" name="horses[]"  value= "{{$horse->id}}"/>
-                               <label for="horse_{{$horse->id}}"> {{$horse->name}}</label><br>
+                              
+                               <input class="form-check-input"  type="checkbox" id= "horse_{{$horse->id}}" name="horses[]"  value= "{{$horse->id}}"/>
+                                <label for="horse_{{$horse->id}}" class="checkbox-inline"> {{$horse->name}}</label>
 
-                               
-                           
-                          </div>
-</div> <!-- end of the col-->
+                    </div>
 @endforeach
 
 

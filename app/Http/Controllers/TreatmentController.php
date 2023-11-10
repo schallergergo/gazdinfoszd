@@ -16,7 +16,30 @@ class TreatmentController extends Controller
      */
     public function index()
     {
-        //
+        request()->validate(["search_term"=>["string","max:256","nullable"]]);
+
+        $search_term = $data["search_term"] ?? "";
+
+        if ($search_term=="") $treatments = Treatment::paginate(20);
+        else $treatments = Treatment::where("comments","like","%".$search_term."%")->paginate(20);
+
+        return view("treatment.index",["treatments"=>$treatments,"search_term"=>$search_term]);
+
+    }
+
+    public function categoryIndex($category)
+    {
+       
+        $treatments = Treatment::where("type_of_treatment",$category)->paginate(20);
+        return view("treatment.index",["treatments"=>$treatments,"search_term"=>""]);
+
+    }
+    public function horseIndex(Horse $horse)
+    {
+       
+        $treatments = Treatment::where("horse_id",$horse->id)->paginate(20);
+        return view("treatment.index",["treatments"=>$treatments,"search_term"=>""]);
+
     }
 
     /**

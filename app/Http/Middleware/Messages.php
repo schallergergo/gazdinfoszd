@@ -24,9 +24,12 @@ class Messages
         $messages = $messages->merge(TaskMessage::where("to_user_id",Auth::user()->id)->get());
         $messages = $messages->where("read",0);
 
+        $tasks = $user->task->where("done",0);
+
+
         
 
-        $request->merge(['messages' => $messages]);
+        $request->merge(['messages' => $messages,"tasks",$tasks]);
         return $next($request);
     }
 }

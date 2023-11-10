@@ -61,6 +61,9 @@
                                     <div class="candidate-list-content mt-3 mt-lg-0">
                                         <h5 class="fs-19 mb-0">
                                             <a class="primary-link" href="{{route('horse.show',$horse)}}">{{$horse->name}}</a>
+                                             @if(!$horse->active)
+                                            <span class="text-danger">{{__("Inactive")}}</span>
+                                            @endif
                                         </h5>
                                         <p class="text-muted mb-2">{{$horse->gender}}</p>
                                         <ul class="list-inline mb-0 text-muted">
@@ -78,8 +81,13 @@
                                 </div>
                             </div>
                             <div class="favorite-icon">
-                                <a href="#" data-toggle="modal" data-target="#deleteHorse{{$horse->id}}Modal">
-                                    <i class="mdi mdi mdi-trash-can-outline fs-18"></i></a>
+                                <a href="{{route('horse.delete',$horse)}}" >
+                                    @if ($horse->active)
+                                    <i class="mdi mdi mdi-trash-can-outline fs-18"></i>
+                                    @else
+                                    <i class="mdi mdi mdi-airplane-off fs-18"></i>
+                                    @endif
+                                </a>
                                     <a href="{{route('horse.edit',$horse)}}" >
                                     <i class="mdi mdi mdi-cog fs-18"></i></a>
                             </div>

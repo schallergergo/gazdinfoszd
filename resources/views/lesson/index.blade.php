@@ -8,6 +8,31 @@
 <section class="section">
     <div class="container">
     
+     <form action="{{route('lesson.index')}}" method="GET">
+        <div class="justify-content-center row">
+            <div class="col-lg-12">
+                <div class="candidate-list-widgets mb-4">
+                    <form action="#" class="">
+                        <div class="g-2 row">
+                            <div class="col-lg-3">
+                                <div class="filler-job-form">
+                                    <i class="uil uil-briefcase-alt"></i><input id="search_term" name="search_term" placeholder="{{__('Search term')}}" type="date" class="form-control filler-job-input-box form-control"  value="{{$search_term}}"/>
+                                </div>
+                            </div>
+                           
+                            <div class="col-lg-3">
+                                <div>
+                                    <input type="submit" name="submit" class="btn btn-success ms-2" value={{__("Filter")}}>
+                                    
+                                </div>
+                            </div>
+                              
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        </form>
 
         <div class="row">
             <div class="col-lg-12">
@@ -53,12 +78,13 @@
                              
                             </div>
                             <div class="favorite-icon">
-                                <a href="#"><i class="mdi mdi mdi-trash-can-outline fs-18"></i></a>
+                                <a href="#" data-toggle="modal" data-target="#deletelesson{{$lesson->id}}Modal">
+                                    <i class="mdi mdi mdi-trash-can-outline fs-18"></i></a>
                             </div>
                         </div>
                     </div>
 
-
+                    @include("lesson.modal")
                     @endforeach
                    
                 </div>

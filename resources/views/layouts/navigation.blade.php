@@ -23,6 +23,21 @@
             <hr class="sidebar-divider">
 
 
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUser"
+                    aria-expanded="true" aria-controls="collapseUser">
+                    <i class="fas fa-user"></i>
+                    <span>{{__("Users")}}</span>
+                </a>
+                <div id="collapseUser" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <!--<h6 class="collapse-header">Custom Components:</h6> -->
+                        <a class="collapse-item" href="{{route('user.index')}}">{{__("Index")}}</a>
+                        <a class="collapse-item" href="{{route('user.create')}}">{{__("Create")}}</a>
+                    </div>
+                </div>
+            </li>
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
@@ -39,6 +54,8 @@
                     </div>
                 </div>
             </li>
+
+             
 
 
              <li class="nav-item">
@@ -68,6 +85,23 @@
                         <!--<h6 class="collapse-header">Custom Components:</h6> -->
                         <a class="collapse-item" href="{{route('rider.index')}}">{{__("Index")}}</a>
                         <a class="collapse-item" href="{{route('rider.create')}}">{{__("Create")}}</a>
+                    </div>
+                </div>
+            </li>
+
+             <!-- Nav Item - Utilities Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTreatment"
+                    aria-expanded="true" aria-controls="collapseTreatment">
+                    <i class="fas fa-book-medical"></i>
+                    <span>{{__("Treatments")}}</span>
+                </a>
+                <div id="collapseTreatment" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <!--<h6 class="collapse-header">Treatment</h6>-->
+                         <a class="collapse-item" href="{{route('treatment.index')}}">{{__("Index")}}</a>
+                        <a class="collapse-item" href="{{route('treatment.create')}}">{{__("Create")}}</a>
                     </div>
                 </div>
             </li>
@@ -152,22 +186,7 @@
                 </div>
             </li>
 
-            <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTreatment"
-                    aria-expanded="true" aria-controls="collapseTreatment">
-                    <i class="fas fa-book-medical"></i>
-                    <span>{{__("Treatments")}}</span>
-                </a>
-                <div id="collapseTreatment" class="collapse" aria-labelledby="headingUtilities"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <!--<h6 class="collapse-header">Treatment</h6>-->
-                         <a class="collapse-item" href="{{route('treatment.index')}}">{{__("Index")}}</a>
-                        <a class="collapse-item" href="{{route('treatment.create')}}">{{__("Create")}}</a>
-                    </div>
-                </div>
-            </li>
+           
 
 
 

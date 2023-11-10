@@ -15,7 +15,7 @@ class Horse extends Model
     protected $guarded =[];
 
     public function owner (){
-        return $this->belongsToMany(Owner::class);
+        return $this->belongsToMany(Owner::class)->where("active",1);
     }
     public function treatment (){
         return $this->hasMany(Treatment::class);

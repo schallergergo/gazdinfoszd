@@ -38,7 +38,7 @@
                                   <option value="farrier" @if ($treatment->type_of_treatment=="farrier")selected @endif> {{__("Farrier")}}</option>
                                   <option value="vet" @if ($treatment->type_of_treatment=="vet")selected @endif>{{__("Vet")}}</option>
                                   <option value="vaccination" @if ($treatment->type_of_treatment=="vaccination")selected @endif> {{__("Vaccination")}}</option>
-                                  <option value="deworming" @if ($treatment->type_of_treatment=="demorming")selected @endif>{{__("Deworming")}}</option>
+                                  <option value="deworming" @if ($treatment->type_of_treatment=="deworming")selected @endif>{{__("Deworming")}}</option>
                                   <option value="breeding" @if ($treatment->type_of_treatment=="breeding")selected @endif>{{__("Breeding")}}</option>
                         </select>
                     </div>

@@ -37,9 +37,9 @@
         <div class="row">
             <div class="col-lg-12">
 
-
-                @foreach ($expenses as $expense)
                 <div class="candidate-list">
+                @foreach ($expenses as $expense)
+                
                     <div class="candidate-list-box card mt-4">
                         <div class="p-4 card-body">
                             <div class="align-items-center row">
@@ -69,11 +69,13 @@
 
                             </div>
                             <div class="favorite-icon">
-                                <a href="#"><i class="mdi mdi mdi-trash-can-outline fs-18"></i></a>
+                                <a href="#" data-toggle="modal" data-target="#deleteexpense{{$expense->id}}Modal">
+                                    <i class="mdi mdi mdi-trash-can-outline fs-18"></i></a>
                             </div>
                         </div>
                     </div>
 
+                    @include("expense.modal")
 
                     @endforeach
                    

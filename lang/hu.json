@@ -13,6 +13,20 @@
 	"Monthly Income Sources":"Havi bevétel eloszlása",
 	"Yearly Expense Overview":"Éves kiadás változása",
 	"Monthly Expense Sources":"Havi kiadás eloszlása",
+	"Edit rider":"Lovas szerkesztése",
+	"Select a user":"Válassz felhasználót",
+	"Create task":"Feladat létrehozása",
+	"Task":"Feladat",
+	"Edit user record":"Felhasználó szerkesztése",
+	"Inactive":"Inaktív",
+	"Start of the task":"Feladat kezdete",
+	"End of the task":"Feladat vége",
+	"Description of the task":"Feladat leírása",
+	"groom":"lóápoló",
+	"owner":"tulajdonos",
+	"rider":"lovas",
+	"Select a role":"Szerepkör kiválasztása",
+	"Role":"Szerepkör",
 	"Horses":"Lovak",
 	"Owners":"Tulajdonosok",
 	"Riders":"Lovasok",
@@ -117,9 +131,13 @@
 	"Log in":"Bejelentkezés",
 	"Search for...":"Keresés...",
 	"Profile":"Profil",
-	"Logout":"Kijelentkezés"
-
-
+	"Inventory items":"Készlet információ",
+	"Delete":"Törlés",
+	"Logout":"Kijelentkezés",
+	"Delete this item?":"Töröljük a bejegyzést?",
+	"Change in inventory":"Készlet változás",
+	"Select \"Delete\" below if you are ready to delete this item.":"Válassza a törlés, ha ki szeretné törölni ezt az elemet",
+	"remaining":"maradt"
 
 
 

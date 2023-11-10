@@ -20,7 +20,8 @@ class RiderController extends Controller
             "rider_name"=>["string","nullable"],
         ]);
         $rider_name = isset($data["rider_name"]) ? $data["rider_name"] : "";
-        $riders = Rider::where("name","like","%".$rider_name."%")->paginate(10);
+        $riders = Rider::where("name","like","%".$rider_name."%")->
+        orderByDesc("active")->orderBy("name")->paginate(10);
 
 
         
@@ -102,6 +103,11 @@ class RiderController extends Controller
      */
     public function destroy(Rider $rider)
     {
-        //
+
+        $rider->active = !$rider->active;
+        $rider->save();
+
+        return redirect()->back();
+
     }
 }

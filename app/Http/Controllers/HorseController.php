@@ -25,9 +25,14 @@ class HorseController extends Controller
         ]);
         $horse_name = isset($data["horse_name"]) ? $data["horse_name"] : "";
         $gender =  isset($data["gender"]) ? $data["gender"] : "";
-        $horses = Horse::where("name","like","%".$horse_name."%")->where("gender","like","%".$gender."%")->paginate(10);
+        $horses = Horse::where("name","like","%".$horse_name."%")->
+                where("gender","like","%".$gender."%")->
+                orderByDesc("active")->
+                orderBy("name")->
 
-         $genders = Horse::select("gender")->distinct("gender")->get();
+                paginate(10);
+
+         $genders = Horse::where("active",1)->select("gender")->distinct("gender")->get();
 
         
         return view("horse.index",["horses"=>$horses,"genders"=>$genders,"horse_name"=>$horse_name,"genderSearch"=>$gender]);
@@ -41,7 +46,7 @@ class HorseController extends Controller
         $horses = $owner->horse()->paginate(10);
 
 
-        $genders = Horse::select("gender")->distinct("gender")->get();
+        $genders = Horse::where("active",1)->select("gender")->distinct("gender")->get();
 
         
         return view("horse.index",["horses"=>$horses,"genders"=>$genders,"horse_name"=>"","genderSearch"=>""]);
@@ -67,7 +72,7 @@ class HorseController extends Controller
     public function store(StoreHorseRequest $request)
     {
         $data=$request->validated();
-        $newHorse=Horse::create($data);
+        $newHorse=Horse::where("active",1)->create($data);
         return redirect(route("horse.show",$newHorse));
     }
 
@@ -110,7 +115,7 @@ class HorseController extends Controller
      */
     public function edit(Horse $horse)
     {
-        $owners = Owner::all();
+        $owners = Owner::where("active",1)->get();
         $doesOwn = $horse->owner;
         $doesNotOwn = $owners->whereNotIn("id",$doesOwn->pluck("id"));
         return view("horse.edit",["horse"=>$horse,"doesOwn"=>$doesOwn,"doesNotOwn"=>$doesNotOwn]);
@@ -138,7 +143,8 @@ class HorseController extends Controller
      */
     public function destroy(Horse $horse)
     {
-        $horse->delete();
+        $horse->active = !$horse->active;
+        $horse->save();
         return redirect(route('horse.index'));
     }
 }

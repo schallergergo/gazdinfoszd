@@ -19,11 +19,14 @@ class LessonController extends Controller
     public function index()
     {
 
-        $lessons=Lesson::orderByDesc("created_at")->paginate(10);
-        $riders = Rider::orderBy("name")->get();
-        $horses = Horse::orderBy("name")->get();
+        
+        $data = request()->validate(["search_term"=>["date","max:256","nullable"]]);
 
-        return view("lesson.index",["lessons"=>$lessons,"riders"=>$riders,"horses"=>$horses,"rider_id"=>"","horse_is"=>""]);
+        $search_term = $data["search_term"]?? "";
+        if ($search_term != null) $lessons = Lesson::where("date_of_lesson",$search_term)->paginate(20);
+        else $lessons=Lesson::orderByDesc("created_at")->paginate(20);
+
+        return view("lesson.index",["lessons"=>$lessons,"search_term"=>$search_term]);
     }
 
     /**
@@ -34,8 +37,8 @@ class LessonController extends Controller
     public function create()
     {
 
-        $horses=Horse::all();
-        $riders=Rider::all();
+        $horses=Horse::where("active",1)->get();
+        $riders=Rider::where("active",1)->get();
         return view("lesson.create",["horses"=>$horses,"riders"=>$riders]);
     }
 
@@ -88,6 +91,7 @@ class LessonController extends Controller
         $lessons = Lesson::where("date_of_lesson",$date)->orderByDesc("created_at")->paginate(10);
                return view("lesson.index",
                     ["lessons"=>$lessons,
+                    "search_term"=>""
                 ]);
         
     }
@@ -97,7 +101,8 @@ class LessonController extends Controller
 
         $lessons = Lesson::where("horse_id",$horse->id)->orderByDesc("created_at")->paginate(10);
         return view("lesson.index",
-                    ["lessons"=>$lessons]);
+                    ["lessons"=>$lessons,
+                    "search_term"=>""]);
     }
 
     /**

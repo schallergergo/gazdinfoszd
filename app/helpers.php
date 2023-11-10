@@ -20,6 +20,9 @@ function getExpenseTypes(){
 	return ["treatment","breeding","assets","other"];
 }
 
+function getUserRoles(){
+  return ['admin', 'owner', 'groom', 'rider'];
+}
 function getChartColors(){
 return [
 "color" => [

@@ -70,12 +70,13 @@
 
                             </div>
                             <div class="favorite-icon">
-                                <a href="#"><i class="mdi mdi mdi-trash-can-outline fs-18"></i></a>
+                                <a href="#" data-toggle="modal" data-target="#deleteincome{{$income->id}}Modal">
+                                    <i class="mdi mdi mdi-trash-can-outline fs-18"></i></a>
                             </div>
                         </div>
                     </div>
 
-
+                    @include("income.modal")
                     @endforeach
                    
                 </div>

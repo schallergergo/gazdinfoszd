@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HorseController;
 use App\Http\Controllers\TreatmentController;
@@ -44,6 +45,13 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile/delete', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    Route::get('/user/index',[UserController::class,'index'])->name('user.index');
+
+    Route::get('/user/create',[UserController::class,'create'])->name('user.create');
+    Route::post('/user/store',[UserController::class,'store'])->name('user.store');
+    Route::get('/user/{user}/edit',[UserController::class,'edit'])->name('user.edit');
+    Route::post('/user/{user}/update',[UserController::class,'update'])->name('user.update');
+    Route::get('/user/{user}/activate',[UserController::class,'activate'])->name('user.activate');
 
     Route::get("/horse/index",[HorseController::class,'index'])->name('horse.index');
     Route::get("/horse/index/owner/{owner}",[HorseController::class,'ownerIndex'])->name('horse.index.owner');
@@ -55,10 +63,15 @@ Route::middleware('auth')->group(function () {
     Route::get("/horse/{horse}/delete",[HorseController::class,'destroy'])->name('horse.delete');
 
     Route::get('/treatment/index',[TreatmentController::class,'index'])->name('treatment.index');
+    Route::get('/treatment/index/horse/{horse}',[TreatmentController::class,'horseIndex'])->name('treatment.index.horse');
+    Route::get('/treatment/index/category/{category}',[TreatmentController::class,'categoryIndex'])->name('treatment.index.category');
+
     Route::get('/treatment/create',[TreatmentController::class,'create'])->name('treatment.create');
     Route::post('/treatment/store',[TreatmentController::class,'store'])->name('treatment.store');
     Route::get('/treatment/{treatment}/edit',[TreatmentController::class,'edit'])->name('treatment.edit');
     Route::post('/treatment/{treatment}/update',[TreatmentController::class,'update'])->name('treatment.update');
+    Route::get('/treatment/{treatment}/delete',[TreatmentController::class,'destroy'])->name('treatment.delete');
+
 
     Route::get('/owner/index',[OwnerController::class,'index'])->name('owner.index');
     Route::get('/owner/create',[OwnerController::class,'create'])->name('owner.create');
@@ -123,6 +136,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/inventoryitem/create/inventory/{inventory}/{added}',[InventoryItemController::class,'create'])->name('inventoryitem.create');
     Route::post('/inventoryitem/store/inventory/{inventory}/{added}',[InventoryItemController::class,'store'])->name('inventoryitem.store');
+    Route::get('/inventoryitem/index/inventory/{inventory}',[InventoryItemController::class,'index'])->name('inventoryitem.index');
     Route::get('/inventoryitem/{inventory_item}/delete',[InventoryItemController::class,'destroy'])->name('inventoryitem.delete');
 
     Route::get('/rider/index',[RiderController::class,'index'])->name('rider.index');
@@ -171,6 +185,7 @@ use Illuminate\Support\Facades\App;
 
 use App\Models\HorseMessage;
 Route::get('/test', function () {
+    return "No entry";
     $message = HorseMessage::find(1);
     dd($message->toUser);
     dd(request());

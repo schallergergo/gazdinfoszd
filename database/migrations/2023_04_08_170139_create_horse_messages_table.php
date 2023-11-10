@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger("user_id");
             $table->unsignedBigInteger("to_user_id")->nullable();
-            $table->binary("read")->default(0);
+            $table->boolean("read")->default(0);
             $table->unsignedBigInteger("horse_id");
             $table->string("message");
             $table->unsignedBigInteger("tenant_id");
