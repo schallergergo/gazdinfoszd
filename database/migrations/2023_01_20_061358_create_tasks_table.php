@@ -16,8 +16,10 @@ return new class extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
             $table->string("task");
-            $table->datetime("task_start");
-            $table->datetime("task_end");
+            
+            $table->date("task_day");
+            $table->time("task_start");
+            $table->time("task_end");
             $table->string("description")->nullable();
             $table->boolean("done")->default(0);
             $table->unsignedBigInteger("tenant_id");

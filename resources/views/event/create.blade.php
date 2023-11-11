@@ -32,8 +32,9 @@
 
                     </div> <!-- end of the row-->
                            <div class="row">
-                          <x-input type="datetime-local" name="start" displayname="Start of the event" isrequired="required"/>
-                          <x-input type="datetime-local" name="end" displayname="End of the event" isrequired="required" />
+                        <x-input type="date" name="event_day" displayname="Day of the event" isrequired="required"/>
+                          <x-input type="time" name="start" displayname="Start of the event" isrequired="required"/>
+                          <x-input type="time" name="end" displayname="End of the event" isrequired="required" />
 
                    </div> <!-- end of the row-->
 

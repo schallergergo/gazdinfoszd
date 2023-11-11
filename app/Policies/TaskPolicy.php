@@ -18,7 +18,7 @@ class TaskPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        
     }
 
     /**
@@ -41,7 +41,8 @@ class TaskPolicy
      */
     public function create(User $user)
     {
-        //
+        if ($user->isAdmin()) return true;
+        return false;
     }
 
     /**
@@ -53,7 +54,8 @@ class TaskPolicy
      */
     public function update(User $user, Task $task)
     {
-        //
+        if ($user->isAdmin()) return true;
+        return false;
     }
 
     /**
@@ -65,7 +67,8 @@ class TaskPolicy
      */
     public function delete(User $user, Task $task)
     {
-        //
+        if ($user->isAdmin()) return true;
+        return false;
     }
 
     /**

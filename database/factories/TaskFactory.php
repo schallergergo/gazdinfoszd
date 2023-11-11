@@ -16,12 +16,13 @@ class TaskFactory extends Factory
      */
     public function definition()
     {
-        $time1=fake()->datetime();
-        $time2=fake()->datetime();
+        $time1=fake()->time();
+        $time2=fake()->time();
         return [
             "task" => fake()->text(20),
-            "task_start" => fake()->datetime(min($time1,$time2)),
-            "task_end" => fake()->datetime(max($time1,$time2)),
+            "task_day" => fake()->date(),
+            "task_start" => min($time1,$time2),
+            "task_end" => max($time1,$time2),
             'tenant_id' => rand(1,3),
         ];
     }

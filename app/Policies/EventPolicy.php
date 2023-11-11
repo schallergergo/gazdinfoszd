@@ -30,7 +30,7 @@ class EventPolicy
      */
     public function view(User $user, Event $event)
     {
-        //
+        
     }
 
     /**
@@ -41,7 +41,9 @@ class EventPolicy
      */
     public function create(User $user)
     {
-        //
+        if ($user->isAdmin()) return true;
+
+        return false;
     }
 
     /**
@@ -53,7 +55,8 @@ class EventPolicy
      */
     public function update(User $user, Event $event)
     {
-        //
+        if ($user->isAdmin()) return true;
+        return false;
     }
 
     /**
@@ -65,7 +68,9 @@ class EventPolicy
      */
     public function delete(User $user, Event $event)
     {
-        //
+        if ($user->isAdmin()) return true;
+
+        return false;
     }
 
     /**
@@ -89,6 +94,8 @@ class EventPolicy
      */
     public function forceDelete(User $user, Event $event)
     {
-        //
+        if ($user->isAdmin()) return true;
+
+        return false;
     }
 }

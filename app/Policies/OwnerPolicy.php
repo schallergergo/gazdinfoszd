@@ -30,7 +30,8 @@ class OwnerPolicy
      */
     public function view(User $user, Owner $owner)
     {
-        //
+        if ($user->isAdmin()) return true;
+        return false;
     }
 
     /**
@@ -41,7 +42,8 @@ class OwnerPolicy
      */
     public function create(User $user)
     {
-        //
+        if ($user->isAdmin()) return true;
+        return false;
     }
 
     /**
@@ -53,7 +55,8 @@ class OwnerPolicy
      */
     public function update(User $user, Owner $owner)
     {
-        return true;
+        if ($user->isAdmin()) return true;
+        return false;
     }
 
     /**
@@ -65,7 +68,8 @@ class OwnerPolicy
      */
     public function delete(User $user, Owner $owner)
     {
-        //
+        if ($user->isAdmin()) return true;
+        return false;
     }
 
     /**

@@ -30,7 +30,9 @@ class HorsePolicy
      */
     public function view(User $user, Horse $horse)
     {
-        //
+        if ($user->isAdmin()) return true;
+        if ($user->isOwner()) return true;
+        return false;
     }
 
     /**
@@ -41,7 +43,9 @@ class HorsePolicy
      */
     public function create(User $user)
     {
-        //
+        if ($user->isAdmin()) return true;
+
+        return false;
     }
 
     /**
@@ -53,7 +57,8 @@ class HorsePolicy
      */
     public function update(User $user, Horse $horse)
     {
-        //
+        if ($user->isAdmin()) return true;
+        return false;
     }
 
     /**
@@ -65,7 +70,8 @@ class HorsePolicy
      */
     public function delete(User $user, Horse $horse)
     {
-        //
+        if ($user->isAdmin()) return true;
+        return false;
     }
 
     /**
@@ -77,7 +83,8 @@ class HorsePolicy
      */
     public function restore(User $user, Horse $horse)
     {
-        //
+        if ($user->isAdmin()) return true;
+        return false;
     }
 
     /**

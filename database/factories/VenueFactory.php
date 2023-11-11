@@ -17,7 +17,11 @@ class VenueFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => fake()->text(10),
+            'opens'=> fake()->datetime(),
+            'closes' => fake()->datetime(),
+            'tenant_id' => 1,
+
         ];
     }
 }

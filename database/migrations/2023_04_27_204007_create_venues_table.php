@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string("name");
             $table->time("opens")->nullable();
             $table->time("closes")->nullable();
+            $table->boolean("active")->default(1);
             $table->softDeletes();
             $table->timestamps();
         });

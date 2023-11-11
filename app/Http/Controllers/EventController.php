@@ -6,6 +6,7 @@ use App\Models\Event;
 use App\Models\Venue;
 use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
+use Carbon\Carbon;
 
 class EventController extends Controller
 {
@@ -16,8 +17,16 @@ class EventController extends Controller
      */
     public function index()
     {
-        $events = Event::all();
-        return $events;
+        $data = request()->validate(["search_term"=>["date","nullable"]]);
+        $now = Carbon::now();
+        if (isset($data["search_term"])) {
+            $now = Carbon::parse($data["search_term"]);
+        }
+        
+        $date1 = $now->format("Y-m-d");
+
+        $events = Event::where("event_day",$date1)->orderBy("start")->paginate(20);
+        return view("event.index",["events"=>$events,"search_term"=>$date1]);
     }
 
     /**

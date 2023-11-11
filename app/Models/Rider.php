@@ -11,4 +11,8 @@ class Rider extends Model
 {
     use HasFactory, BelongsToTenant, SoftDeletes;
     protected $guarded = [];
+
+    public function lesson(){
+        return $this->hasMany(Lesson::class);
+    }
 }

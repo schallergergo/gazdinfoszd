@@ -26,6 +26,16 @@ class UserController extends Controller
         return view("user.index",["users"=>$users,"user_name"=>$user_name]);
     }
 
+        public function roleIndex($role)
+    {
+        
+
+
+        $users = User::where("role",$role)->orderByDesc("active")->orderBy("name")->paginate(20);
+        
+        return view("user.index",["users"=>$users,"user_name"=>""]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

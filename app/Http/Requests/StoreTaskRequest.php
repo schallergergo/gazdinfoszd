@@ -16,8 +16,9 @@ class StoreTaskRequest extends FormRequest
     {
         return [
             "task" => ['required',"string",'max:255'],
-            "task_start" => ['required',"date"], 
-            "task_end"=>['required',"date"], 
+            "task_day"=>['required',"date"],
+            "task_start" => ['required'], 
+            "task_end"=>['required'], 
             "description"=>["string",'max:1000',"nullable"],
             "horses"=>["array","nullable"],
         ];

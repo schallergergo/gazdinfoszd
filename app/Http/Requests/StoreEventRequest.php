@@ -16,6 +16,7 @@ class StoreEventRequest extends FormRequest
     {
         return [
             "description" => ['required',"string",'max:255'],
+            "event_day"=>['required',"date"],
             'start' => ['required'],
             "end" =>['required'],
             "venue_id"=>['required','integer'],

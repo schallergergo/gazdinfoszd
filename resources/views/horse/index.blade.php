@@ -93,7 +93,7 @@
                             </div>
                         </div>
                     </div>
-                    @include("horse.modal")
+
 
                     @endforeach
                    

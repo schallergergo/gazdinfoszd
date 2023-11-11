@@ -22,8 +22,9 @@
 
                     </div> <!-- end of the row-->
                            <div class="row">
-                          <x-input type="datetime-local" name="task_start" displayname="Start of the task" isrequired="required"/>
-                          <x-input type="datetime-local" name="task_end" displayname="End of the task" isrequired="required"/>
+                            <x-input type="date" name="task_day" displayname="Day of the task" isrequired="required"/>
+                          <x-input type="time" name="task_start" displayname="Start of the task" isrequired="required"/>
+                          <x-input type="time" name="task_end" displayname="End of the task" isrequired="required"/>
 
                    </div> <!-- end of the row-->
 

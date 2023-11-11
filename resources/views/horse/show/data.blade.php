@@ -4,8 +4,13 @@
             <h4 class="mb-0">{{$horse->name}}</h4>
             <p class="text-muted">{{$horse->box_in_stable}}</p>
 
+
+              @can("create",App\Model\Treatment::class)
               <a href="{{route('treatment.create')}}">  <button type="button" class="btn btn-success btn-xs waves-effect mb-2 waves-light">{{__("New treatment")}}</button></a>
+              @endcan
+              @can("create",App\Model\Task::class)
             <a href="{{route('task.create')}}"> <button type="button" class="btn btn-danger btn-xs waves-effect mb-2 waves-light">{{__("New task")}}</button></a>
+            @endcan
 
             <div class="text-left mt-3">
                 <h4 class="font-13 text-uppercase pb-2">{{__("Data")}}:</h4>

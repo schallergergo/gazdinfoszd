@@ -32,8 +32,10 @@
 
                     </div> <!-- end of the row-->
                            <div class="row">
-                          <x-input-edit type="datetime-local" name="start" displayname="Start of the event" value="{{$event->start}}" isrequired="required"/>
-                          <x-input-edit type="datetime-local" name="end" displayname="End of the event" value="{{$event->end}}" isrequired="required" />
+                            <x-input-edit type="date" name="event_day" displayname="Day of the event" value="{{$event->event_day}}" isrequired="required" />
+
+                          <x-input-edit type="time" name="start" displayname="Start of the event" value="{{$event->start}}" isrequired="required"/>
+                          <x-input-edit type="time" name="end" displayname="End of the event" value="{{$event->end}}" isrequired="required" />
 
                    </div> <!-- end of the row-->
 

@@ -21,8 +21,9 @@
 
                     </div> <!-- end of the row-->
                            <div class="row">
-                          <x-input-edit type="datetime-local" name="task_start" displayname="Start of the task" isrequired="required" value="{{$task->task_start}}"/>
-                          <x-input-edit type="datetime-local" name="task_end" displayname="End of the task" isrequired="required" value="{{$task->task_end}}"/>
+                        <x-input-edit type="date" name="task_day" displayname="Day of the task" isrequired="required" value="{{$task->task_day}}"/>
+                          <x-input-edit type="time" name="task_start" displayname="Start of the task" isrequired="required" value="{{$task->task_start}}"/>
+                          <x-input-edit type="time" name="task_end" displayname="End of the task" isrequired="required" value="{{$task->task_end}}"/>
 
                    </div> <!-- end of the row-->
 

@@ -7,7 +7,7 @@ use App\Models\User;
 use App\Models\Horse;
 use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
-
+use Carbon\Carbon;
 class TaskController extends Controller
 {
     /**
@@ -17,7 +17,28 @@ class TaskController extends Controller
      */
     public function index()
     {
-        //
+         $data = request()->validate(["search_term"=>["date","nullable"]]);
+        $now = Carbon::now();
+        if (isset($data["search_term"])) {
+            $now = Carbon::parse($data["search_term"]);
+        }
+        
+        $date1 = $now->format("Y-m-d");
+
+        $tasks = Task::where("task_day",$date1)->orderBy("task_start")->paginate(20);
+        return view("task.index",["tasks"=>$tasks,"search_term"=>$date1]);
+    }
+
+    public function horseIndex(Horse $horse)
+    {
+         $tasks = $horse->task()->orderBy("done")->orderBy("created_at")->paginate(20);
+        return view("task.index",["tasks"=>$tasks,"search_term"=>""]);
+    }
+    public function userIndex(User $user)
+    {
+
+        $tasks = $user->task()->orderBy("done")->orderBy("created_at")->paginate(20);
+        return view("task.index",["tasks"=>$tasks,"search_term"=>""]);
     }
 
     /**
@@ -29,6 +50,13 @@ class TaskController extends Controller
     {
         $horses = Horse::where("active",1)->get();
         return view("task.create",["horses"=>$horses]);
+    }
+
+    public function done(Task $task)
+    {
+        $task->done = !$task->done;
+        $task->save();
+        return redirect()->back();
     }
 
     /**
@@ -133,7 +161,9 @@ class TaskController extends Controller
      */
     public function attachUser(Task $task)
     {
-        $data = request()->validate(["user_id"=>"required","number","min:0"]);
+
+        $data = request()->validate(["user_id"=>"required","min:0"]);
+
         $user_id = $data["user_id"];
         $task->user()->attach($user_id);
 
@@ -151,7 +181,7 @@ class TaskController extends Controller
 
     public function attachHorse(Task $task)
     {
-        $data = request()->validate(["horse_id"=>"required","number","min:0"]);
+        $data = request()->validate(["horse_id"=>"required","integer","min:0"]);
         $horse_id = $data["horse_id"];
         $task->horse()->attach($horse_id);
 

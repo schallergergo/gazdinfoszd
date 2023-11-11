@@ -46,6 +46,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile/delete', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/user/index',[UserController::class,'index'])->name('user.index');
+    Route::get('/user/index/role/{role}',[UserController::class,'roleIndex'])->name('user.index.role');
+
 
     Route::get('/user/create',[UserController::class,'create'])->name('user.create');
     Route::post('/user/store',[UserController::class,'store'])->name('user.store');
@@ -87,6 +89,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/venue/create',[VenueController::class,'create'])->name('venue.create');
     Route::post('/venue/store',[VenueController::class,'store'])->name('venue.store');
     Route::get('/venue/{venue}/edit',[VenueController::class,'edit'])->name('venue.edit');
+    Route::get('/venue/{venue}/delete',[VenueController::class,'destroy'])->name('venue.delete');
     Route::post('/venue/{venue}/update',[VenueController::class,'update'])->name('venue.update');
 
 
@@ -95,6 +98,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/event/store',[EventController::class,'store'])->name('event.store');
     Route::get('/event/{event}/edit',[EventController::class,'edit'])->name('event.edit');
     Route::post('/event/{event}/update',[EventController::class,'update'])->name('event.update');
+     Route::get('/event/{event}/delete',[EventController::class,'destroy'])->name('event.delete');
+
 
     Route::get('/expense/index',[ExpenseController::class,'index'])->name('expense.index');
     Route::get('/expense/index/category/{category}',[ExpenseController::class,'indexCategory'])->name('expense.index.category');
@@ -151,7 +156,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/rider/{rider}/getPrice',[RiderController::class,'getPrice'])->name('rider.getPrice');
 
     Route::get('/task/index',[TaskController::class,'index'])->name('task.index');
+    Route::get('/task/index/horse/{horse}',[TaskController::class,'horseIndex'])->name('task.index.horse');
+    Route::get('/task/index/user/{user}',[TaskController::class,'userIndex'])->name('task.index.user');
     Route::get('/task/create',[TaskController::class,'create'])->name('task.create');
+    Route::get('/task/{task}/done',[TaskController::class,'done'])->name('task.done');
     Route::post('/task/store',[TaskController::class,'store'])->name('task.store');
     Route::get('/task/{task}/edit',[TaskController::class,'edit'])->name('task.edit');
     Route::post('/task/{task}/attachUser',[TaskController::class,'attachUser'])->name('task.assignUser');

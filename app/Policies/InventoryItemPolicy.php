@@ -41,7 +41,9 @@ class InventoryItemPolicy
      */
     public function create(User $user)
     {
-        //
+        if ($user->isAdmin()) return true;
+        if ($user->isGroom()) return true;
+        return false;
     }
 
     /**
@@ -53,7 +55,9 @@ class InventoryItemPolicy
      */
     public function update(User $user, InventoryItem $inventoryItem)
     {
-        //
+        if ($user->isAdmin()) return true;
+        if ($user->isGroom()) return true;
+        return false;
     }
 
     /**
@@ -65,7 +69,8 @@ class InventoryItemPolicy
      */
     public function delete(User $user, InventoryItem $inventoryItem)
     {
-        //
+        if ($user->isAdmin()) return true;
+        return false;
     }
 
     /**

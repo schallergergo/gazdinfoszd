@@ -29,7 +29,7 @@ class Messages
 
         
 
-        $request->merge(['messages' => $messages,"tasks",$tasks]);
+        $request->merge(['messages' => $messages,"tasks"=>$tasks]);
         return $next($request);
     }
 }

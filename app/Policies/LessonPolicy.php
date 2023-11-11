@@ -30,7 +30,9 @@ class LessonPolicy
      */
     public function view(User $user, Lesson $lesson)
     {
-        //
+        if ($user->isAdmin()) return true;
+        if ($user->isRider()) return true;
+        return false;
     }
 
     /**
@@ -41,7 +43,8 @@ class LessonPolicy
      */
     public function create(User $user)
     {
-        //
+        if ($user->isAdmin()) return true;
+        return false;
     }
 
     /**
@@ -53,7 +56,8 @@ class LessonPolicy
      */
     public function update(User $user, Lesson $lesson)
     {
-        //
+        if ($user->isAdmin()) return true;
+        return false;
     }
 
     /**
@@ -65,7 +69,8 @@ class LessonPolicy
      */
     public function delete(User $user, Lesson $lesson)
     {
-        //
+        if ($user->isAdmin()) return true;
+        return false;
     }
 
     /**

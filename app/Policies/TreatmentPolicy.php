@@ -18,7 +18,7 @@ class TreatmentPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        
     }
 
     /**
@@ -41,7 +41,9 @@ class TreatmentPolicy
      */
     public function create(User $user)
     {
-        //
+        if ($user->isAdmin()) return true;
+        if ($user->isGroom()) return true;
+        return false;
     }
 
     /**
@@ -53,7 +55,9 @@ class TreatmentPolicy
      */
     public function update(User $user, Treatment $treatment)
     {
-        //
+        if ($user->isAdmin()) return true;
+        if ($user->isGroom()) return true;
+        return false;
     }
 
     /**
@@ -65,7 +69,9 @@ class TreatmentPolicy
      */
     public function delete(User $user, Treatment $treatment)
     {
-        //
+        if ($user->isAdmin()) return true;
+        if ($user->isGroom()) return true;
+        return false;
     }
 
     /**

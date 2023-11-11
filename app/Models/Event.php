@@ -11,4 +11,11 @@ class Event extends Model
 {
     use HasFactory, BelongsToTenant, SoftDeletes;
     protected $guarded = [];
+
+
+    public function venue(){
+
+        return $this->belongsTo(Venue::class);
+        
+    }
 }

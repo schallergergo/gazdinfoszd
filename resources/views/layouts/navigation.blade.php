@@ -23,6 +23,105 @@
             <hr class="sidebar-divider">
 
 
+            
+         
+
+            @if(Auth::user()->isAdmin()  || Auth::user()->isGroom())
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseHorses"
+                    aria-expanded="true" aria-controls="collapseHorses">
+                    <i class="fas fa-horse"></i>
+                    <span>{{__("Horses")}}</span>
+                </a>
+                <div id="collapseHorses" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <!--<h6 class="collapse-header">Custom Components:</h6> -->
+                        <a class="collapse-item" href="{{route('horse.index')}}">{{__("Index")}}</a>
+                        @can("create",App\Model\Horse::class)
+                        <a class="collapse-item" href="{{route('horse.create')}}">{{__("Create")}}</a>
+                        @endcan
+                    </div>
+                </div>
+            </li>
+            
+
+             <!-- Nav Item - Utilities Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTreatment"
+                    aria-expanded="true" aria-controls="collapseTreatment">
+                    <i class="fas fa-book-medical"></i>
+                    <span>{{__("Treatments")}}</span>
+                </a>
+                <div id="collapseTreatment" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <!--<h6 class="collapse-header">Treatment</h6>-->
+                         <a class="collapse-item" href="{{route('treatment.index')}}">{{__("Index")}}</a>
+                         @can("create",App\Model\Treatment::class)
+                        <a class="collapse-item" href="{{route('treatment.create')}}">{{__("Create")}}</a>
+                        @endcan
+                    </div>
+                </div>
+            </li>
+           
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTask"
+                    aria-expanded="true" aria-controls="collapseTask">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span>{{__("Tasks")}}</span>
+                </a>
+                <div id="collapseTask" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <!--<h6 class="collapse-header">Treatment</h6>-->
+                         <a class="collapse-item" href="{{route('task.index')}}">{{__("Index")}}</a>
+                         @can("create",App\Model\Task::class)
+                        <a class="collapse-item" href="{{route('task.create')}}">{{__("Create")}}</a>
+                        @endcan
+                    </div>
+                </div>
+            </li>
+
+             <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInventory"
+                    aria-expanded="true" aria-controls="collapseInventory">
+                    <i class="fa-solid fa-warehouse"></i>
+                    <span>{{__("Inventory")}}</span>
+                </a>
+                <div id="collapseInventory" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <!--<h6 class="collapse-header">Custom Components:</h6> -->
+                        <a class="collapse-item" href="{{route('inventory.index')}}">{{__("Index")}}</a>
+                        @can("create",App\Model\Inventory::class)
+                        <a class="collapse-item" href="{{route('inventory.create')}}">{{__("Create")}}</a>
+                        @endcan
+                    </div>
+                </div>
+            </li>
+            @endif
+            @if(Auth::user()->isAdmin())
+
+             <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLesson"
+                    aria-expanded="true" aria-controls="collapseLesson">
+                    <i class="fa-solid fa-person-chalkboard"></i>
+                    <span>{{__("Lessons")}}</span>
+                </a>
+                <div id="collapseLesson" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <!--<h6 class="collapse-header">Custom Components:</h6> -->
+                        <a class="collapse-item" href="{{route('lesson.index')}}">{{__("Index")}}</a>
+
+                        <a class="collapse-item" href="{{route('lesson.create')}}">{{__("Create")}}</a>
+
+                    </div>
+                </div>
+            </li>
+
+ 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUser"
@@ -38,23 +137,6 @@
                     </div>
                 </div>
             </li>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseHorses"
-                    aria-expanded="true" aria-controls="collapseHorses">
-                    <i class="fas fa-horse"></i>
-                    <span>{{__("Horses")}}</span>
-                </a>
-                <div id="collapseHorses" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <!--<h6 class="collapse-header">Custom Components:</h6> -->
-                        <a class="collapse-item" href="{{route('horse.index')}}">{{__("Index")}}</a>
-                        <a class="collapse-item" href="{{route('horse.create')}}">{{__("Create")}}</a>
-                    </div>
-                </div>
-            </li>
-
              
 
 
@@ -89,22 +171,7 @@
                 </div>
             </li>
 
-             <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTreatment"
-                    aria-expanded="true" aria-controls="collapseTreatment">
-                    <i class="fas fa-book-medical"></i>
-                    <span>{{__("Treatments")}}</span>
-                </a>
-                <div id="collapseTreatment" class="collapse" aria-labelledby="headingUtilities"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <!--<h6 class="collapse-header">Treatment</h6>-->
-                         <a class="collapse-item" href="{{route('treatment.index')}}">{{__("Index")}}</a>
-                        <a class="collapse-item" href="{{route('treatment.create')}}">{{__("Create")}}</a>
-                    </div>
-                </div>
-            </li>
+            
 
                <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEvents"
@@ -122,38 +189,8 @@
                 </div>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTask"
-                    aria-expanded="true" aria-controls="collapseTask">
-                    <i class="fa-solid fa-location-dot"></i>
-                    <span>{{__("Tasks")}}</span>
-                </a>
-                <div id="collapseTask" class="collapse" aria-labelledby="headingUtilities"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <!--<h6 class="collapse-header">Treatment</h6>-->
-                         <a class="collapse-item" href="{{route('task.index')}}">{{__("Index")}}</a>
-                        <a class="collapse-item" href="{{route('task.create')}}">{{__("Create")}}</a>
-                    </div>
-                </div>
-            </li>
 
 
-
-               <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLesson"
-                    aria-expanded="true" aria-controls="collapseLesson">
-                    <i class="fa-solid fa-person-chalkboard"></i>
-                    <span>{{__("Lessons")}}</span>
-                </a>
-                <div id="collapseLesson" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <!--<h6 class="collapse-header">Custom Components:</h6> -->
-                        <a class="collapse-item" href="{{route('lesson.index')}}">{{__("Index")}}</a>
-                        <a class="collapse-item" href="{{route('lesson.create')}}">{{__("Create")}}</a>
-                    </div>
-                </div>
-            </li>
 
 
                <li class="nav-item">
@@ -171,21 +208,8 @@
                 </div>
             </li>
 
-             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInventory"
-                    aria-expanded="true" aria-controls="collapseInventory">
-                    <i class="fa-solid fa-warehouse"></i>
-                    <span>{{__("Inventory")}}</span>
-                </a>
-                <div id="collapseInventory" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <!--<h6 class="collapse-header">Custom Components:</h6> -->
-                        <a class="collapse-item" href="{{route('inventory.index')}}">{{__("Index")}}</a>
-                        <a class="collapse-item" href="{{route('inventory.create')}}">{{__("Create")}}</a>
-                    </div>
-                </div>
-            </li>
-
+            
+            @endif
            
 
 

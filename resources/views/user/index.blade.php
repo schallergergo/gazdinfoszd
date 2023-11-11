@@ -34,9 +34,9 @@
         <div class="row">
             <div class="col-lg-12">
 
-
+<div class="candidate-list">
                 @foreach ($users as $user)
-                <div class="candidate-list">
+                
                     <div class="candidate-list-box card mt-4">
                         <div class="p-4 card-body">
                             <div class="align-items-center row">
@@ -55,7 +55,7 @@
                                             @endif
 
                                         </h5>
-                                        <p class="text-muted mb-2">{{__($user->role)}}</p>
+                                        <a href="{{route('user.index.role',$user->role)}}"><p class="text-muted mb-2">{{__($user->role)}}</p></a>
                                         <ul class="list-inline mb-0 text-muted">
                                             <li class="list-inline-item"><i class="mdi mdi-map-marker"></i> {{$user->email}}</li>
    

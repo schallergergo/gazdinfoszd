@@ -42,6 +42,9 @@ class DatabaseSeeder extends Seeder
   'MENTA'
 );
         \App\Models\User::factory(10)->create();
+        \App\Models\Venue::factory(5)->create();
+        for($i=1;$i<31;$i++)
+        \App\Models\Event::factory(8)->create(["event_day"=>"2023-11-".$i]);
         \App\Models\User::factory()->create(["email"=>"seitec01@gmail.com"]);
         \App\Models\Task::factory(10)->create();
         \App\Models\Owner::factory(10)->create();

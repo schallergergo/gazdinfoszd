@@ -15,7 +15,7 @@
                           
 
                     </form>
-                    @foreach($messages as $message)
+                    @foreach($messages->sortByDesc("created_at") as $message)
                     <div class="row mt-2 ml-2 mr-2">
                     <div class="card ">
                           <div class="card-header">

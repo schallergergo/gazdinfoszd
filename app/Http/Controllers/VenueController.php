@@ -15,9 +15,9 @@ class VenueController extends Controller
      */
     public function index()
     {
-        $venues = Venue::all();
+        $venues = Venue::orderByDesc("active")->orderBy("name")->paginate(20);
 
-        return $venues;
+
         return view("venue.index",["venues"=>$venues]);
     }
 
@@ -92,7 +92,8 @@ class VenueController extends Controller
      */
     public function destroy(Venue $venue)
     {
-        $venue->delete();
+        $venue->active = !$venue->active;
+        $venue->save();
         return redirect(route("venue.index"));
     }
 }

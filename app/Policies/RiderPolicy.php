@@ -41,7 +41,8 @@ class RiderPolicy
      */
     public function create(User $user)
     {
-        //
+        if ($user->isAdmin()) return true;
+        return false;
     }
 
     /**
@@ -53,7 +54,8 @@ class RiderPolicy
      */
     public function update(User $user, Rider $rider)
     {
-        return true;
+        if ($user->isAdmin()) return true;
+        return false;
     }
 
     /**
@@ -65,7 +67,8 @@ class RiderPolicy
      */
     public function delete(User $user, Rider $rider)
     {
-        //
+        if ($user->isAdmin()) return true;
+        return false;
     }
 
     /**

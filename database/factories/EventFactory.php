@@ -1,6 +1,7 @@
 <?php
 
 namespace Database\Factories;
+use App\Models\Venue;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -16,8 +17,15 @@ class EventFactory extends Factory
      */
     public function definition()
     {
+        $time1 = fake()->time();
+        $time2 = fake()->time();
         return [
-            //
+            'description' => fake()->text(10),
+            'venue_id'=> Venue::all()->random()->id,
+            "event_day" => fake()->date(),
+            'start' => min($time1,$time2),
+            'end' => max($time1,$time2),
+            'tenant_id' => 1,
         ];
     }
 }

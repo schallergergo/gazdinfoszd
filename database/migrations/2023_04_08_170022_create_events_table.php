@@ -17,8 +17,9 @@ return new class extends Migration
             $table->id();
             $table->string("description");
             $table->unsignedBigInteger("venue_id");
-            $table->datetime("start");
-            $table->datetime("end");
+            $table->date("event_day");
+            $table->time("start");
+            $table->time("end");
             $table->unsignedBigInteger("tenant_id");
             $table->softDeletes();
             $table->timestamps();

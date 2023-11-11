@@ -30,7 +30,8 @@ class IncomePolicy
      */
     public function view(User $user, Income $income)
     {
-        //
+        if ($user->isAdmin()) return true;
+        return false;
     }
 
     /**
@@ -41,7 +42,8 @@ class IncomePolicy
      */
     public function create(User $user)
     {
-        //
+        if ($user->isAdmin()) return true;
+        return false;
     }
 
     /**
@@ -53,7 +55,8 @@ class IncomePolicy
      */
     public function update(User $user, Income $income)
     {
-        //
+        if ($user->isAdmin()) return true;
+        return false;
     }
 
     /**
@@ -65,7 +68,8 @@ class IncomePolicy
      */
     public function delete(User $user, Income $income)
     {
-        //
+        if ($user->isAdmin()) return true;
+        return false;
     }
 
     /**

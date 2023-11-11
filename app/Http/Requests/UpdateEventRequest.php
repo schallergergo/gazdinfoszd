@@ -17,6 +17,7 @@ class UpdateEventRequest extends FormRequest
     {
         return [
             "description" => ['required',"string",'max:255'],
+            "event_day"=>['required',"date"],
             "open" => ['required'],
             "close" =>['required'],
             "venue_id"=>['required','integer'],
