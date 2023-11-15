@@ -19,7 +19,7 @@
 
                           <x-input-edit type="date" name="date_of_treatment" displayname="Date of treatment"  value="{{$treatment->date_of_treatment}}" isrequired="required" />
                           
-                          <x-input-edit type="number" name="cost_of_treatment" displayname="Cost of treatment" value="{{$treatment->cost_of_treatment}}" isrequired="required" />
+                          <x-input-edit type="number" name="cost_of_treatment" displayname="Cost of treatment" value="{{$treatment->cost_of_treatment}}" isrequired="disabled" />
 
                    </div> <!-- end of the row-->
 

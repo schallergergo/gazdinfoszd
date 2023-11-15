@@ -16,7 +16,6 @@ class HomeController extends Controller
         
         $user = Auth::user();
 
-        
         if ($user->isRider()) return $this->riderIndex($user);
         if ($user->isOwner()) return $this->ownerIndex($user);
 
@@ -28,8 +27,6 @@ class HomeController extends Controller
                         "currentMonth"=>$currentMonth,
                         "yearlyIncome"=>$currentYear->sum("income"),
                         "yearlyExpense"=>$currentYear->sum("expense"),
-
-
                     ]);
 
     }

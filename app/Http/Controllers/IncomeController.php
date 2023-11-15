@@ -16,7 +16,7 @@ class IncomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
+    {   $this->authorize("viewAny",App\Models\Income::class);
         $data = request()->validate(["search_term"=>["nullable","string","max:256"],]);
         $search_term = $data["search_term"] ?? "";
         $incomes =  Income::where("description","like","%".$search_term."%")
@@ -35,6 +35,7 @@ class IncomeController extends Controller
      */
     public function indexCategory($category)
     {
+        $this->authorize("viewAny",App\Models\Income::class);
         $incomes =  Income::where("category",$category)->orderByDesc("created_at")->paginate(10);
         $search_term = "";
         return view("income.index",["incomes"=>$incomes,"search_term"=>$search_term]);
@@ -47,6 +48,7 @@ class IncomeController extends Controller
      */
     public function indexHorse(Horse $horse)
     {
+        $this->authorize("viewAny",App\Models\Income::class);
         $incomes =  Income::where("horse_id",$horse->id)->orderByDesc("created_at")->paginate(10);
         $search_term = "";
         return view("income.index",["incomes"=>$incomes,"search_term"=>$search_term]);
@@ -60,6 +62,7 @@ class IncomeController extends Controller
      */
     public function create()
     {
+        $this->authorize("create",App\Models\Income::class);
         $horses = Horse::where("active",1)->get();
         return view("income.create",["horses"=>$horses]);
     }
@@ -72,6 +75,7 @@ class IncomeController extends Controller
      */
     public function store(StoreIncomeRequest $request)
     {
+        $this->authorize("create",App\Models\Income::class);
         $data = $request->validated();
         Income::create($data);
         return redirect(route("income.index"));
@@ -119,6 +123,7 @@ class IncomeController extends Controller
      */
     public function destroy(Income $income)
     {
+        $this->authorize("delete",$income);
         $income->delete();
         return redirect(route("income.index"));
     }

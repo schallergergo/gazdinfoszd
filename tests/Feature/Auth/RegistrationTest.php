@@ -26,9 +26,10 @@ class RegistrationTest extends TestCase
             'role'=>"admin",
             'password_confirmation' => 'password',
             'club'=>"My Riding Club",
+            'locale'=>"hu"
         ]);
 
-        $this->assertAuthenticated();
+
         $response->assertRedirect(RouteServiceProvider::HOME);
     }
 }

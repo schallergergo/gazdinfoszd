@@ -18,6 +18,7 @@ class InventoryItemController extends Controller
      */
     public function index(Inventory $inventory)
     {
+        $this->authorize("viewAny",App\Models\InventoryItem::class);
         $inventoryitems = InventoryItem::where("inventory_id",$inventory->id)->orderByDesc("created_at")->paginate(10);
         return view("inventoryitem.index",["inventory"=>$inventory,"inventoryitems"=>$inventoryitems]);
     }
@@ -29,7 +30,7 @@ class InventoryItemController extends Controller
      */
     public function create(Inventory $inventory,$added)
     {
-
+        $this->authorize("create",App\Models\InventoryItem::class);
         return view("inventoryitem.create",["inventory"=>$inventory,"added"=>$added]);
     }
 
@@ -41,12 +42,14 @@ class InventoryItemController extends Controller
      */
     public function store(StoreInventoryItemRequest $request,Inventory $inventory,$added)
     {
+        $this->authorize("create",App\Models\InventoryItem::class);
         $data = $request->validated();
         $amount =  $data["amount"];
+        if ($added == "minus" && $inventory->amount < $amount) return back()->with("error",Lang::get("Invetory does not contain enough items!"));
         $user = Auth::user();
         $amount = $added=="minus" ? -$amount : $amount;
 
-        if ($added == "minus" && $inventory->amount < $amount) return back()->with("error",Lang::get("Invetory does not contain enough items!"));
+        
         $data = array("user_id"=>$user->id,"inventory_id"=>$inventory->id,"amount"=>$amount,"comments"=>$data["comments"]);
 
         InventoryItem::create($data);
@@ -95,6 +98,7 @@ class InventoryItemController extends Controller
      */
     public function destroy(InventoryItem $inventoryItem)
     {
+        $this->authorize("delete",$inventory);
         $inventoryItem->delete();
         return redirect(route("inventoryitem.show",$inventoryItem->inventory));
     }

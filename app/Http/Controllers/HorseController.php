@@ -18,6 +18,7 @@ class HorseController extends Controller
      */
     public function index()
     {   
+        $this->authorize("viewAny",App\Models\Horse::class);
         $data = request()->validate([
             "horse_name"=>["string","nullable"],
             "gender"=>["string","nullable"]
@@ -42,7 +43,7 @@ class HorseController extends Controller
 
     public function ownerIndex(Owner $owner)
     {   
-
+        $this->authorize("viewAny",App\Models\Horse::class);
         $horses = $owner->horse()->paginate(10);
 
 
@@ -60,6 +61,7 @@ class HorseController extends Controller
      */
     public function create()
     {
+        $this->authorize("create",App\Models\Horse::class);
         return view("horse.create");
     }
 
@@ -71,6 +73,7 @@ class HorseController extends Controller
      */
     public function store(StoreHorseRequest $request)
     {
+        $this->authorize("create",App\Models\Horse::class);
         $data=$request->validated();
         $newHorse=Horse::where("active",1)->create($data);
         return redirect(route("horse.show",$newHorse));
@@ -84,7 +87,7 @@ class HorseController extends Controller
      */
     public function show(Horse $horse)
     {
-
+        $this->authorize("view",$horse);
         $owners = $horse->owner;
         $messages = $horse->message;
         $treatments = Treatment::where("horse_id",$horse->id)->orderByDesc("date_of_treatment")->paginate(10);
@@ -115,6 +118,7 @@ class HorseController extends Controller
      */
     public function edit(Horse $horse)
     {
+        $this->authorize("update",$horse);
         $owners = Owner::where("active",1)->get();
         $doesOwn = $horse->owner;
         $doesNotOwn = $owners->whereNotIn("id",$doesOwn->pluck("id"));
@@ -130,6 +134,7 @@ class HorseController extends Controller
      */
     public function update(UpdateHorseRequest $request, Horse $horse)
     {
+        $this->authorize("update",$horse);
         $data=$request->validated();
         $horse->update($data);
         return redirect(route("horse.show",$horse));
@@ -143,6 +148,7 @@ class HorseController extends Controller
      */
     public function destroy(Horse $horse)
     {
+        $this->authorize("delete",$horse);
         $horse->active = !$horse->active;
         $horse->save();
         return redirect(route('horse.index'));

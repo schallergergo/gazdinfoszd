@@ -80,6 +80,7 @@
                                     </div>
                                 </div>
                             </div>
+                            @can("update",$horse)
                             <div class="favorite-icon">
                                 <a href="{{route('horse.delete',$horse)}}" >
                                     @if ($horse->active)
@@ -91,6 +92,7 @@
                                     <a href="{{route('horse.edit',$horse)}}" >
                                     <i class="mdi mdi mdi-cog fs-18"></i></a>
                             </div>
+                            @endcan
                         </div>
                     </div>
 

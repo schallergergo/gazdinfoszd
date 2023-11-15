@@ -18,7 +18,9 @@ class HorsePolicy
      */
     public function viewAny(User $user)
     {
-        //
+        if ($user->isAdmin()) return true;
+        if ($user->isGroom()) return true;
+        return false;
     }
 
     /**
@@ -31,7 +33,9 @@ class HorsePolicy
     public function view(User $user, Horse $horse)
     {
         if ($user->isAdmin()) return true;
-        if ($user->isOwner()) return true;
+        $owner = $user->owner;
+        if ($user->isOwner() ) return true;
+        if ($user->isGroom()) return true;
         return false;
     }
 

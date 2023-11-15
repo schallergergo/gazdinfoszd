@@ -54,6 +54,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/user/{user}/edit',[UserController::class,'edit'])->name('user.edit');
     Route::post('/user/{user}/update',[UserController::class,'update'])->name('user.update');
     Route::get('/user/{user}/activate',[UserController::class,'activate'])->name('user.activate');
+    Route::get('/user/{user}/loginAs',[UserController::class,'loginAs'])->name('user.loginAs');
 
     Route::get("/horse/index",[HorseController::class,'index'])->name('horse.index');
     Route::get("/horse/index/owner/{owner}",[HorseController::class,'ownerIndex'])->name('horse.index.owner');
@@ -193,7 +194,8 @@ use Illuminate\Support\Facades\App;
 
 use App\Models\HorseMessage;
 Route::get('/test', function () {
-    return "No entry";
+
+    
     $message = HorseMessage::find(1);
     dd($message->toUser);
     dd(request());

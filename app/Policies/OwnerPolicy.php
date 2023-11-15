@@ -18,7 +18,8 @@ class OwnerPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        if ($user->isAdmin()) return true;
+        return false;
     }
 
     /**

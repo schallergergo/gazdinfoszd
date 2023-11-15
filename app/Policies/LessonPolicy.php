@@ -18,7 +18,9 @@ class LessonPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        if ($user->isAdmin()) return true;
+        if ($user->isRider()) return true;
+        return false;
     }
 
     /**

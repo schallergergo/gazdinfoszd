@@ -69,11 +69,10 @@
                                     <i class="mdi mdi mdi-plus fs-18"></i></a>
                                 <a href="{{route('inventoryitem.create',[$inventory,'minus'])}}" >
                                     <i class="mdi mdi mdi-minus fs-18"></i></a>
-                                <a href="#" data-toggle="modal" data-target="#deleteinventory{{$inventory->id}}Modal">
-                                    <i class="mdi mdi mdi-trash-can-outline fs-18"></i></a>
+                                @can("update",$inventory)
                                 <a href="{{route('inventory.edit',$inventory)}}" >
                                     <i class="mdi mdi mdi-cog fs-18"></i></a>
-
+                                    @endcan
 
                             </div>
                         </div>

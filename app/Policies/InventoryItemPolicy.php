@@ -18,7 +18,9 @@ class InventoryItemPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        if ($user->isAdmin()) return true;
+        if ($user->isGroom()) return true;
+        return false;
     }
 
     /**
@@ -30,7 +32,9 @@ class InventoryItemPolicy
      */
     public function view(User $user, InventoryItem $inventoryItem)
     {
-        //
+        if ($user->isAdmin()) return true;
+        if ($user->isGroom()) return true;
+        return false;
     }
 
     /**

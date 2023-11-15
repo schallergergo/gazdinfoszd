@@ -18,7 +18,8 @@ class RiderPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        if ($user->isAdmin()) return true;
+        return false;
     }
 
     /**
@@ -30,7 +31,8 @@ class RiderPolicy
      */
     public function view(User $user, Rider $rider)
     {
-        //
+        if ($user->isAdmin()) return true;
+        return false;
     }
 
     /**

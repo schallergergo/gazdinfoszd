@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\HorseMessage;
 use App\Models\TaskMessage;
+use Carbon\Carbon;
 
 class Messages
 {
@@ -24,7 +25,7 @@ class Messages
         $messages = $messages->merge(TaskMessage::where("to_user_id",Auth::user()->id)->get());
         $messages = $messages->where("read",0);
 
-        $tasks = $user->task->where("done",0);
+        $tasks = $user->task->where("done",0)->where("task_day","<=",Carbon::now()->format("YYYY-mm-dd"));
 
 
         

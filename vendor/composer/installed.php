@@ -5,11 +5,20 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'fdc058af91a77ded43d1ab5ace1504aab3e7a8d1',
+        'reference' => '46fa584844586a2f80980563a6d6a8b1d25e515f',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
     'versions' => array(
+        'andyabih/laravel-to-uml' => array(
+            'pretty_version' => '1.0.3',
+            'version' => '1.0.3.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../andyabih/laravel-to-uml',
+            'aliases' => array(),
+            'reference' => 'd925215a7dbcaf813cabc8d83178e9f601c63b57',
+            'dev_requirement' => true,
+        ),
         'brick/math' => array(
             'pretty_version' => '0.11.0',
             'version' => '0.11.0.0',
@@ -397,7 +406,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'fdc058af91a77ded43d1ab5ace1504aab3e7a8d1',
+            'reference' => '46fa584844586a2f80980563a6d6a8b1d25e515f',
             'dev_requirement' => false,
         ),
         'laravel/pint' => array(
@@ -769,8 +778,8 @@
         'psr/log-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '1.0|2.0|3.0',
-                1 => '1.0.0 || 2.0.0 || 3.0.0',
+                0 => '1.0.0 || 2.0.0 || 3.0.0',
+                1 => '1.0|2.0|3.0',
             ),
         ),
         'psr/simple-cache' => array(

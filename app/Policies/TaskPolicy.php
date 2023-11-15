@@ -18,7 +18,9 @@ class TaskPolicy
      */
     public function viewAny(User $user)
     {
-        
+        if ($user->isAdmin()) return true;
+                if ($user->isGroom()) return true;
+        return false;
     }
 
     /**
@@ -30,7 +32,9 @@ class TaskPolicy
      */
     public function view(User $user, Task $task)
     {
-        //
+        if ($user->isAdmin()) return true;
+        if ($user->isGroom()) return true;
+        return false;
     }
 
     /**
@@ -42,6 +46,13 @@ class TaskPolicy
     public function create(User $user)
     {
         if ($user->isAdmin()) return true;
+        return false;
+    }
+
+    public function editDone(User $user)
+    {
+        if ($user->isAdmin()) return true;
+        if ($user->isGroom()) return true;
         return false;
     }
 

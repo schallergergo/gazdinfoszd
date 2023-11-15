@@ -15,7 +15,7 @@ class InventoryController extends Controller
      */
     public function index()
     {
-        
+        $this->authorize("viewAny",App\Models\Inventory::class);
         $data = request()->validate(["inventory_name"=>["string","min:0","nullable"]]);
         $inventory_name = $data["inventory_name"] ?? "";
         $inventories = Inventory::where("name_of_product","LIKE","%".$inventory_name."%")->paginate(20);
@@ -30,6 +30,7 @@ class InventoryController extends Controller
      */
     public function create()
     {   
+        $this->authorize("create",App\Models\Inventory::class);
         return view("inventory.create");
     }
 
@@ -41,6 +42,7 @@ class InventoryController extends Controller
      */
     public function store(StoreInventoryRequest $request)
     {
+        $this->authorize("create",App\Models\Inventory::class);
         $data = $request->validated();
         Inventory::create($data);
         return redirect(route("inventory.index"));
@@ -54,7 +56,7 @@ class InventoryController extends Controller
      */
     public function show(Inventory $inventory)
     {
-
+        $this->authorize("view",$inventory);
         return view("inventory.show",["inventory"=>$inventory]);
     }
 
@@ -66,6 +68,7 @@ class InventoryController extends Controller
      */
     public function edit(Inventory $inventory)
     {
+        $this->authorize("update",$inventory);
         return view("inventory.edit",["inventory"=>$inventory]);
     }
 
@@ -78,6 +81,7 @@ class InventoryController extends Controller
      */
     public function update(UpdateInventoryRequest $request, Inventory $inventory)
     {
+        $this->authorize("update",$inventory);
         $data = $request->validated();
         $inventory->update($data);
         return redirect(route("inventory.index"));
@@ -91,6 +95,7 @@ class InventoryController extends Controller
      */
     public function destroy(Inventory $inventory)
     {
+        $this->authorize("delete",$inventory);
         $inventory->delete();
     }
 }

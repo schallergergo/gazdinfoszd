@@ -37,7 +37,7 @@
                                   <option value="">{{__("Select an item")}}</option>
                                   <option value="farrier">{{__("Farrier")}}</option>
                                   <option value="vet">{{__("Vet")}}</option>
-                                  <option value="vaccinaton">{{__("Vaccination")}}</option>
+                                  <option value="vaccination">{{__("Vaccination")}}</option>
                                   <option value="deworming">{{__("Deworming")}}</option>
                                   <option value="breeding">{{__("Breeding")}}</option>
 

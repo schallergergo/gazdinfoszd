@@ -80,12 +80,17 @@
                                 </div>
 
                             </div>
+                            
                             <div class="favorite-icon">
+                            @can("delete",$treatment)
                                 <a href="#" data-toggle="modal" data-target="#deletetreatment{{$treatment->id}}Modal">
                                     <i class="mdi mdi mdi-trash-can-outline fs-18"></i></a>
+                            @endcan
                                 <a href="{{route('treatment.edit',$treatment)}}" >
                                     <i class="mdi mdi mdi-cog fs-18"></i></a>
                             </div>
+
+                            
                         </div>
                     </div>
 

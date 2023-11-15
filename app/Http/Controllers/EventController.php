@@ -17,6 +17,7 @@ class EventController extends Controller
      */
     public function index()
     {
+        $this->authorize("viewAny",App\Models\Event::class);
         $data = request()->validate(["search_term"=>["date","nullable"]]);
         $now = Carbon::now();
         if (isset($data["search_term"])) {
@@ -36,6 +37,7 @@ class EventController extends Controller
      */
     public function create()
     {
+        $this->authorize("create",App\Models\Event::class);
         $venues = Venue::all();
 
         return view("event.create",["venues"=>$venues]);
@@ -49,6 +51,7 @@ class EventController extends Controller
      */
     public function store(StoreEventRequest $request)
     {
+        $this->authorize("create",App\Models\Event::class);
         $data = $request->validated();
 
         Event::create($data);
@@ -75,6 +78,7 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
+        $this->authorize("update",$event);
         $venues = Venue::all();
 
         return view("event.edit",[
@@ -93,6 +97,8 @@ class EventController extends Controller
      */
     public function update(UpdateEventRequest $request, Event $event)
     {
+        $this->authorize("update",$event);
+        $venues = Venue::all();
          $data = $request->validated();
 
         $event->update($data);
@@ -108,6 +114,7 @@ class EventController extends Controller
      */
     public function destroy(Event $event)
     {
+        $this->authorize("delete",$event);
         $event->delete();
         return redirect(route("event.index"));
     }

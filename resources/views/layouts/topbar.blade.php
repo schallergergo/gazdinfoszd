@@ -67,7 +67,7 @@ $tasks = request()["tasks"];
                                     {{__("Tasks")}}
                                 </h6>
                                 @foreach($tasks as $task)
-                                    <a class="dropdown-item d-flex align-items-center" href="{{route(task.index.user),Auth::user()}}">
+                                    <a class="dropdown-item d-flex align-items-center" href="{{route('task.index.user',Auth::user())}}">
                                         <div class="mr-3">
                                             <div class="icon-circle bg-primary">
                                                 <i class="fas fa-file-alt text-white"></i>

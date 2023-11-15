@@ -18,7 +18,9 @@ class EventPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        if ($user->isAdmin()) return true;
+        if ($user->isGroom()) return true;
+        return false;
     }
 
     /**

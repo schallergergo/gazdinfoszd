@@ -89,7 +89,7 @@
                                     <i class="mdi mdi-checkbox-blank-outline fs-18"></i>
                                     @endif
                                 </a>
-                                <a href="{{route('task.done',$task)}}" >
+                                <a href="{{route('task.delete',$task)}}" >
                                     <i class="mdi mdi mdi-trash-can-outline fs-18"></i></a>
                                     <a href="{{route('task.edit',$task)}}" >
                                     <i class="mdi mdi mdi-cog fs-18"></i></a>

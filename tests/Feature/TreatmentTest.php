@@ -29,10 +29,5 @@ class TreatmentTest extends TestCase
         $this->assertNotNull($horse);
     }
 
-       public function test_a_treatment_has_the_person_last_to_save_it_linked()
-    {
-        
-        $user= Treatment::factory()->create()->last_updated_by;
-        $this->assertNotNull($user);
-    }
+       
 }

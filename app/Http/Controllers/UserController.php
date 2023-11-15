@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -16,7 +17,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        
+        if(!Auth::user()->isAdmin()) return abort(403);
         $data = request()->validate(["user_name"=>["string","max:256","nullable"]]);
 
 
@@ -30,7 +31,7 @@ class UserController extends Controller
     {
         
 
-
+        if(!Auth::user()->isAdmin()) return abort(403);
         $users = User::where("role",$role)->orderByDesc("active")->orderBy("name")->paginate(20);
         
         return view("user.index",["users"=>$users,"user_name"=>""]);
@@ -43,6 +44,7 @@ class UserController extends Controller
      */
     public function create()
     {
+        if(!Auth::user()->isAdmin()) return abort(403);
         return view("user.create");
     }
 
@@ -54,6 +56,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        if(!Auth::user()->isAdmin()) return abort(403);
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
@@ -90,6 +93,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        if(!Auth::user()->isAdmin()) return abort(403);
         return view("user.edit",["user"=>$user]);
     }
 
@@ -102,6 +106,7 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        if(!Auth::user()->isAdmin()) return abort(403);
             $data =$request->validate([
             'name' => ['required', 'string', 'max:255'],
             'locale'=>["required","string","in:en,hu"],
@@ -117,11 +122,20 @@ class UserController extends Controller
         return redirect(route("user.index"));
     }
     public function activate(User $user){
-        
+        if(!Auth::user()->isAdmin()) return abort(403);
         $user->active = !$user->active;
         $user->save();
         return redirect()->back();
     }
+
+    public function loginAs(User $user)
+    {
+        if(!Auth::user()->isAdmin()) return abort(403);
+        Auth::login($user);
+        return redirect("/");
+    }
+
+
     /**
      * Remove the specified resource from storage.
      *

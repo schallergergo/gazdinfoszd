@@ -1,7 +1,6 @@
 <?php
 
-
-function dateDifferencePercentage(string $startString, string $endString){
+function dateDifferencePercent(string $startString, string $endString){
 
 	$start = strtotime($startString);
 	$end = strtotime($endString);

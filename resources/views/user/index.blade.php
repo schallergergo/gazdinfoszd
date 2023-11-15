@@ -77,6 +77,8 @@
                                 </a>
                                 <a href="{{route('user.edit',$user)}}" >
                                     <i class="mdi mdi mdi-cog fs-18"></i></a>
+                                <a href="{{route('user.loginAs',$user)}}" >
+                                    <i class="mdi mdi mdi-login fs-18"></i></a>
                             </div>
                         </div>
                     </div>

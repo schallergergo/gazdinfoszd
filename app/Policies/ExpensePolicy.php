@@ -18,7 +18,8 @@ class ExpensePolicy
      */
     public function viewAny(User $user)
     {
-
+        if ($user->isAdmin()) return true;
+        return false;
     }
 
     /**
@@ -41,7 +42,7 @@ class ExpensePolicy
      */
     public function create(User $user)
     {
-                if ($user->isAdmin()) return true;
+        if ($user->isAdmin()) return true;
         return false;
     }
 

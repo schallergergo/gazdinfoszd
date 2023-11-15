@@ -16,6 +16,7 @@ class TreatmentController extends Controller
      */
     public function index()
     {
+        $this->authorize("viewAny",App\Models\Treatment::class);
         request()->validate(["search_term"=>["string","max:256","nullable"]]);
 
         $search_term = $data["search_term"] ?? "";
@@ -29,14 +30,14 @@ class TreatmentController extends Controller
 
     public function categoryIndex($category)
     {
-       
+       $this->authorize("viewAny",App\Models\Treatment::class);
         $treatments = Treatment::where("type_of_treatment",$category)->paginate(20);
         return view("treatment.index",["treatments"=>$treatments,"search_term"=>""]);
 
     }
     public function horseIndex(Horse $horse)
     {
-       
+       $this->authorize("viewAny",App\Models\Treatment::class);
         $treatments = Treatment::where("horse_id",$horse->id)->paginate(20);
         return view("treatment.index",["treatments"=>$treatments,"search_term"=>""]);
 
@@ -49,7 +50,7 @@ class TreatmentController extends Controller
      */
     public function create()
     {
-
+        $this->authorize("create",App\Models\Treatment::class);
         $horses=Horse::where("active",1)->get();
         return view("treatment.create",["horses"=>$horses]);
     }
@@ -62,6 +63,7 @@ class TreatmentController extends Controller
      */
     public function store(StoreTreatmentRequest $request)
     {
+        $this->authorize("create",App\Models\Treatment::class);
         $data=$request->validated();
         foreach ($data["horses"] as $horse_id){
             Treatment::create([
@@ -72,7 +74,7 @@ class TreatmentController extends Controller
             "date_of_notification"=> $data["date_of_notification"],
             "comments"=>$data["comments"]]);
         }
-        return redirect(route("treatment.create")); 
+        return redirect(route("treatment.index")); 
     }
 
     /**
@@ -94,7 +96,7 @@ class TreatmentController extends Controller
      */
     public function edit(Treatment $treatment)
     {
-        //return $treatment->date_of_treatment;
+        $this->authorize("update",$treatment);
         return view("treatment.edit",["treatment"=> $treatment]);
     }
 
@@ -107,6 +109,7 @@ class TreatmentController extends Controller
      */
     public function update(UpdateTreatmentRequest $request, Treatment $treatment)
     {
+        $this->authorize("update",$treatment);
         $data=$request->validated();
         $treatment->update($data);
         return redirect()->back();
@@ -120,6 +123,8 @@ class TreatmentController extends Controller
      */
     public function destroy(Treatment $treatment)
     {
-        //
+        $this->authorize("delete",$treatment);
+        $treatment->delete();
+        return redirect()->back();
     }
 }

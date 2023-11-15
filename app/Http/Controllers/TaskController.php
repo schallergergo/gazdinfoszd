@@ -17,6 +17,7 @@ class TaskController extends Controller
      */
     public function index()
     {
+        $this->authorize("viewAny",App\Models\Task::class);
          $data = request()->validate(["search_term"=>["date","nullable"]]);
         $now = Carbon::now();
         if (isset($data["search_term"])) {
@@ -31,12 +32,14 @@ class TaskController extends Controller
 
     public function horseIndex(Horse $horse)
     {
+        $this->authorize("viewAny",App\Models\Task::class);
          $tasks = $horse->task()->orderBy("done")->orderBy("created_at")->paginate(20);
         return view("task.index",["tasks"=>$tasks,"search_term"=>""]);
     }
     public function userIndex(User $user)
     {
-
+        $this->authorize("viewAny",App\Models\Task::class);
+        $today = Carbon::now()->format("YYYY-mm-dd");
         $tasks = $user->task()->orderBy("done")->orderBy("created_at")->paginate(20);
         return view("task.index",["tasks"=>$tasks,"search_term"=>""]);
     }
@@ -48,16 +51,12 @@ class TaskController extends Controller
      */
     public function create()
     {
+        $this->authorize("create",App\Models\Task::class);
         $horses = Horse::where("active",1)->get();
         return view("task.create",["horses"=>$horses]);
     }
 
-    public function done(Task $task)
-    {
-        $task->done = !$task->done;
-        $task->save();
-        return redirect()->back();
-    }
+   
 
     /**
      * Store a newly created resource in storage.
@@ -67,6 +66,7 @@ class TaskController extends Controller
      */
     public function store(StoreTaskRequest $request)
     {
+        $this->authorize("create",App\Models\Task::class);
         $data = $request->validated();
         $horses = $data["horses"];
         unset($data["horses"]);
@@ -75,6 +75,13 @@ class TaskController extends Controller
 
         $this->attachHorses($task, $horses);
         return redirect(route("task.edit",$task));
+    }
+     public function done(Task $task)
+    {
+        $this->authorize("editDone",App\Models\Task::class);
+        $task->done = !$task->done;
+        $task->save();
+        return redirect()->back();
     }
 
     private function attachHorses(Task $task, array $horses){
@@ -106,6 +113,7 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
+        $this->authorize("update",$task);
         $users = User::whereIn("role",["groom","worker"])->get();
 
         $assignedUser = $task->user;
@@ -135,6 +143,7 @@ class TaskController extends Controller
      */
     public function update(UpdateTaskRequest $request, Task $task)
     {
+        $this->authorize("update",$task);
         $data = $request->validated();
         $task->update($data);
 
@@ -150,7 +159,12 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
-        //
+        $this->authorize("delete",$task);
+        $task->user()->detach();
+        $task->horse()->detach();
+        $task->delete();
+        return redirect()->back();
+
     }
 
      /**
@@ -161,7 +175,7 @@ class TaskController extends Controller
      */
     public function attachUser(Task $task)
     {
-
+        $this->authorize("update",$task);
         $data = request()->validate(["user_id"=>"required","min:0"]);
 
         $user_id = $data["user_id"];
@@ -173,7 +187,7 @@ class TaskController extends Controller
 
         public function detachUser(Task $task, User $user)
     {
-
+        $this->authorize("update",$task);
         $task->user()->detach($user->id);
 
         return redirect(route("task.edit",$task));
@@ -181,6 +195,7 @@ class TaskController extends Controller
 
     public function attachHorse(Task $task)
     {
+        $this->authorize("update",$task);
         $data = request()->validate(["horse_id"=>"required","integer","min:0"]);
         $horse_id = $data["horse_id"];
         $task->horse()->attach($horse_id);
@@ -190,7 +205,7 @@ class TaskController extends Controller
 
         public function detachHorse(Task $task, Horse $horse)
     {
-
+        $this->authorize("update",$task);
         $task->horse()->detach($horse->id);
 
         return redirect(route("task.edit",$task));

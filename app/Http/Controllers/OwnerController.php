@@ -17,6 +17,7 @@ class OwnerController extends Controller
      */
     public function index()
     {
+        $this->authorize("viewAny",App\Models\Owner::class);
         $data = request()->validate([
             "owner_name"=>["string","nullable"],
 
@@ -35,7 +36,7 @@ class OwnerController extends Controller
      */
     public function create()
     {
-
+        $this->authorize("create",App\Models\Owner::class);
         $users = User::where("role","owner")->get();
         return view("owner.create",["users"=>$users]);
     }
@@ -48,6 +49,7 @@ class OwnerController extends Controller
      */
     public function store(StoreOwnerRequest $request)
     {
+        $this->authorize("create",App\Models\Owner::class);
         $data = $request->validated();
         Owner::create($data);
         return redirect(route("owner.index"));
@@ -73,6 +75,7 @@ class OwnerController extends Controller
      */
     public function edit(Owner $owner)
     {
+        $this->authorize("update",$owner);
         $users = User::where("role","owner")->get();
         $horses = Horse::where("active",1)->get();
         $ownedHorses = $owner->horse;
@@ -89,6 +92,7 @@ class OwnerController extends Controller
      */
     public function update(UpdateOwnerRequest $request, Owner $owner)
     {
+        $this->authorize("update",$owner);
         $data = $request->validated();
         $owner->update($data);
         return redirect(route("owner.index"));
@@ -102,16 +106,19 @@ class OwnerController extends Controller
      */
     public function destroy(Owner $owner)
     {
+        $this->authorize("delete",$owner);
         $owner->active = !$owner->active;
         $owner->save();
         return redirect(route("owner.index")); 
     }
     public function attachHorse(Owner $owner, Horse $horse, $returnOwner){
+        $this->authorize("update",$owner);
         $owner->horse()->attach($horse->id);
         if(!$returnOwner) return redirect(route("horse.edit",$horse));
         return redirect(route("owner.edit",$owner));
     }
      public function detachHorse(Owner $owner, Horse $horse, $returnOwner){
+        $this->authorize("update",$owner);
 
         $owner->horse()->detach($horse->id);
         if($returnOwner==0) return redirect(route("horse.edit",$horse));

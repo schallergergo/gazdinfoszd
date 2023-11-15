@@ -18,7 +18,9 @@ class InventoryPolicy
      */
     public function viewAny(User $user)
     {
-        
+        if ($user->isAdmin()) return true;
+        if ($user->isGroom()) return true;
+        return false;
     }
 
     /**
@@ -44,7 +46,7 @@ class InventoryPolicy
     public function create(User $user)
     {
         if ($user->isAdmin()) return true;
-        if ($user->isGroom()) return true;
+
         return false;
     }
 
@@ -58,7 +60,7 @@ class InventoryPolicy
     public function update(User $user, Inventory $inventory)
     {
         if ($user->isAdmin()) return true;
-        if ($user->isGroom()) return true;
+
         return false;
     }
 

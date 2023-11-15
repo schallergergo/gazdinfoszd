@@ -15,7 +15,7 @@ class ExpenseController extends Controller
      * @return \Illuminate\Http\Response
      */
    public function index()
-    {   
+    {   $this->authorize("viewAny",App\Models\Expense::class);
         $data = request()->validate(["search_term"=>["nullable","string","max:256"],]);
         $search_term = $data["search_term"] ?? "";
         $expenses =  Expense::where("description","like","%".$search_term."%")
@@ -34,6 +34,7 @@ class ExpenseController extends Controller
      */
     public function indexCategory($category)
     {
+        $this->authorize("viewAny",App\Models\Expense::class);
         $expenses =  Expense::where("category",$category)->orderByDesc("created_at")->paginate(10);
         $search_term = "";
         return view("expense.index",["expenses"=>$expenses,"search_term"=>$search_term]);
@@ -46,6 +47,7 @@ class ExpenseController extends Controller
      */
     public function indexHorse(Horse $horse)
     {
+        $this->authorize("viewAny",App\Models\Expense::class);
         $expenses =  Expense::where("horse_id",$horse->id)->orderByDesc("created_at")->paginate(10);
         $search_term = "";
         return view("expense.index",["expenses"=>$expenses,"search_term"=>$search_term]);
@@ -59,6 +61,7 @@ class ExpenseController extends Controller
      */
     public function create()
     {
+        $this->authorize("create",App\Models\Expense::class);
         $horses = Horse::where("active",1)->get();
         return view("expense.create",["horses"=>$horses]);
     }
@@ -71,6 +74,7 @@ class ExpenseController extends Controller
      */
     public function store(StoreExpenseRequest $request)
     {
+        $this->authorize("create",App\Models\Expense::class);
         $data = $request->validated();
         Expense::create($data);
         return redirect(route("expense.index"));
@@ -118,6 +122,7 @@ class ExpenseController extends Controller
      */
     public function destroy(Expense $expense)
     {
+        $this->authorize("delete",$expense);
         $expense->delete();
         return redirect(route("expense.index"));
 

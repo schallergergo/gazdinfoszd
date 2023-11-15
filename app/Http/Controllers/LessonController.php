@@ -19,7 +19,7 @@ class LessonController extends Controller
     public function index()
     {
 
-        
+        $this->authorize("viewAny",App\Models\Lesson::class);
         $data = request()->validate(["search_term"=>["date","max:256","nullable"]]);
 
         $search_term = $data["search_term"]?? "";
@@ -29,6 +29,37 @@ class LessonController extends Controller
         return view("lesson.index",["lessons"=>$lessons,"search_term"=>$search_term]);
     }
 
+
+public function riderIndex(Rider $rider)
+    {   
+        $this->authorize("viewAny",App\Models\Lesson::class);
+        $lessons = Lesson::where("rider_id",$rider->id)->orderByDesc("created_at")->paginate(10);
+               return view("lesson.index",
+                    ["lessons"=>$lessons,
+
+                    "search_term"=>""
+                ]);
+        
+    }
+    public function dateIndex($date)
+    {   
+        $this->authorize("viewAny",App\Models\Lesson::class);
+        $lessons = Lesson::where("date_of_lesson",$date)->orderByDesc("created_at")->paginate(10);
+               return view("lesson.index",
+                    ["lessons"=>$lessons,
+                    "search_term"=>""
+                ]);
+        
+    }
+
+    public function horseIndex(Horse $horse)
+    {
+        $this->authorize("viewAny",App\Models\Lesson::class);
+        $lessons = Lesson::where("horse_id",$horse->id)->orderByDesc("created_at")->paginate(10);
+        return view("lesson.index",
+                    ["lessons"=>$lessons,
+                    "search_term"=>""]);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -36,7 +67,7 @@ class LessonController extends Controller
      */
     public function create()
     {
-
+        $this->authorize("create",App\Models\Lesson::class);
         $horses=Horse::where("active",1)->get();
         $riders=Rider::where("active",1)->get();
         return view("lesson.create",["horses"=>$horses,"riders"=>$riders]);
@@ -50,6 +81,7 @@ class LessonController extends Controller
      */
     public function store(StoreLessonRequest $request)
     {
+        $this->authorize("create",App\Models\Lesson::class);
         $data = $request->validated();
         $newEntry = Lesson::create($data);
 
@@ -65,6 +97,7 @@ class LessonController extends Controller
      */
     public function show(Lesson $lesson)
     {
+        $this->authorize("view",$lesson);
         return view("lesson.show",["lesson"=>$lesson]);
     }
 
@@ -74,36 +107,7 @@ class LessonController extends Controller
      * @param  \App\Models\Lesson  $lesson
      * @return \Illuminate\Http\Response
      */
-    public function riderIndex(Rider $rider)
-    {   
-
-        $lessons = Lesson::where("rider_id",$rider->id)->orderByDesc("created_at")->paginate(10);
-               return view("lesson.index",
-                    ["lessons"=>$lessons,
-
-                    "search_term"=>""
-                ]);
-        
-    }
-    public function dateIndex($date)
-    {   
-
-        $lessons = Lesson::where("date_of_lesson",$date)->orderByDesc("created_at")->paginate(10);
-               return view("lesson.index",
-                    ["lessons"=>$lessons,
-                    "search_term"=>""
-                ]);
-        
-    }
-
-    public function horseIndex(Horse $horse)
-    {
-
-        $lessons = Lesson::where("horse_id",$horse->id)->orderByDesc("created_at")->paginate(10);
-        return view("lesson.index",
-                    ["lessons"=>$lessons,
-                    "search_term"=>""]);
-    }
+    
 
     /**
      * Show the form for editing the specified resource.
@@ -113,6 +117,7 @@ class LessonController extends Controller
      */
     public function edit(Lesson $lesson)
     {
+        $this->authorize("update",$lesson);
         $horses=Horse::where("active",1)->get();
         $riders=Rider::all();
         return view("lesson.edit",[
@@ -131,6 +136,7 @@ class LessonController extends Controller
      */
     public function update(UpdateLessonRequest $request, Lesson $lesson)
     {
+        $this->authorize("update",$lesson);
         $data = $request->validated();
         $entry = $lesson->update($data);
 
@@ -145,7 +151,7 @@ class LessonController extends Controller
      */
     public function destroy(Lesson $lesson)
     {
-
+        $this->authorize("delete",$lesson);
         $lesson->delete();
 
         return redirect(route("lesson.index"));

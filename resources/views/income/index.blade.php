@@ -51,11 +51,9 @@
                                 <div class="col-lg-5">
                                     <div class="candidate-list-content mt-3 mt-lg-0">
                                         <h5 class="fs-19 mb-0">
-                                            @can("update",$income)
-                                            <a class="primary-link" href="{{route('income.edit',$income)}}">{{$income->description}}</a>
-                                            @else
+
                                             {{$income->description}}
-                                            @endcan
+      
 
                                         </h5>
                                         <p class="text-muted mb-2">{{$income->amount}} ( {{$income->date}} )</p>

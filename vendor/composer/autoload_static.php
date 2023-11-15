@@ -26,14 +26,14 @@ class ComposerStaticInit27280e67355611cb3c229f1b3fbf04e4
         '23c18046f52bef3eea034657bafda50f' => __DIR__ . '/..' . '/symfony/polyfill-php81/bootstrap.php',
         '3bd81c9b8fcc150b69d8b63b4d2ccf23' => __DIR__ . '/..' . '/spatie/flare-client-php/src/helpers.php',
         'e39a8b23c42d4e1452234d762b03835a' => __DIR__ . '/..' . '/ramsey/uuid/src/functions.php',
-        '8825ede83f2f289127722d4e842cf7e8' => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme/bootstrap.php',
         '265b4faa2b3a9766332744949e83bf97' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Collections/helpers.php',
         'c7a3c339e7e14b60e06a2d7fcce9476b' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Events/functions.php',
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
+        '8825ede83f2f289127722d4e842cf7e8' => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme/bootstrap.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
-        'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
         '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
+        'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
         '320163ac6b93aebe3dc25b60a0533d56' => __DIR__ . '/..' . '/spatie/laravel-ignition/src/helpers.php',
         'b4e3f29b106af37a2bb239f73cdf68c7' => __DIR__ . '/../..' . '/app/helpers.php',
     );
@@ -177,6 +177,7 @@ class ComposerStaticInit27280e67355611cb3c229f1b3fbf04e4
         'A' => 
         array (
             'App\\' => 4,
+            'Andyabih\\LaravelToUML\\' => 22,
         ),
     );
 
@@ -539,9 +540,18 @@ class ComposerStaticInit27280e67355611cb3c229f1b3fbf04e4
             0 => __DIR__ . '/../..' . '/app',
             1 => __DIR__ . '/..' . '/laravel/pint/app',
         ),
+        'Andyabih\\LaravelToUML\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/andyabih/laravel-to-uml/src',
+        ),
     );
 
     public static $classMap = array (
+        'Andyabih\\LaravelToUML\\Facades\\LaravelToUML' => __DIR__ . '/..' . '/andyabih/laravel-to-uml/src/Facades/LaravelToUML.php',
+        'Andyabih\\LaravelToUML\\Http\\Controllers\\Controller' => __DIR__ . '/..' . '/andyabih/laravel-to-uml/src/Http/Controllers/Controller.php',
+        'Andyabih\\LaravelToUML\\Http\\Controllers\\LaravelToUMLController' => __DIR__ . '/..' . '/andyabih/laravel-to-uml/src/Http/Controllers/LaravelToUMLController.php',
+        'Andyabih\\LaravelToUML\\LaravelToUML' => __DIR__ . '/..' . '/andyabih/laravel-to-uml/src/LaravelToUML.php',
+        'Andyabih\\LaravelToUML\\LaravelToUMLServiceProvider' => __DIR__ . '/..' . '/andyabih/laravel-to-uml/src/LaravelToUMLServiceProvider.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\Auth\\AuthenticatedSessionController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/AuthenticatedSessionController.php',
@@ -571,6 +581,7 @@ class ComposerStaticInit27280e67355611cb3c229f1b3fbf04e4
         'App\\Http\\Controllers\\TaskController' => __DIR__ . '/../..' . '/app/Http/Controllers/TaskController.php',
         'App\\Http\\Controllers\\TaskMessageController' => __DIR__ . '/../..' . '/app/Http/Controllers/TaskMessageController.php',
         'App\\Http\\Controllers\\TreatmentController' => __DIR__ . '/../..' . '/app/Http/Controllers/TreatmentController.php',
+        'App\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserController.php',
         'App\\Http\\Controllers\\VenueController' => __DIR__ . '/../..' . '/app/Http/Controllers/VenueController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
@@ -579,6 +590,7 @@ class ComposerStaticInit27280e67355611cb3c229f1b3fbf04e4
         'App\\Http\\Middleware\\Messages' => __DIR__ . '/../..' . '/app/Http/Middleware/Messages.php',
         'App\\Http\\Middleware\\PreventRequestsDuringMaintenance' => __DIR__ . '/../..' . '/app/Http/Middleware/PreventRequestsDuringMaintenance.php',
         'App\\Http\\Middleware\\RedirectIfAuthenticated' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectIfAuthenticated.php',
+        'App\\Http\\Middleware\\TaskMiddleWare' => __DIR__ . '/../..' . '/app/Http/Middleware/TaskMiddleWare.php',
         'App\\Http\\Middleware\\TrimStrings' => __DIR__ . '/../..' . '/app/Http/Middleware/TrimStrings.php',
         'App\\Http\\Middleware\\TrustHosts' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustHosts.php',
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
@@ -614,6 +626,8 @@ class ComposerStaticInit27280e67355611cb3c229f1b3fbf04e4
         'App\\Http\\Requests\\UpdateTaskRequest' => __DIR__ . '/../..' . '/app/Http/Requests/UpdateTaskRequest.php',
         'App\\Http\\Requests\\UpdateTreatmentRequest' => __DIR__ . '/../..' . '/app/Http/Requests/UpdateTreatmentRequest.php',
         'App\\Http\\Requests\\UpdateVenueRequest' => __DIR__ . '/../..' . '/app/Http/Requests/UpdateVenueRequest.php',
+        'App\\Http\\Requests\\UserStoreRequest' => __DIR__ . '/../..' . '/app/Http/Requests/UserStoreRequest.php',
+        'App\\Http\\Requests\\UserUpdateRequest' => __DIR__ . '/../..' . '/app/Http/Requests/UserUpdateRequest.php',
         'App\\Listeners\\SetTenantIdInSession' => __DIR__ . '/../..' . '/app/Listeners/SetTenantIdInSession.php',
         'App\\Models\\Event' => __DIR__ . '/../..' . '/app/Models/Event.php',
         'App\\Models\\Expense' => __DIR__ . '/../..' . '/app/Models/Expense.php',

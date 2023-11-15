@@ -25,8 +25,30 @@ class Treatment extends Model
                 {
             static::created(function (Treatment $treatment) {
 
+
+                $notification = $treatment->date_of_notification;
+
+            if ( $notification!= null)
+
+            {
+                $task = Task::create([
+                    "task"=> $treatment->horse->name." ".$treatment->type_of_treatment. " + ". $treatment->comments,
+                    "task_day"=> $treatment->date_of_treatment,
+                    "task_start"=> "00:00",
+                    "task_end"=> "00:00",
+                    "tenant_id"=>$treatment->tenant_id,
+
+                ]);
+
+            $admins = User::where("role","admin")->get();
+            foreach($admins as $admin)
+            $admin->task()->attach($task->id);
+
+            }
+
+
             $price =  $treatment->cost_of_treatment;
-            if ($price==0) return;
+            if ($price!=0){
 
             Expense::create([
                 "tenant_id"=>$treatment->tenant_id,
@@ -36,7 +58,7 @@ class Treatment extends Model
                 "category"=>"treatment",
                 "description"=>$treatment->type_of_treatment." + ".$treatment->horse->name,
             ]);
-
+        }
         });
         }
 }

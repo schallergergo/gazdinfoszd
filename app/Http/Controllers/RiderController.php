@@ -16,6 +16,7 @@ class RiderController extends Controller
      */
     public function index()
     {
+        $this->authorize("viewAny",App\Models\Rider::class);
         $data = request()->validate([
             "rider_name"=>["string","nullable"],
         ]);
@@ -35,6 +36,7 @@ class RiderController extends Controller
      */
     public function create()
     {
+        $this->authorize("create",App\Models\Rider::class);
         $users = User::where("role","rider")->get();
         return view("rider.create",["users"=>$users]);
     }
@@ -47,6 +49,7 @@ class RiderController extends Controller
      */
     public function store(StoreRiderRequest $request)
     {
+        $this->authorize("create",App\Models\Rider::class);
         $data = $request->validated();
         $rider = Rider::create($data);
         return redirect(route("rider.index"));
@@ -60,7 +63,7 @@ class RiderController extends Controller
      */
     public function show(Rider $rider)
     {
-        return $rider;
+        
     }
 
      public function getPrice(Rider $rider)
@@ -76,6 +79,7 @@ class RiderController extends Controller
      */
     public function edit(Rider $rider)
     {
+        $this->authorize("update",$rider);
         $users = User::where("role","rider")->get();
         return view("rider.edit",["rider"=>$rider,"users"=>$users]);
     }
@@ -89,7 +93,7 @@ class RiderController extends Controller
      */
     public function update(UpdateRiderRequest $request, Rider $rider)
     {
-
+        $this->authorize("update",$rider);
         $data = $request->validated();
         $rider->update($data);
         return redirect()->back();
@@ -103,7 +107,7 @@ class RiderController extends Controller
      */
     public function destroy(Rider $rider)
     {
-
+        $this->authorize("delete",$rider);
         $rider->active = !$rider->active;
         $rider->save();
 

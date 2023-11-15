@@ -25,7 +25,7 @@ class AuthServiceProvider extends ServiceProvider
         'App\Models\Owner'   => 'App\Policies\OwnerPolicy',
         'App\Models\Rider'   => 'App\Policies\RiderPolicy',
         'App\Models\TaskMessage'   => 'App\Policies\TaskMessagePolicy',
-        'App\Models\Task'   => 'App\Policies\Task',
+        'App\Models\Task'   => 'App\Policies\TaskPolicy',
         'App\Models\Treatment'   => 'App\Policies\TreatmentPolicy',
         'App\Models\User'   => 'App\Policies\UserPolicy',
         'App\Models\Venue'   => 'App\Policies\VenuePolicy',

@@ -52,6 +52,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Task::class);
     }
 
+    public function owner(){
+
+        return $this->hasOne(Owner::class);
+    }
+
     public function isAdmin(){
 
         return $this->role=="admin";

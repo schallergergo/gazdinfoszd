@@ -6,6 +6,11 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Andyabih\\LaravelToUML\\Facades\\LaravelToUML' => $vendorDir . '/andyabih/laravel-to-uml/src/Facades/LaravelToUML.php',
+    'Andyabih\\LaravelToUML\\Http\\Controllers\\Controller' => $vendorDir . '/andyabih/laravel-to-uml/src/Http/Controllers/Controller.php',
+    'Andyabih\\LaravelToUML\\Http\\Controllers\\LaravelToUMLController' => $vendorDir . '/andyabih/laravel-to-uml/src/Http/Controllers/LaravelToUMLController.php',
+    'Andyabih\\LaravelToUML\\LaravelToUML' => $vendorDir . '/andyabih/laravel-to-uml/src/LaravelToUML.php',
+    'Andyabih\\LaravelToUML\\LaravelToUMLServiceProvider' => $vendorDir . '/andyabih/laravel-to-uml/src/LaravelToUMLServiceProvider.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Http\\Controllers\\Auth\\AuthenticatedSessionController' => $baseDir . '/app/Http/Controllers/Auth/AuthenticatedSessionController.php',
@@ -35,6 +40,7 @@ return array(
     'App\\Http\\Controllers\\TaskController' => $baseDir . '/app/Http/Controllers/TaskController.php',
     'App\\Http\\Controllers\\TaskMessageController' => $baseDir . '/app/Http/Controllers/TaskMessageController.php',
     'App\\Http\\Controllers\\TreatmentController' => $baseDir . '/app/Http/Controllers/TreatmentController.php',
+    'App\\Http\\Controllers\\UserController' => $baseDir . '/app/Http/Controllers/UserController.php',
     'App\\Http\\Controllers\\VenueController' => $baseDir . '/app/Http/Controllers/VenueController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\Authenticate' => $baseDir . '/app/Http/Middleware/Authenticate.php',
@@ -43,6 +49,7 @@ return array(
     'App\\Http\\Middleware\\Messages' => $baseDir . '/app/Http/Middleware/Messages.php',
     'App\\Http\\Middleware\\PreventRequestsDuringMaintenance' => $baseDir . '/app/Http/Middleware/PreventRequestsDuringMaintenance.php',
     'App\\Http\\Middleware\\RedirectIfAuthenticated' => $baseDir . '/app/Http/Middleware/RedirectIfAuthenticated.php',
+    'App\\Http\\Middleware\\TaskMiddleWare' => $baseDir . '/app/Http/Middleware/TaskMiddleWare.php',
     'App\\Http\\Middleware\\TrimStrings' => $baseDir . '/app/Http/Middleware/TrimStrings.php',
     'App\\Http\\Middleware\\TrustHosts' => $baseDir . '/app/Http/Middleware/TrustHosts.php',
     'App\\Http\\Middleware\\TrustProxies' => $baseDir . '/app/Http/Middleware/TrustProxies.php',
@@ -78,6 +85,8 @@ return array(
     'App\\Http\\Requests\\UpdateTaskRequest' => $baseDir . '/app/Http/Requests/UpdateTaskRequest.php',
     'App\\Http\\Requests\\UpdateTreatmentRequest' => $baseDir . '/app/Http/Requests/UpdateTreatmentRequest.php',
     'App\\Http\\Requests\\UpdateVenueRequest' => $baseDir . '/app/Http/Requests/UpdateVenueRequest.php',
+    'App\\Http\\Requests\\UserStoreRequest' => $baseDir . '/app/Http/Requests/UserStoreRequest.php',
+    'App\\Http\\Requests\\UserUpdateRequest' => $baseDir . '/app/Http/Requests/UserUpdateRequest.php',
     'App\\Listeners\\SetTenantIdInSession' => $baseDir . '/app/Listeners/SetTenantIdInSession.php',
     'App\\Models\\Event' => $baseDir . '/app/Models/Event.php',
     'App\\Models\\Expense' => $baseDir . '/app/Models/Expense.php',

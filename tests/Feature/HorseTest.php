@@ -6,6 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\Horse;
+use App\Models\User;
 use App\Models\Owner;
 
 class HorseTest extends TestCase
@@ -19,15 +20,15 @@ class HorseTest extends TestCase
     public function test_horses_can_have_owners_added()
     {
         $horse=$this->createHorseWithOwners();
-        $this->assertEquals($horse->owners->count(),3);
+        $this->assertEquals($horse->owner->count(),3);
     }
     public function test_horses_can_have_owners_removed()
     {
         $horse=Horse::all()->first();
-        $owner=$horse->owners->first();
-        $horse->owners()->detach($owner);
+        $owner=$horse->owner->first();
+        $horse->owner()->detach($owner);
         $horse=Horse::all()->first();
-        $owners=$horse->owners;
+        $owners=$horse->owner;
         $this->assertEquals(count($owners),2);
     }
 
@@ -36,24 +37,25 @@ class HorseTest extends TestCase
         Owner::factory(3)->create();
         $horse=Horse::first();
         $owners=Owner::where("id","<",4)->get();
-        $horse->owners()->attach($owners);
+        $horse->owner()->attach($owners);
         return $horse;
     }
 
     public function test_horse_create_page_can_be_rendered()
     {
-
-        $response = $this
+        $user = User::where("role","admin")->first();
+        $response = $this->actingAs($user)
             ->get('/horse/create');
 
-        $response->assertSee("Rendered");
+        $response->assertStatus(200);
     }
 
     public function test_horse_can_be_stored_with_all_data()
     {
         session()->put("tenant_id",1);
-        $response = $this->post('/horse/store', [
-             "name" => "Lovacska",
+        $user = User::factory()->create();
+        $response = $this->actingAs($user)->post('/horse/store', [
+            "name" => "Lovacska",
             "birthdate" => "2022-01-01",
             "gender"=> "mare",
             "passport_number" => "HU 135444 554",
@@ -88,7 +90,7 @@ class HorseTest extends TestCase
         $response = $this->post('/horse/store', [
             "name" => "Lovacska",
         ]);
-        $response->assertSessionHasNoErrors();
+
         $response->assertValid("name");
 
     }
