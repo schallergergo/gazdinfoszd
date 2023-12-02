@@ -81,6 +81,10 @@ return [
         'Providers/BroadcastServiceProvider.php',
         'Providers/EventServiceProvider.php',
         'Providers/RouteServiceProvider.php',
+        'Http/Controllers/Auth',
+
+        //'Http/Controllers/EventController',
+        //'Http/Controllers/HomeController',
         'Models/Traits',
         'Models/Scopes',
         'Models/TaskMessage',
@@ -89,18 +93,22 @@ return [
         'Models/Owner',
         'Models/Treatment',
         'Models/User',
-        'Models/Expense',
-        'Models/Inventory',
-        'Models/InventoryItem',
-        'Models/Venue',
-        'Models/Event',
-        'Models/Income', 
+        //'Models/Expense',
+        //'Models/Inventory',
+        //'Models/InventoryItem',
+        //'Models/Venue',
+        //'Models/Event',
+        //'Models/Income', 
         'Models/Lesson',
         'Models/Rider',
-        'Models/MonthlyFinance',
+        'Models/Horse',
+        //'Models/MonthlyFinance',
         'Models/HorseMessage',
 
-        'Http/Controllers',
+
+        //'Http/Controllers',
+
+
 
 
 

@@ -16,11 +16,11 @@ class InventoryItem extends Model
     public function inventory (){
         return $this->belongsTo(Inventory::class);
     }
-
-    public function user (){
+  public function user (){
         return $this->belongsTo(User::class);
     }
 
+    
     protected static function booted(): void
     {
         static::created(function (InventoryItem $inventoryItem) {
