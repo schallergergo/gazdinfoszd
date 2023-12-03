@@ -15,11 +15,11 @@ jobs:
 
     - name: Build Docker image
       run: |
-        docker build -t your-docker-image-name .
-        docker-compose -f path/to/your/docker-compose.yml up -d
+        docker build -t gazdinfoszd .
+        docker-compose -f docker-compose.yml up -d
 
     - name: Archive artifacts
       uses: actions/upload-artifact@v2
       with:
         name: docker-image
-        path: path/to/your/docker-compose.yml
+        path: docker-compose.yml
