@@ -1,25 +1,17 @@
-name: Build Docker Image
-
-on:
-  push:
-    branches:
-      - main
+name: My Workflow
+on: [push]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    container: 
+      image: lorisleiva/laravel-docker:7.4
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Build Docker image
-      run: |
-        docker build -t gazdinfoszd .
-        docker-compose -f docker-compose.yml up -d
-
-    - name: Archive artifacts
-      uses: actions/upload-artifact@v2
-      with:
-        name: docker-image
-        path: docker-compose.yml
+    - uses: actions/checkout@v2
+    - name: Copy .env
+      run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+    - name: Install Dependencies
+      run: composer install --prefer-dist --no-progress --no-suggest
+    - name: Generate key
+      run: php artisan key:generate
+      # Your Laravel application is ready...

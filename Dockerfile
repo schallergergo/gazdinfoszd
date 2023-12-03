@@ -1,31 +1,27 @@
-# Use an official PHP image as a base image
-FROM php:7.4-fpm
+# syntax=docker/dockerfile:1
 
-# Set the working directory in the container
-WORKDIR /var/www/html
+#Deriving the latest base image
+FROM node:16.17.0-bullseye-slim
 
-# Install dependencies
-RUN apt-get update && apt-get install -y \
-    git \
-    zip \
-    unzip \
-    libpq-dev \
-    && docker-php-ext-install pdo_mysql pdo_pgsql
+# Any working directory can be chosen as per choice like '/' or '/home' etc
+WORKDIR /app
 
-# Install Composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+COPY .env.example .env
 
-# Copy the Laravel application files to the container
 COPY . .
 
-# Install Laravel dependencies
-RUN composer install
+RUN apt-get update -y && \
+    apt-get install -y --no-install-recommends software-properties-common gnupg2 wget && \
+    echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | tee /etc/apt/sources.list.d/sury-php.list && \
+    wget -qO - https://packages.sury.org/php/apt.gpg | apt-key add - && \
+    apt-get update -y && \
+    apt-get install -y --no-install-recommends php8.1 php8.1-curl php8.1-xml php8.1-zip php8.1-gd php8.1-mbstring php8.1-mysql && \
+    apt-get update -y && \
+    apt-get install -y composer && \
+    composer update && \
+    composer install && \
+    npm install && \
+    php artisan key:generate && \
+    rm -rf /var/lib/apt/lists/*
 
-# Generate the application key
-RUN php artisan key:generate
-
-# Expose port 80 (adjust if your Laravel app uses a different port)
-EXPOSE 80
-
-# Start PHP-FPM
-CMD ["php-fpm"]
+CMD [ "bash", "./run.sh"]
