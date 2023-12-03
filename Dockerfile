@@ -1,23 +1,31 @@
-FROM php:8.2-fpm
+# Use an official PHP image as a base image
+FROM php:7.4-fpm
 
-ARG user
-ARG uid
+# Set the working directory in the container
+WORKDIR /var/www/html
 
-RUN apt update && apt install -y \
+# Install dependencies
+RUN apt-get update && apt-get install -y \
     git \
-    curl \
-    libpng-dev \
-    libonig-dev \
-    libxml2-dev
-RUN apt clean && rm -rf /var/lib/apt/lists/*
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+    zip \
+    unzip \
+    libpq-dev \
+    && docker-php-ext-install pdo_mysql pdo_pgsql
 
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+# Install Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-RUN useradd -G www-data,root -u $uid -d /home/$user $user
-RUN mkdir -p /home/$user/.composer && \
-    chown -R $user:$user /home/$user
+# Copy the Laravel application files to the container
+COPY . .
 
-WORKDIR /var/www
+# Install Laravel dependencies
+RUN composer install
 
-USER $user
+# Generate the application key
+RUN php artisan key:generate
+
+# Expose port 80 (adjust if your Laravel app uses a different port)
+EXPOSE 80
+
+# Start PHP-FPM
+CMD ["php-fpm"]
