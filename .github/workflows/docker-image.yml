@@ -7,7 +7,7 @@ jobs:
     container: 
       image: lorisleiva/laravel-docker:8.0
     steps:
-    steps:
+
     - name: Checkout repository
       uses: actions/checkout@v2
 
