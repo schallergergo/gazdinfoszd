@@ -1,0 +1,25 @@
+name: Build Docker Image
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Build Docker image
+      run: |
+        docker build -t your-docker-image-name .
+        docker-compose -f path/to/your/docker-compose.yml up -d
+
+    - name: Archive artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: docker-image
+        path: path/to/your/docker-compose.yml

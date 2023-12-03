@@ -29,6 +29,9 @@ class Horse extends Model
         public function income (){
         return $this->hasMany(Income::class);
     }
+     public function expense (){
+        return $this->hasMany(Expense::class);
+    }
     public function lesson (){
         return $this->hasMany(Lesson::class);
     }
