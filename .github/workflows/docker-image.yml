@@ -1,4 +1,4 @@
-name: My Workflow
+name: Gazdinfoszd
 on: [push]
 
 jobs:
@@ -7,11 +7,23 @@ jobs:
     container: 
       image: lorisleiva/laravel-docker:8.0
     steps:
-    - uses: actions/checkout@v2
-    - name: Copy .env
-      run: php -r "file_exists('.env') || copy('.env.example', '.env');"
-    - name: Install Dependencies
-      run: composer install --prefer-dist --no-progress --no-suggest
-    - name: Generate key
-      run: php artisan key:generate
-      # Your Laravel application is ready...
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Docker
+      uses: docker/setup-docker@v2
+
+    - name: Build Docker image
+      run: |
+        docker build -t your-docker-image-name .
+        docker-compose up -d
+
+    - name: Archive artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: docker-image
+        path: docker-compose.yml
+
+
+    
