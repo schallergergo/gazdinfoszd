@@ -19,6 +19,8 @@ use App\Http\Controllers\TaskMessageController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\HorseMessageController;
 use App\Http\Controllers\MonthlyFinanceController;
+use App\Http\Controllers\GenerateDataController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -189,6 +191,8 @@ Route::middleware('auth')->group(function () {
     });
 require __DIR__.'/auth.php';
 
+
+Route::get('/generateData',[GenerateDataController::class,'generate'])->name('data.generate');
 
 use Illuminate\Support\Facades\App;
 

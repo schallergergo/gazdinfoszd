@@ -18,7 +18,7 @@ return new class extends Migration
             $table->id();
             $table->date("date");
             $table->foreignIdFor(MonthlyFinance::class)->nullable();
-            $table->unsignedBigInteger("horse_id");
+            $table->unsignedBigInteger("horse_id")->nullable();
             $table->integer("amount");
             $table->string("category");
             $table->string("description");

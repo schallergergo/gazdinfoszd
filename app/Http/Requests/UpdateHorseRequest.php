@@ -16,7 +16,7 @@ class UpdateHorseRequest extends FormRequest
         return [
             "name" => ['required',"string",'max:255'],
             "birthdate" => ["date","nullable"],
-            "gender"=> ["string","nullable"],
+            "gender"=> ["string","nullable,in:mén,csődőr,kanca,herélt,mare,stallion,gelding"],
             "passport_number" => ["string",'max:255',"nullable"],
             "FEI_number" => ["string",'max:255',"nullable"],
             "color" => ["string",'max:255',"nullable"],
