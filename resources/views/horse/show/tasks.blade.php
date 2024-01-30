@@ -14,7 +14,7 @@
                     $assignedUsers = $task->user;
                 @endphp
                 @if (count($assignedUsers)>0)
-                <p><span class="fw-bold">{{__("Assigned users:")}}</span> @foreach($assignedUsers as $user) <span>{{$user->name}}, </span>@endforeach</p>
+                <p><span class="fw-bold">{{__("Assigned users")}}:</span> @foreach($assignedUsers as $user) <span>{{$user->name}}, </span>@endforeach</p>
                 @endif
             </div>
 

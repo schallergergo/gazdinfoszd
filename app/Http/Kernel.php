@@ -24,6 +24,7 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \App\Http\Middleware\Localization::class,
         \App\Http\Middleware\Messages::class,
+        \App\Http\Middleware\InactiveUserMiddleware::class,
     ];
 
     /**
