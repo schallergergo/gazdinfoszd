@@ -83,11 +83,11 @@
                             </div>
                         </div>
                     </div>
-
+</div>
                     @include("lesson.modal")
                     @endforeach
                    
-                </div>
+                
             </div>
         </div>
         <div class="row">

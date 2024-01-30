@@ -73,11 +73,11 @@
                             </div>
                         </div>
                     </div>
-
+</div>
                     @include("income.modal")
                     @endforeach
                    
-                </div>
+                
             </div>
         </div>
         <div class="row">

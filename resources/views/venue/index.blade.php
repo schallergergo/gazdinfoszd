@@ -60,6 +60,7 @@
                                     @else
                                     <i class="mdi mdi mdi-airplane-off fs-18"></i>
                                     @endif
+                                </a>
                                 <a href="{{route('venue.edit',$venue)}}" >
                                     <i class="mdi mdi mdi-cog fs-18"></i></a>
                             </div>
@@ -71,7 +72,6 @@
                    
                 </div>
             </div>
-        </div>
         <div class="row">
             <div class="mt-4 pt-2 col-lg-12">
                 <nav aria-label="Page navigation example">
@@ -81,7 +81,7 @@
                 </nav>
             </div>
         </div>
-    </div>
+    
 </section>
 
 @endsection
