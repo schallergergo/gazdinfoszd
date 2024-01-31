@@ -163,7 +163,8 @@
 	"Delete this item?":"Töröljük a bejegyzést?",
 	"Change in inventory":"Készlet változás",
 	"Select \"Delete\" below if you are ready to delete this item.":"Válassza a törlés, ha ki szeretné törölni ezt az elemet",
-	"remaining":"maradt"
+	"remaining":"maradt",
+	"Usage per month": "Havi felhasználás"
 
 
 

@@ -35,6 +35,9 @@
                                         <ul class="list-inline mb-0 text-muted">
                                             <li class="list-inline-item"><i class="mdi mdi-warehouse"></i> {{$inventory->amount}}</li>
                                             <li class="list-inline-item"><i class="mdi mdi-comment"></i> {{$inventory->description}}</li>
+                                            <li class="list-inline-item"><i class="mdi mdi-calendar-star"></i> 
+                                            {{__("Usage per month")}}:  {{number_format($usage3Month,2)}}
+                                        </li>
    
                                         </ul>
                                     </div>

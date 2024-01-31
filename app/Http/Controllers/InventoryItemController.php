@@ -8,6 +8,7 @@ use App\Http\Requests\StoreInventoryItemRequest;
 use App\Http\Requests\UpdateInventoryItemRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
+use Carbon\Carbon;
 
 class InventoryItemController extends Controller
 {
@@ -20,7 +21,24 @@ class InventoryItemController extends Controller
     {
         $this->authorize("viewAny",App\Models\InventoryItem::class);
         $inventoryitems = InventoryItem::where("inventory_id",$inventory->id)->orderByDesc("created_at")->paginate(10);
-        return view("inventoryitem.index",["inventory"=>$inventory,"inventoryitems"=>$inventoryitems]);
+        $usage3Month = $this->getUsage($inventoryitems,3);
+        return view("inventoryitem.index",
+            ["inventory"=>$inventory,
+            "inventoryitems"=>$inventoryitems,
+            "usage3Month" => $usage3Month,
+            ]);
+    }
+
+    private function getUsage($inventoryitems, int $month){
+        $now = Carbon::now();
+        $date = Carbon::now()->subMonth($month);
+
+        $usage = $inventoryitems->where("created_at",">",$date)->where("amount","<",0);
+        if (count($usage)==0) return "";
+        $diff = $now->diffInDays($usage->first()->created_at);
+        return $usage->sum("amount")*-30.0/$diff
+        ;
+
     }
 
     /**

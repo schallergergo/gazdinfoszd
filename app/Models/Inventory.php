@@ -11,4 +11,5 @@ class Inventory extends Model
 {
     use HasFactory, BelongsToTenant, SoftDeletes;
     protected $guarded = [];
+    
 }
