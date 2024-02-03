@@ -33,13 +33,13 @@ class InventoryItemController extends Controller
 private function getUsage($inventoryitems, int $month){
         $now = Carbon::now();
         $date = Carbon::now()->subMonth($month);
-
+        $first = $usage->first();
         $usage = $inventoryitems->where("created_at",">",$date)->where("amount","<",0)->sortBy("created_at");
         if (count($usage)<3) return 0;
-        $diff = $usage->last()->created_at->diffInDays($usage->first()->created_at);
+        $diff = $usage->last()->created_at->diffInDays($first->created_at);
         if ($diff == 0) return 0;
-
-        return $usage->sum("amount")*-30.0/$diff;
+        $usageSum = $usage->sum("amount") - $first->amount;
+        return $usageSum*-30.0/$diff;
 
     }
 
