@@ -35,10 +35,11 @@ private function getUsage($inventoryitems, int $month){
         $date = Carbon::now()->subMonth($month);
         $usage = $inventoryitems->where("created_at",">",$date)->where("amount","<",0)->sortBy("created_at");
         $first = $usage->first();
+        $first = $usage->last();
         if (count($usage)<3) return 0;
-        $diff = $usage->last()->created_at->diffInDays($first->created_at);
+        $diff = $last->created_at->diffInDays($first->created_at);
         if ($diff == 0) return 0;
-        $usageSum = $usage->sum("amount") - $first->amount;
+        $usageSum = $usage->sum("amount") - $last->amount;
         return $usageSum*-30.0/$diff;
 
     }
