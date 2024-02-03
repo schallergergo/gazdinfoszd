@@ -29,20 +29,21 @@ class InventoryItemController extends Controller
             ]);
     }
 
-    private function getUsage($inventoryitems, int $month){
+
 private function getUsage($inventoryitems, int $month){
         $now = Carbon::now();
         $date = Carbon::now()->subMonth($month);
 
         $usage = $inventoryitems->where("created_at",">",$date)->where("amount","<",0)->sortBy("created_at");
         if (count($usage)<3) return 0;
-        $diff = $now->diffInDays($usage->first()->created_at);
+        $diff = $usage->last()->created_at->diffInDays($usage->first()->created_at);
         if ($diff == 0) return 0;
+
         return $usage->sum("amount")*-30.0/$diff;
 
     }
 
-    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -119,8 +120,8 @@ private function getUsage($inventoryitems, int $month){
      */
     public function destroy(InventoryItem $inventoryItem)
     {
-        $this->authorize("delete",$inventory);
+        $this->authorize("delete",$inventoryItem->inventory);
         $inventoryItem->delete();
-        return redirect(route("inventoryitem.show",$inventoryItem->inventory));
+        return redirect(route("inventoryitem.index",$inventoryItem->inventory));
     }
 }
