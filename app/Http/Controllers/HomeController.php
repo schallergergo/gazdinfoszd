@@ -18,7 +18,7 @@ class HomeController extends Controller
 
         if ($user->isRider()) return $this->riderIndex($user);
         if ($user->isOwner()) return $this->ownerIndex($user);
-
+        if ($user->isGroom()) return $this->groomIndex($user);
         $now = Carbon::now();
         $currentMonth = MonthlyFinance::firstOrCreate(["year"=>$now->year,"month"=>$now->month]);
         $currentYear = MonthlyFinance::where("year",$now->year)->get();
@@ -46,6 +46,10 @@ class HomeController extends Controller
 
         $horses = $owner->horse()->orderByDesc("name")->paginate(20);
         return view("home.owner",["horses"=>$horses,"found"=>true]);
+    }
+
+        private function groomIndex(User $user){
+        return view("home.groom",[]);
     }
 
 }
